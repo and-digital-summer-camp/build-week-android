@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/global_75"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        android:src="@android:drawable/ic_media_play" />
 
     <TextView
         android:layout_width="match_parent"
