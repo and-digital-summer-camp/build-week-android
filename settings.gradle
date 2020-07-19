@@ -1,2 +1,7 @@
+include ':common'
+include ':shared-ui'
+include ':navigation'
+include ':module-config'
 include ':app'
+include ':comms'
 rootProject.name = "BuildWeekApp"
