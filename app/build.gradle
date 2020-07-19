@@ -32,7 +32,7 @@ android {
 
             applicationVariants.all { variant ->
                 variant.outputs.all {
-                    outputFileName = "${applicationId}-v${versionName}(${versionCode}).apk"
+                    outputFileName = "CommsModApp-v${versionName}.apk"
                 }
             }
             signingConfig signingConfigs.release

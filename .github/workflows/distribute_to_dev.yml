@@ -30,7 +30,7 @@ jobs:
 
         run: |
           npm install -g appcenter-cli
-          appcenter distribute release --app Summer-Camp-AND-Newton/Summer-Camp-Android-NutriFood -r "For developers- PR on master branch" --file app/build/outputs/apk/release/*.apk --group "Dev" --token ${{secrets.APP_CENTER_TOKEN}}
+          appcenter distribute release --app Summer-Camp-AND-Newton/Summer-Camp-Comms-Build -r "For developers- PR on master branch" --file app/build/outputs/apk/release/*.apk --group "Dev" --token ${{secrets.APP_CENTER_TOKEN}}
           
    
 
