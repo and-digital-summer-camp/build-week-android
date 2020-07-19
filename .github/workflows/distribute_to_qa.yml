@@ -26,7 +26,7 @@ jobs:
 
         run: |
           npm install -g appcenter-cli
-          appcenter distribute release --app Summer-Camp-AND-Newton/Summer-Camp-Comms-Build -r "For QA- New code merged to master" --file app/build/outputs/apk/release/*.apk --group "QA" --token ${{secrets.APP_CENTER_TOKEN}}
+          appcenter distribute release --app Summer-Camp-AND-Newton/Summer-camp-Comms_build -r "For QA- New code merged to master" --file app/build/outputs/apk/release/*.apk --group "QA" --token ${{secrets.APP_CENTER_TOKEN}}
           
    
 
