@@ -18,10 +18,9 @@ jobs:
       - name: build release
         run: ./gradlew assembleRelease
 
-      - name: print apk name
-        run: |
-          cd app/build/outputs/apk/release/
-          ls
+      - name:  Run Android lint
+        run: ./gradlew lint
+        
       - uses: actions/setup-node@v1
         with:
           node-version: '12'
