@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply from: "${rootDir}/android-lint.gradle"
 
 
 android {
@@ -26,7 +27,6 @@ android {
 }
 
 dependencies {
-
     implementation project(":common")
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
