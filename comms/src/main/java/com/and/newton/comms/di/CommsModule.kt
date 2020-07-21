@@ -24,40 +24,15 @@ object CommsModule {
 
     @Singleton
     @Provides
-    fun provideNetworkApi() : CommsAPI {
-
-//        val httpLogInterceptor = HttpLoggingInterceptor()
-//        httpLogInterceptor.level = HttpLoggingInterceptor.Level.BODY
-//
-//
-//        val mockInterceptor = MockInterceptor()
-//
-//        val okHttpClient = OkHttpClient.Builder()
-//            .addInterceptor(httpLogInterceptor)
-//            .addInterceptor(mockInterceptor)
-//            .build()
-
-//        val gsonBuilder = GsonBuilder()
-//        val gson = gsonBuilder.create()
-
-        return Retrofit.Builder()
-//            .client(okHttpClient)
-            .baseUrl(" https://www.google.com")
-//            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-            .create(CommsAPI::class.java)
+    fun provideNetworkApi(retrofit: Retrofit) : CommsAPI {
+        return retrofit.create(CommsAPI::class.java)
     }
 }
 
 
 @Module
 @InstallIn(ApplicationComponent::class)
-abstract class CommsBindModule {
-
-//    @Binds
-//    abstract fun bindNetworkAPI(
-//        networkAPI: NetworkAPI
-//    ): CommsAPI
+abstract class CommsBindingModule {
 
     @Binds
     abstract fun bindCommsRepository(

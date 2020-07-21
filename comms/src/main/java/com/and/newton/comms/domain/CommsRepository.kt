@@ -1,12 +1,11 @@
 package com.and.newton.comms.domain
 
-import com.and.newton.comms.domain.data.Recipe
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import com.and.newton.comms.domain.data.Article
+import com.and.newton.comms.domain.data.User
 
 interface CommsRepository {
-    suspend fun getRecipe(query: String): List<Recipe>?
+    suspend fun getUser(token: String): User?
+
+    suspend fun getArticles(): List<Article>?
 }
 

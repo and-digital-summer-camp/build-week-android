@@ -1,29 +1,23 @@
 package com.and.newton.comms.network
 
-import com.and.newton.comms.domain.data.RecipeResponse
+import com.and.newton.comms.domain.data.Articles
+import com.and.newton.comms.domain.data.User
 import retrofit2.http.*
 
 
-interface CommsAPI{
+interface CommsAPI {
 
     /**
      * TODO: STRING RETURN TYPE NEEDS TO BE CHANGED TO ARTICLE DATA MODEL, ATM
      */
 
-    @GET("/recipes/search?")
-    suspend fun getRecipe(
-        @Query("query") query: String,
-        @Header("x-rapidapi-host") apiHost: String,
-        @Header("x-rapidapi-key") apiKey: String
-    ): RecipeResponse
-
     //Gets auth users permission
     @POST("/auth/google")
-    suspend fun getAuthUser(@Query("Google Token") Google_token: String) : String
+    suspend fun getAuthUser(@Query("Authorization") JWT_token: String) : User
 
     //Gets ALL articles
     @GET("/articles")
-    suspend fun getArticles(@Header("JWT token") JWT_token: String) : String
+    suspend fun getArticles(@Header("Authorization") JWT_token: String) : Articles
 
     //Gets SPECIFIC article by ID
     @GET("/articles/{id}")

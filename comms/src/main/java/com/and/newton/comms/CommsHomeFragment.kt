@@ -1,6 +1,5 @@
 package com.and.newton.comms
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,11 +13,6 @@ import timber.log.Timber
 @AndroidEntryPoint
 class CommsHomeFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = CommsHomeFragment()
-    }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,20 +20,19 @@ class CommsHomeFragment : Fragment() {
     ): View? {
         val layout = inflater.inflate(R.layout.comms_home_fragment, container, false)
 
-        Timber.d("Fragment :: onCreateView")
 
-         val viewModel: CommsHomeViewModel by viewModels()
+        val viewModel: CommsHomeViewModel by viewModels()
 
-            viewModel.recipe.observe(viewLifecycleOwner, Observer { t ->
-                Timber.d("Response::"+t)
-            })
+        viewModel.articles.observe(viewLifecycleOwner, Observer { t ->
+            Timber.d("Mock API Articles Response::" + t)
+        })
+
+        viewModel.user.observe(viewLifecycleOwner, Observer { t ->
+            Timber.d("Mock API fragment User Response::" + t)
+        })
 
         return layout
     }
 
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        // TODO: Use the ViewModel
-//    }
 
 }

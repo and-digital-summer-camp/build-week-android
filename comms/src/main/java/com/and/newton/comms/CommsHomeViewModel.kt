@@ -5,23 +5,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.and.newton.comms.domain.CommsRepository
-import com.and.newton.comms.domain.data.Recipe
+import com.and.newton.comms.domain.data.Article
+import com.and.newton.comms.domain.data.User
+import timber.log.Timber
 
 class CommsHomeViewModel @ViewModelInject constructor(private val commsRepository: CommsRepository) :
-            ViewModel() {
+    ViewModel() {
 
-    //private val commsRepository: CommsRepository
-        var categoryFilter = "Burger"
-
-//    var recipeListData: List<Recipe> = listOf<Recipe>(
-//        Recipe(1, "recipe1", 10, 5),
-//        Recipe(2, "recipe2", 5, 2),
-//        Recipe(3, "recipe3", 15, 4),
-//        Recipe(4, "recipe4", 10, 3),
-//        Recipe(5, "recipe5", 5, 2)
-//    )
-
-        val recipe: LiveData<List<Recipe>> = liveData {
-//            commsRepository.getRecipe(categoryFilter)?.also { emit(it) }
-        }
+    val user: LiveData<User> = liveData {
+        commsRepository.getUser("Bearer googletoken")?.also { emit(it)}
     }
+
+    val articles: LiveData<List<Article>> = liveData {
+        commsRepository.getArticles()?.also { emit(it)}
+    }
+}
