@@ -1,14 +1,21 @@
-package com.and.newton.common
+package com.and.newton.comms.network
 
+import com.and.newton.comms.domain.data.RecipeResponse
 import retrofit2.http.*
 
 
-interface ArticleAPI{
+interface CommsAPI{
 
     /**
      * TODO: STRING RETURN TYPE NEEDS TO BE CHANGED TO ARTICLE DATA MODEL, ATM
      */
 
+    @GET("/recipes/search?")
+    suspend fun getRecipe(
+        @Query("query") query: String,
+        @Header("x-rapidapi-host") apiHost: String,
+        @Header("x-rapidapi-key") apiKey: String
+    ): RecipeResponse
 
     //Gets auth users permission
     @POST("/auth/google")
