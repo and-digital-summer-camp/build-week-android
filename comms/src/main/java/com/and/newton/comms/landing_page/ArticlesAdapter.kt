@@ -8,8 +8,8 @@ import com.and.newton.comms.R
 import com.and.newton.comms.domain.data.Article
 import javax.inject.Inject
 
-class CommCardsAdapter @Inject constructor():
-    RecyclerView.Adapter<CommCardsAdapter.ThumbnailViewHolder>() {
+class ArticlesAdapter @Inject constructor():
+    RecyclerView.Adapter<ArticlesAdapter.ThumbnailViewHolder>() {
 
     private lateinit var articleDataSet:List<Article>
 
@@ -26,12 +26,13 @@ class CommCardsAdapter @Inject constructor():
             this.article = article
             //TOdo init the item view with the article data
 
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThumbnailViewHolder {
         val cardView =
-            LayoutInflater.from(parent.context).inflate(R.layout.comms_thumbnail_item_view, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.article_list_item, parent, false)
 
         //Todo Implement click listener on the cardview to navigate to the Arcticle/Comms View fragment
 

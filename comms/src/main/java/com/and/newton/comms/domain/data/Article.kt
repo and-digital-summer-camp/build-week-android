@@ -7,5 +7,7 @@ data class Article constructor(
 
     val title: String?,
 
-    val content: String?
+    val content: String?,
+
+    val imagePath:String?
 )

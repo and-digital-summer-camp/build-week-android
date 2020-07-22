@@ -17,10 +17,10 @@ import javax.inject.Inject
 class CommsLandingPageFragment : Fragment() {
 
     @Inject
-    lateinit var highlightedArticlesAdapter: CommCardsAdapter
+    lateinit var highlightedArticlesAdapter: ArticlesAdapter
 
     @Inject
-    lateinit var otherArticlesAdapter: CommCardsAdapter
+    lateinit var otherArticlesAdapter: ArticlesAdapter
 
 
     override fun onCreateView(
