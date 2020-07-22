@@ -1,13 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CommsHomeFragment">
+    android:layout_marginStart="@dimen/global_100"
+    android:layout_marginEnd="@dimen/global_100"
+    android:orientation="vertical">
 
-    <TextView
+    <AutoCompleteTextView
+        android:id="@+id/category_edit"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/comms_text" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/global_100"
+        android:hint="@string/choose_category"
+        android:completionThreshold="1"
+        android:focusable="true"
+        android:enabled="true"
+        android:textAlignment="center" />
 
-</FrameLayout>
+    <com.and.newton.comms.CustomAutoTextView
+        android:id="@+id/category_edit2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/global_100"
+        android:hint="@string/choose_category"
+        android:completionThreshold="1"
+        android:focusable="true"
+        android:enabled="true"
+        android:textAlignment="center" />
+
+</LinearLayout>

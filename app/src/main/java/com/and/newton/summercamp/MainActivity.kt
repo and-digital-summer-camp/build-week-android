@@ -2,6 +2,7 @@ package com.and.newton.summercamp
 
 import android.os.Bundle
 import android.view.Menu
+import android.widget.ArrayAdapter
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,9 +17,24 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//        var categoryListData: List<String> = listOf<String>(
+//            "COVID-19",
+//            "Business Update",
+//            "Android Upskilling",
+//            "Mobile Native",
+//            "React",
+//            "iOS Native"
+//        )
+//
+//        val adapterCategories = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoryListData.toList())
+//        adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
 
         initNavigationDrawerWithToolBar()
     }

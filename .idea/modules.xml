@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BuildWeekApp.iml" filepath="$PROJECT_DIR$/.idea/modules/BuildWeekApp.iml" group="BuildWeekApp" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="BuildWeekApp/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/common.iml" group="BuildWeekApp/common" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/comms/comms.iml" filepath="$PROJECT_DIR$/.idea/modules/comms/comms.iml" group="BuildWeekApp/comms" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/module-config/module-config.iml" filepath="$PROJECT_DIR$/.idea/modules/module-config/module-config.iml" group="BuildWeekApp/module-config" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/navigation/navigation.iml" filepath="$PROJECT_DIR$/.idea/modules/navigation/navigation.iml" group="BuildWeekApp/navigation" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared-ui/shared-ui.iml" filepath="$PROJECT_DIR$/.idea/modules/shared-ui/shared-ui.iml" group="BuildWeekApp/shared-ui" />
+    </modules>
+  </component>
+</project>

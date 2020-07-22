@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="comms_text">This is communication fragment</string>
+    <string name="choose_category">Choose or add category</string>
 </resources>
