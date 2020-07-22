@@ -56,7 +56,7 @@ class CreateArticleFragment : Fragment() {
 
     private fun cancelCreateArticle() {
         val createArticleToHomeAction =
-            CreateArticleFragmentDirections.actionFragmentCreateArticleToFragmentArticlesHome()
+            CreateArticleFragmentDirections.actionFragmentCreateArticleToFragmentCommsHome()
         this.findNavController().navigate(createArticleToHomeAction)
     }
 

@@ -9,20 +9,20 @@ import android.view.ViewGroup
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ArticlesMainFragment.newInstance] factory method to
+ * Use the [CommsMainFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ArticlesMainFragment : Fragment() {
+class CommsMainFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_articles_main, container, false)
+        return inflater.inflate(R.layout.fragment_comms_main, container, false)
     }
 
     companion object {
-        fun newInstance() = ArticlesMainFragment()
+        fun newInstance() = CommsMainFragment()
     }
 }

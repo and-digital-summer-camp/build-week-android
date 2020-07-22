@@ -1,0 +1,8 @@
+android {
+    lintOptions {
+        quiet true
+        abortOnError true
+        warningsAsErrors true
+        lintConfig file('../lint.xml')
+    }
+}
