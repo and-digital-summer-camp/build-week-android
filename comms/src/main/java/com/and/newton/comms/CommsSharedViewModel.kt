@@ -7,20 +7,23 @@ import androidx.lifecycle.liveData
 import com.and.newton.comms.domain.CommsRepository
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.User
-import timber.log.Timber
 
-class CommsHomeViewModel @ViewModelInject constructor(private val commsRepository: CommsRepository) :
+class CommsSharedViewModel @ViewModelInject constructor(private val commsRepository: CommsRepository) :
     ViewModel() {
 
     val user: LiveData<User> = liveData {
         commsRepository.getUser("Bearer googletoken")?.also { emit(it)}
     }
 
-    val articles: LiveData<List<Article>> = liveData {
+    val otherArticles: LiveData<List<Article>> = liveData {
         commsRepository.getArticles()?.also { emit(it)}
     }
 
     val article: LiveData<Article> = liveData {
         commsRepository.getArticle(1)?.also { emit(it)}
+    }
+
+    val highLightedArticles: LiveData<List<Article>> = liveData {
+        commsRepository.getArticles()?.also { emit(it)}
     }
 }
