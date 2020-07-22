@@ -35,6 +35,7 @@ class CommsHomeFragment : Fragment() {
             "Android Upskilling",
             "Mobile Native",
             "React",
+            "COVID-20",
             "iOS Native"
         )
         val adapterCategories = ArrayAdapter<String>(ctx, android.R.layout.simple_spinner_item, categoryListData.toList())
