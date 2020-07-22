@@ -24,11 +24,15 @@ class CommsHomeFragment : Fragment() {
         val viewModel: CommsHomeViewModel by viewModels()
 
         viewModel.articles.observe(viewLifecycleOwner, Observer { t ->
-            Timber.d("Mock API Articles Response::" + t)
+            Timber.d("Mock API Articles List Response::${t}")
         })
 
         viewModel.user.observe(viewLifecycleOwner, Observer { t ->
-            Timber.d("Mock API fragment User Response::" + t)
+            Timber.d("Mock API fragment User Response::${t}")
+        })
+
+        viewModel.article.observe(viewLifecycleOwner, Observer { t ->
+            Timber.d("Mock API Article id:1 Response::${t}")
         })
 
         return layout

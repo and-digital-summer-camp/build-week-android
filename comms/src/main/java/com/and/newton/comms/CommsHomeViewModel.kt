@@ -19,4 +19,8 @@ class CommsHomeViewModel @ViewModelInject constructor(private val commsRepositor
     val articles: LiveData<List<Article>> = liveData {
         commsRepository.getArticles()?.also { emit(it)}
     }
+
+    val article: LiveData<Article> = liveData {
+        commsRepository.getArticle(1)?.also { emit(it)}
+    }
 }

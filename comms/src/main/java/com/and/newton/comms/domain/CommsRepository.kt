@@ -7,5 +7,7 @@ interface CommsRepository {
     suspend fun getUser(token: String): User?
 
     suspend fun getArticles(): List<Article>?
+
+    suspend fun getArticle(id: Int): Article?
 }
 
