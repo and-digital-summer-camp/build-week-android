@@ -5,7 +5,7 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_comms"
+            android:id="@+id/nav_articles"
             android:title="@string/menu_communication" />
         <item
             android:id="@+id/nav_logout"

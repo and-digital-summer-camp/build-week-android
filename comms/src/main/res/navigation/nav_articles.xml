@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_articles"
+    app:startDestination="@id/fragment_articles_home">
+
+    <fragment
+        android:id="@+id/fragment_articles_home"
+        android:name="com.and.newton.comms.ArticlesHomeFragment"
+        android:label="articles_home_fragment"
+        tools:layout="@layout/fragment_articles_home" >
+        <action
+            android:id="@+id/action_fragment_articles_home_to_fragment_create_article"
+            app:destination="@id/fragment_create_article">
+            <argument
+                android:name="article"
+                android:defaultValue="@null"
+                app:nullable="true"
+                app:argType="com.and.newton.comms.ArticleDataModel"
+                />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_create_article"
+        android:name="com.and.newton.comms.CreateArticleFragment"
+        android:label="create_article_fragment"
+        tools:layout="@layout/fragment_create_article" >
+        <action
+            android:id="@+id/action_fragment_create_article_to_fragment_articles_home"
+            app:destination="@id/fragment_articles_home">
+        </action>
+    </fragment>
+</navigation>

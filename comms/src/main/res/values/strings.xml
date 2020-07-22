@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="comms_text">This is communication fragment</string>
+    <string name="article_text">This is articles fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="content">Content</string>
+    <string name="title_name">Title Name</string>
+    <string name="title">Title</string>
+    <string name="new_post_title">Create A New Post</string>
+    <string name="edit_post_title">Edit Article</string>
+    <string name="post">Post</string>
+    <string name="cancel">Cancel</string>
 </resources>
