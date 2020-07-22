@@ -1,0 +1,16 @@
+{"results": [{
+  "id": 1,
+  "title": "Article 1 - Title",
+  "content": "Article 1 - Content"
+},
+  {
+    "id": 2,
+    "title": "Article 2 - Title",
+    "content": "Article 2 - Content"
+  },
+  {
+    "id": 3,
+    "title": "Article 3 - Title",
+    "content": "Article 3 - Content"
+  }]
+}
