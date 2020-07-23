@@ -34,7 +34,7 @@ interface CommsAPI {
 
     //creates article
     @POST("/articles")
-    suspend fun createArticle(@Query("article") article: String, @Header("Authorization") JWT_token: String) : String
+    suspend fun createArticle(@Query("article") article: String, @Header("Authorization") JWT_token: String) : Article
 
     //Gets ALL categories
     @GET("/categories")

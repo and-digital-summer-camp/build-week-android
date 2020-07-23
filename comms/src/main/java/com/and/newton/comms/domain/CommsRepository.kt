@@ -9,5 +9,7 @@ interface CommsRepository {
     suspend fun getArticles(): List<Article>?
 
     suspend fun getArticle(id: Int): Article?
+
+    suspend fun createArticle(article: String) : Article?
 }
 

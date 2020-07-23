@@ -17,7 +17,7 @@
                 android:name="article"
                 android:defaultValue="@null"
                 app:nullable="true"
-                app:argType="com.and.newton.comms.ArticleDataModel"
+                app:argType="com.and.newton.comms.domain.data.Article"
                 />
         </action>
     </fragment>

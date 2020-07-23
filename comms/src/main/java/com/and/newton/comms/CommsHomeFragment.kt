@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.and.newton.comms.domain.data.Article
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -56,7 +57,7 @@ class CommsHomeFragment : Fragment() {
     }
 
     private fun openEditArticleFragment() {
-        val article = ArticleDataModel("title", "content")
+        val article = Article(1,"title", "content")
         val homeToEditFragment =
             CommsHomeFragmentDirections.actionFragmentCommsHomeToFragmentCreateArticle()
         homeToEditFragment.article = article

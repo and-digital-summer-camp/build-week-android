@@ -1,6 +1,6 @@
 package com.and.newton.comms.domain.data
 
-import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Article constructor(
     val id: Int?,
@@ -8,4 +8,4 @@ data class Article constructor(
     val title: String?,
 
     val content: String?
-)
+) : Serializable
