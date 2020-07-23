@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.and.newton.shared_ui.CustomAutoCompleteTextView
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -34,6 +35,7 @@ class CommsHomeFragment : Fragment() {
         viewModel.article.observe(viewLifecycleOwner, Observer { t ->
             Timber.d("Mock API Article id:1 Response::${t}")
         })
+
 
         return layout
     }
