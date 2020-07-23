@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import com.and.newton.comms.CommsSharedViewModel
 import com.and.newton.comms.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.comms_landing_page_fragment.view.*
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -33,21 +34,25 @@ class CommsLandingPageFragment : Fragment() {
         val viewModel: CommsSharedViewModel by viewModels()
 
         viewModel.highLightedArticles.observe(viewLifecycleOwner, Observer { highlightedArticles ->
-            Timber.d("Mock API Articles List Response::${highlightedArticles}")
-            highlightedArticlesAdapter.setAdapterData(highlightedArticles)
+            Timber.d("Mock API Articles List Response::${highlightedArticles.size}")
+            highlightedArticlesAdapter.bindData(highlightedArticles)
+            layout.highlighted_articles.adapter = highlightedArticlesAdapter
+            layout.highlighted_articles.adapter?.notifyDataSetChanged()
         })
 
         viewModel.otherArticles.observe(viewLifecycleOwner, Observer { otherArticles ->
-            Timber.d("Mock API Articles List Response::${otherArticles}")
-            otherArticlesAdapter.setAdapterData(otherArticles)
+            Timber.d("Mock API Articles List Response::${otherArticles.size}")
+            otherArticlesAdapter.bindData(otherArticles)
+            layout.other_articles.adapter = otherArticlesAdapter
+            layout.other_articles.adapter?.notifyDataSetChanged()
         })
 
         viewModel.user.observe(viewLifecycleOwner, Observer { user ->
-            Timber.d("Mock API fragment User Response::${user}")
+//            Timber.d("Mock API fragment User Response::${user}")
         })
 
         viewModel.article.observe(viewLifecycleOwner, Observer { anArticle ->
-            Timber.d("Mock API Article id:1 Response::${anArticle}")
+//            Timber.d("Mock API Article id:1 Response::${anArticle}")
         })
 
         return layout
