@@ -3,4 +3,5 @@
     <string name="comms_text">This is communication fragment</string>
     <string name="comms_category">This is communication fragment,This is communication fragment,This is communication fragment</string>
     <string name="comms_category_label">Label1</string>
+    <string name="iv_thumbnail_description">thumbnail</string>
 </resources>
