@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.and.newton.comms.R
 import com.and.newton.comms.domain.data.Article
+import kotlinx.android.synthetic.main.article_list_item.view.*
 import javax.inject.Inject
 
 class ArticlesAdapter @Inject constructor():
@@ -14,7 +15,7 @@ class ArticlesAdapter @Inject constructor():
     private lateinit var articleDataSet:List<Article>
 
 
-    fun setAdapterData(dataSet: List<Article>) {
+    fun bindData(dataSet: List<Article>) {
         articleDataSet = dataSet
     }
 
@@ -24,6 +25,8 @@ class ArticlesAdapter @Inject constructor():
 
         fun bindViewData(article: Article) {
             this.article = article
+
+            cardView.article_content.text = article.content
             //TOdo init the item view with the article data
 
 
@@ -33,6 +36,7 @@ class ArticlesAdapter @Inject constructor():
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThumbnailViewHolder {
         val cardView =
             LayoutInflater.from(parent.context).inflate(R.layout.article_list_item, parent, false)
+
 
         //Todo Implement click listener on the cardview to navigate to the Arcticle/Comms View fragment
 
