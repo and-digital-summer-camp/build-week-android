@@ -36,6 +36,7 @@ class CommsHomeFragment : Fragment() {
             Timber.d("Mock API Article id:1 Response::${t}")
         })
 
+
         val createArticleButton = layout.findViewById<Button>(R.id.button_create_article)
         createArticleButton.setOnClickListener {
             openCreateArticleFragment()

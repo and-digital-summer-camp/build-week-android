@@ -1,6 +1,7 @@
 package com.and.newton.comms.domain
 
 import com.and.newton.comms.domain.data.Article
+import com.and.newton.comms.domain.data.Category
 import com.and.newton.comms.domain.data.User
 
 interface CommsRepository {
@@ -11,5 +12,7 @@ interface CommsRepository {
     suspend fun getArticle(id: Int): Article?
 
     suspend fun createArticle(article: String) : Article?
+
+    suspend fun getAllCategories() : List<Category>
 }
 
