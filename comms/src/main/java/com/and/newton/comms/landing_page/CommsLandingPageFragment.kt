@@ -3,6 +3,7 @@ package com.and.newton.comms.landing_page
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -18,10 +19,12 @@ import javax.inject.Inject
 class CommsLandingPageFragment : Fragment() {
 
     @Inject
-    lateinit var highlightedArticlesAdapter: ArticlesAdapter
+    lateinit var articlesAdapter: ArticlesAdapter
 
-    @Inject
-    lateinit var otherArticlesAdapter: ArticlesAdapter
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
 
     override fun onCreateView(
@@ -33,30 +36,31 @@ class CommsLandingPageFragment : Fragment() {
 
         val viewModel: CommsSharedViewModel by viewModels()
 
-        viewModel.highLightedArticles.observe(viewLifecycleOwner, Observer { highlightedArticles ->
-            Timber.d("Mock API Articles List Response::${highlightedArticles.size}")
-            highlightedArticlesAdapter.bindData(highlightedArticles)
-            layout.highlighted_articles.adapter = highlightedArticlesAdapter
-            layout.highlighted_articles.adapter?.notifyDataSetChanged()
-        })
-
-        viewModel.otherArticles.observe(viewLifecycleOwner, Observer { otherArticles ->
-            Timber.d("Mock API Articles List Response::${otherArticles.size}")
-            otherArticlesAdapter.bindData(otherArticles)
-            layout.other_articles.adapter = otherArticlesAdapter
-            layout.other_articles.adapter?.notifyDataSetChanged()
+        viewModel.articles.observe(viewLifecycleOwner, Observer { otherArticles ->
+            Timber.d("Mock API otherArticles Articles List Response::${otherArticles.size}")
+            articlesAdapter.bindData(otherArticles)
+            layout.articles.adapter = articlesAdapter
+            layout.articles.adapter?.notifyDataSetChanged()
         })
 
         viewModel.user.observe(viewLifecycleOwner, Observer { user ->
-//            Timber.d("Mock API fragment User Response::${user}")
+            Timber.d("Mock API fragment User Response::${user}")
         })
 
         viewModel.article.observe(viewLifecycleOwner, Observer { anArticle ->
-//            Timber.d("Mock API Article id:1 Response::${anArticle}")
+            Timber.d("Mock API Article id:1 Response::${anArticle}")
         })
 
         return layout
     }
 
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_filter -> {
+            Timber.d("onOptionsItemSelected filter selected")
+            true
+        }
+        else ->  super.onOptionsItemSelected(item)
+    }
 
 }

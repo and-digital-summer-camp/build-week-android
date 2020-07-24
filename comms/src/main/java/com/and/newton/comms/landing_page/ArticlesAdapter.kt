@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.and.newton.comms.R
 import com.and.newton.comms.domain.data.Article
-import com.squareup.picasso.Picasso
+//import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.article_list_item.view.*
 import javax.inject.Inject
 
@@ -27,8 +27,8 @@ class ArticlesAdapter @Inject constructor():
         fun bindViewData(article: Article) {
             this.article = article
 
-            cardView.tvArticleContent.text = article.content
-            cardView.tvCategoryLabel.text = "Label"
+//            cardView.tvArticleContent.text = article.content
+//            cardView.tvCategoryLabel.text = "Label"
 //            Picasso.get()
 //                .load("https://images-na.ssl-images-amazon.com/images/I/810FiMQwZ5L._AC_SL1500_.jpg")
 //                .resize(250, 250).centerCrop().into(cardView.ivArticleImage)

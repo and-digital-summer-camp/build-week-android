@@ -15,7 +15,7 @@ class CommsSharedViewModel @ViewModelInject constructor(private val commsReposit
         commsRepository.getUser("Bearer googletoken")?.also { emit(it)}
     }
 
-    val otherArticles: LiveData<List<Article>> = liveData {
+    val articles: LiveData<List<Article>> = liveData {
         commsRepository.getArticles()?.also { emit(it)}
     }
 
