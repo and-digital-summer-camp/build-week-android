@@ -24,8 +24,8 @@ class NavLayout @JvmOverloads constructor(
 
 
 
-        open fun loginNavigateToComms(){
-            findNavController().navigate(R.id.action_login_to_nav_comms)
+        fun loginNavigateToComms(){
+//            findNavController().navigate(R.id.action_login_to_nav_comms)
         }
 
 

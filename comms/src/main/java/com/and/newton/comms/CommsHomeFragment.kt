@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.and.newton.common.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -22,6 +23,8 @@ class CommsHomeFragment : Fragment() {
 
 
         val viewModel: CommsHomeViewModel by viewModels()
+        val userViewModel: UserViewModel by viewModels()
+
 
         viewModel.articles.observe(viewLifecycleOwner, Observer { t ->
             Timber.d("Mock API Articles List Response::${t}")
