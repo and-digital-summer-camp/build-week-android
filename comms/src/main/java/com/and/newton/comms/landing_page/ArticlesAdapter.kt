@@ -27,7 +27,7 @@ class ArticlesAdapter @Inject constructor():
         fun bindViewData(article: Article) {
             this.article = article
 
-//            cardView.tvArticleContent.text = article.content
+            cardView.txtArticleDesc.text = article.content
 //            cardView.tvCategoryLabel.text = "Label"
 //            Picasso.get()
 //                .load("https://images-na.ssl-images-amazon.com/images/I/810FiMQwZ5L._AC_SL1500_.jpg")
