@@ -16,7 +16,6 @@ import timber.log.Timber
 @AndroidEntryPoint
 class CommsHomeFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,7 +57,9 @@ class CommsHomeFragment : Fragment() {
     }
 
     private fun openEditArticleFragment() {
+        //TODO: Feed in actual data from the landing page
         val article = Article(1,"title", "content")
+
         val homeToEditFragment =
             CommsHomeFragmentDirections.actionFragmentCommsHomeToFragmentCreateArticle()
         homeToEditFragment.article = article
