@@ -10,7 +10,6 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.and.newton.comms.domain.data.Article
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,7 +42,7 @@ class CreateArticleFragment : Fragment() {
 
         val cancelButton = view.findViewById<Button>(R.id.button_cancel)
         cancelButton.setOnClickListener {
-            cancelCreateArticle()
+            navigateToCommsHome()
         }
 
         val postButton = view.findViewById<Button>(R.id.button_post)
@@ -54,7 +53,7 @@ class CreateArticleFragment : Fragment() {
         return view
     }
 
-    private fun cancelCreateArticle() {
+    private fun navigateToCommsHome() {
         val createArticleToHomeAction =
             CreateArticleFragmentDirections.actionFragmentCreateArticleToFragmentCommsHome()
         this.findNavController().navigate(createArticleToHomeAction)
@@ -68,6 +67,8 @@ class CreateArticleFragment : Fragment() {
 
             viewModel.postArticle(newArticle).observe(viewLifecycleOwner, Observer { article ->
                 Timber.d("Mock API Post Article Response::${article}")
+                // TODO: Show some kind of message - success or failure
+                navigateToCommsHome()
             })
         } else {
             if (edittext_title.text.isNullOrEmpty()) {
