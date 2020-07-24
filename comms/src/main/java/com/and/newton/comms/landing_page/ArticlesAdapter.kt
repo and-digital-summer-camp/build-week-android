@@ -25,9 +25,8 @@ class ArticlesAdapter @Inject constructor():
 
         fun bindViewData(article: Article) {
             this.article = article
-
-            cardView.article_content.text = article.content
             //TOdo init the item view with the article data
+            cardView.txtArticleDesc.text = article.content
 
 
         }
