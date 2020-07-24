@@ -52,7 +52,7 @@ android {
 }
 
 dependencies {
-    api project(":navigation")
+
     
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
@@ -64,6 +64,7 @@ dependencies {
     kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha01'
 
     implementation 'com.google.code.gson:gson:2.8.6'
-
+    api project(":comms")
+    api project(":login")
 
 }

@@ -8,12 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.view.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class Login : Fragment() {
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +34,7 @@ class Login : Fragment() {
         viewModel.loginState.observe(viewLifecycleOwner, Observer {
 
            if(it == LoginState.AUTHENTICATED) {
-               
+               findNavController().navigate(R.id.action_login_to_nav_comms)
             }
         })
         return layout

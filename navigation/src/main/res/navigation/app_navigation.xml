@@ -9,7 +9,7 @@
         android:id="@+id/nav_comms"
         android:name="com.and.newton.comms.CommsHomeFragment"
         android:label="@string/menu_communication"
-        tools:layout="@layout/comms_home_fragment" />
+        />
     <fragment
         android:id="@+id/login"
         android:name="com.and.newton.login.Login"
