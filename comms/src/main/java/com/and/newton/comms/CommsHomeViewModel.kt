@@ -2,11 +2,13 @@ package com.and.newton.comms
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.and.newton.comms.domain.CommsRepository
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.User
+import com.google.gson.Gson
 import timber.log.Timber
 
 class CommsHomeViewModel @ViewModelInject constructor(private val commsRepository: CommsRepository) :
@@ -23,4 +25,10 @@ class CommsHomeViewModel @ViewModelInject constructor(private val commsRepositor
     val article: LiveData<Article> = liveData {
         commsRepository.getArticle(1)?.also { emit(it)}
     }
+
+    fun postArticle(article: Article): LiveData<Article> = liveData {
+        val articleJson: String = Gson().toJson(article)
+        commsRepository.createArticle(articleJson)?.also { emit(it)}
+    }
+
 }
