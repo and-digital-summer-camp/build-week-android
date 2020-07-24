@@ -7,7 +7,6 @@ import androidx.lifecycle.liveData
 import com.and.newton.comms.domain.CommsRepository
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.User
-import timber.log.Timber
 
 class CommsHomeViewModel @ViewModelInject constructor(private val commsRepository: CommsRepository) :
     ViewModel() {

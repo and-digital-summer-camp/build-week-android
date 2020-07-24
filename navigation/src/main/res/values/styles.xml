@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="navHeaderTitle">
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="navHeaderSubTitle">
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="hamburgerMenuIcon" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/color_black</item>
+    </style>
+
+
+</resources>
