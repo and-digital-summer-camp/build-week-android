@@ -1,16 +1,16 @@
 {"results": [{
   "id": 1,
   "title": "Article 1 - Title",
-  "content": "Article 1 - Content"
+  "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n"
 },
   {
     "id": 2,
     "title": "Article 2 - Title",
-    "content": "Article 2 - Content"
+    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n"
   },
   {
     "id": 3,
     "title": "Article 3 - Title",
-    "content": "Article 3 - Content"
+    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n"
   }]
 }
