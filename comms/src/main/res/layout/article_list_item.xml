@@ -1,66 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/categoryItemCardView"
     android:layout_width="match_parent"
-    android:layout_height="220dp"
+    android:layout_height="200dp"
     android:layout_margin="3dp"
     android:elevation="5dp"
     app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/catagoryConstraintLayout"
+        android:id="@+id/articleConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="219dp">
 
         <ImageView
-            android:id="@+id/categoryImage"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/global_600"
+            android:id="@+id/articleImage"
+            android:layout_width="140dp"
+            android:layout_height="125dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:contentDescription="thumbnail"
             android:scaleType="centerCrop"
-            android:src="@drawable/thumb_1_0"
+            android:src="@drawable/coronavirus_thumbnail"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txtCategoryDesc"
+            app:layout_constraintEnd_toStartOf="@+id/txtArticleDesc"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.491" />
+            app:layout_constraintVertical_bias="0.102" />
 
         <TextView
-            android:id="@+id/txtCategoryDesc"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/global_600"
+            android:id="@+id/txtArticleDesc"
+            android:layout_width="236dp"
+            android:layout_height="171dp"
             android:layout_marginStart="@dimen/global_600"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:padding="15dp"
+            android:width="@dimen/global_100"
+            android:lines="6"
+            android:padding="5dp"
             android:text="@string/comms_category"
+            android:textAlignment="gravity"
             android:textColor="#353434"
             android:textSize="20sp"
+            android:justificationMode="inter_word"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txtCategoryLabel"
-            android:layout_width="@dimen/large_200"
-            android:layout_height="@dimen/normal_100"
-            android:layout_marginStart="@dimen/global_75"
-            android:layout_marginEnd="@dimen/global_75"
-            android:text="@string/comms_category_label"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.025"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.974" />
+            app:layout_constraintVertical_bias="0.058" />
+
+        <TextView
+            android:id="@+id/txtArticleLabel"
+            android:layout_width="142dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="@dimen/global_75"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/global_75"
+            android:background="@drawable/article_label_border"
+            android:padding="5dp"
+            android:text="@string/comms_category_label"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.826" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
