@@ -36,7 +36,7 @@ class UserViewModel @ViewModelInject constructor(@ApplicationContext val context
 
 
     fun signout() {
-        AppPreferences.isLogged = false
+        AppPreferences.clear()
         mGoogleSignInClient.signOut()
         _authenticatedState.value = AuthenticationState.UNAUTHENTICATED
     }

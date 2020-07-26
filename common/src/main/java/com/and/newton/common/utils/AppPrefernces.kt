@@ -25,12 +25,17 @@ object AppPreferences {
         editor.apply()
     }
 
+    fun clear() {
+        preferences.edit().clear();
+    }
+
     //SharedPreferences variables getters/setters
     var isLogged: Boolean
         get() = preferences.getBoolean(IS_LOGGED.first, IS_LOGGED.second)
         set(value) = preferences.edit {
             it.putBoolean(IS_LOGGED.first, value)
         }
+
 
     var username: String
         get() = preferences.getString(USERNAME.first, USERNAME.second) ?: ""
