@@ -21,7 +21,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.view.*
-import org.greenrobot.eventbus.EventBus
+
 
 
 @AndroidEntryPoint
@@ -49,18 +49,14 @@ class Login : Fragment() {
     }
 
     fun updateUI(){
-//        EventBus.getDefault().post(LoginNavigator)
-
         findNavController().popBackStack()
     }
 
     fun handleSignInResult(completedTask: Task<GoogleSignInAccount>){
         try{
             val account = completedTask.getResult(ApiException::class.java)
-            //gets token for backend
             val idToken = account?.idToken
-            Log.d("login", idToken.toString())
-            userViewModel.authenticatedUser()
+            userViewModel.verifyUser(account)
             updateUI()
         }catch (e: ApiException){
             Log.d("error", e.toString())

@@ -3,7 +3,9 @@ package com.and.newton.common.viewmodel
 import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.and.newton.common.utils.AppPreferences
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -33,13 +35,19 @@ class UserViewModel @ViewModelInject constructor(@ApplicationContext val context
         get() = _authenticatedState
 
 
-    fun authenticatedUser() {
-        _authenticatedState.value = AuthenticationState.AUTHENTICATED
-    }
-
     fun signout() {
+        AppPreferences.isLogged = false
         mGoogleSignInClient.signOut()
         _authenticatedState.value = AuthenticationState.UNAUTHENTICATED
+    }
+
+    fun unAuthenticatedUser() {
+        _authenticatedState.value = AuthenticationState.UNAUTHENTICATED
+    }
+
+    fun verifyUser(account: GoogleSignInAccount?) {
+        AppPreferences.isLogged = true
+        _authenticatedState.value = AuthenticationState.AUTHENTICATED
     }
 
 

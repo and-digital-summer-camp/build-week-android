@@ -11,10 +11,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
+import com.and.newton.common.utils.AppPreferences
 import com.and.newton.common.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.comms_home_fragment.view.*
-import org.greenrobot.eventbus.EventBus
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -30,18 +31,20 @@ class CommsHomeFragment : Fragment() {
     ): View? {
         val layout = inflater.inflate(R.layout.comms_home_fragment, container, false)
 
+        if(!AppPreferences.isLogged){
+            userViewModel.unAuthenticatedUser()
+        }
 
         userViewModel.authenticatedState.observe(viewLifecycleOwner, Observer { authenticatedState ->
             when(authenticatedState){
                 UserViewModel.AuthenticationState.AUTHENTICATED -> {
-                    Log.d("login",authenticatedState.toString() )
+
                 }
                 UserViewModel.AuthenticationState.UNAUTHENTICATED -> {
-                    Log.d("login",authenticatedState.toString() )
-                    val uri = Uri.parse("myApp://login")
+
+                    val uri = Uri.parse("App://login")
                     findNavController().navigate(uri)
                 }
-
                 else -> {
                     Log.d("login",authenticatedState.toString()  )
                 }
