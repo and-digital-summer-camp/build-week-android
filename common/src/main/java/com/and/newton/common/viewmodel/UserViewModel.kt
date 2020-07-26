@@ -1,19 +1,45 @@
 package com.and.newton.common.viewmodel
 
+import android.content.Context
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 
 //Shared Usermodel
-class UserViewModel @ViewModelInject constructor() : ViewModel() {
+class UserViewModel @ViewModelInject constructor(@ApplicationContext val context: Context) : ViewModel() {
+    enum class AuthenticationState {
+        AUTHENTICATED,
+        UNAUTHENTICATED,
+        INVALID_AUTHENTICATION
+    }
 
-    //Needs to change to user object
-    private var _user = MutableLiveData<String>()
-    val user: LiveData<String>
-        get() = _user
+    var mGoogleSignInClient: GoogleSignInClient
 
-    fun updateUser(){
-        _user.postValue("hello")
+
+    init {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("594316770168-07dhnt20g4svgtp6vqqua9cucp4moqc2.apps.googleusercontent.com")
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(context, gso);
+    }
+
+    private var _authenticatedState = MutableLiveData<AuthenticationState>()
+    val authenticatedState: LiveData<AuthenticationState>
+        get() = _authenticatedState
+
+
+    fun authenticatedUser() {
+        _authenticatedState.value = AuthenticationState.AUTHENTICATED
+    }
+
+    fun signout() {
+        mGoogleSignInClient.signOut()
+        _authenticatedState.value = AuthenticationState.UNAUTHENTICATED
     }
 
 

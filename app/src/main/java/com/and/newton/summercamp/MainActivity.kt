@@ -12,8 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
-import com.and.newton.login.LoginNavigator
-import com.and.newton.navigation.NavLayout
+import com.and.newton.comms.CommsNavigator
 import com.and.newton.navigation.Navigator
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
@@ -63,9 +62,13 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    fun onLoginEventToComms(loginNavigator: LoginNavigator){
+//        navigator.loginNavigateToComms(navController)
+//    }
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onLoginEventToComms(loginNavigator: LoginNavigator){
-        navigator.loginNavigateToComms(navController)
+    fun commsEvent(commsNavigator: CommsNavigator){
+        navigator.commsNavigateToLogin(navController)
     }
 
     override fun onStart() {

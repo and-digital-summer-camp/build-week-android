@@ -4,12 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import com.and.newton.login.LoginNavigator
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 
 class NavLayout @JvmOverloads constructor(
     context: Context,

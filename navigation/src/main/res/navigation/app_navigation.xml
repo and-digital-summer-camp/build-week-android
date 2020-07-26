@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/login">
+    app:startDestination="@id/nav_comms">
 
     <fragment
         android:id="@+id/nav_comms"
         android:name="com.and.newton.comms.CommsHomeFragment"
         android:label="@string/menu_communication"
-        />
+        >
+        <action
+            android:id="@+id/action_nav_comms_to_login"
+            app:destination="@id/login" />
+    </fragment>
     <fragment
         android:id="@+id/login"
         android:name="com.and.newton.login.Login"
-        android:label="Login" >
-        <action
-            android:id="@+id/action_login_to_nav_comms"
-            app:destination="@id/nav_comms" />
-    </fragment>
+        android:label="Login" />
 </navigation>
