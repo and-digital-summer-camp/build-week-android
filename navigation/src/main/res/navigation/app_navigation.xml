@@ -7,15 +7,14 @@
 
     <fragment
         android:id="@+id/nav_comms"
-        android:name="com.and.newton.comms.CommsHomeFragment"
-        android:label="@string/menu_communication"
-        >
-        <action
-            android:id="@+id/action_nav_comms_to_login"
-            app:destination="@id/login" />
+        android:name="com.and.newton.comms.CommsHomeFragment">
+        <deepLink app:uri="myApp://nav_comms" />
     </fragment>
+
     <fragment
         android:id="@+id/login"
-        android:name="com.and.newton.login.Login"
-        android:label="Login" />
+        android:name="com.and.newton.login.Login">
+     <deepLink app:uri="myApp://login" />
+    </fragment>
+
 </navigation>

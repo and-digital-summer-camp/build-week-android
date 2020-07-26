@@ -1,5 +1,6 @@
 package com.and.newton.comms
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -37,7 +38,8 @@ class CommsHomeFragment : Fragment() {
                 }
                 UserViewModel.AuthenticationState.UNAUTHENTICATED -> {
                     Log.d("login",authenticatedState.toString() )
-                    EventBus.getDefault().post(CommsNavigator)
+                    val uri = Uri.parse("myApp://login")
+                    findNavController().navigate(uri)
                 }
 
                 else -> {
