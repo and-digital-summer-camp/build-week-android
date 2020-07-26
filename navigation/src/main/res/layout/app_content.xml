@@ -15,7 +15,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/color_white"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -29,6 +29,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/global_100"
+        app:borderWidth="0dp"
+        android:backgroundTint="@color/color_neutral_grey_25"
+        android:tint="@color/color_black"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
