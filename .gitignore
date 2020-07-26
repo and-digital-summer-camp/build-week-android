@@ -156,3 +156,4 @@ local.properties
 .idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_ktx_2_2_0_aar.xml
 *.xml
 *.xml
+build/kotlin/sessions/kotlin-compiler-5961577492823833626.salive

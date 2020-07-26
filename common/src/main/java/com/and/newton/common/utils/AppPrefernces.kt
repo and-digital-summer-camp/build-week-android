@@ -2,6 +2,8 @@ package com.and.newton.common.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.and.newton.common.utils.AppPreferences.clear
+import okhttp3.internal.cache2.Relay.Companion.edit
 
 object AppPreferences {
     private const val NAME = "USER_STATE"
@@ -26,7 +28,9 @@ object AppPreferences {
     }
 
     fun clear() {
-        preferences.edit().clear();
+      val editor: SharedPreferences.Editor = preferences.edit()
+        editor.clear()
+        editor.commit()
     }
 
     //SharedPreferences variables getters/setters
