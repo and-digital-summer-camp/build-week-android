@@ -60,8 +60,6 @@ class CreateArticleFragment : Fragment() {
             view.category_edit.setDropDownBox(categoryNames)
         })
 
-
-
         return view
     }
 

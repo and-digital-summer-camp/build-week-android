@@ -1,24 +1,22 @@
-{
-  "results": [
-    {
-      "categoryID": 0,
-      "categoryName": "COVID-19"
-    },
-    {
-      "categoryID": 1,
-      "categoryName": "Business update"
-    },
-    {
-      "categoryID": 2,
-      "categoryName": "Android Native"
-    },
-    {
-      "categoryID": 3,
-      "categoryName": "React"
-    },
-    {
-      "categoryID": 4,
-      "categoryName": "iOS"
-    }
-  ]
-}
+[
+  {
+    "categoryID": 0,
+    "categoryName": "COVID-19"
+  },
+  {
+    "categoryID": 1,
+    "categoryName": "Business update"
+  },
+  {
+    "categoryID": 2,
+    "categoryName": "Android Native"
+  },
+  {
+    "categoryID": 3,
+    "categoryName": "React"
+  },
+  {
+    "categoryID": 4,
+    "categoryName": "iOS"
+  }
+]
