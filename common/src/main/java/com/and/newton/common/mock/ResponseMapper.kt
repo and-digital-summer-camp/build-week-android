@@ -13,6 +13,7 @@ class ResponseMapper {
                 in URIConstants.ARTICLE_API -> return CommsResponseMapper.getArticleAPi(httpMethod)
                 in URIConstants.USER_API -> return "getAuthUser.json"
                 in Regex(URIConstants.ARTICLE_API+"/\\d") -> return "getArticle.json"
+                in URIConstants.CATEGORIES_API -> return "getCategories.json"
             }
             return ""
         }

@@ -5,7 +5,9 @@
         android:id="@+id/action_filter"
         android:icon="@drawable/ic_filter"
         android:orderInCategory="100"
+        app:actionViewClass="android.widget.Spinner"
         android:title="@string/action_filter"
         app:showAsAction="always" />
+
 
 </menu>
