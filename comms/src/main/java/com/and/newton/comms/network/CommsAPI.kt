@@ -2,6 +2,7 @@ package com.and.newton.comms.network
 
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.Articles
+import com.and.newton.comms.domain.data.Categories
 import com.and.newton.comms.domain.data.User
 import retrofit2.http.*
 
@@ -38,7 +39,7 @@ interface CommsAPI {
 
     //Gets ALL categories
     @GET("/categories")
-    suspend fun getAllCategories(@Header("Authorization") JWT_token: String) : String
+    suspend fun getAllCategories(@Header("Authorization") JWT_token: String) : Categories
 
     //Deletes SPECIFIC article
     @DELETE("/articles/{id}")

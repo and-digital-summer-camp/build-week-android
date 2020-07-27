@@ -15,8 +15,9 @@ import androidx.navigation.fragment.findNavController
 import com.and.newton.comms.domain.data.Article
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_create_article.*
+import kotlinx.android.synthetic.main.fragment_create_article.view.*
 import timber.log.Timber
-
+import java.util.stream.Collectors
 
 @AndroidEntryPoint
 class CreateArticleFragment : Fragment() {
@@ -51,6 +52,15 @@ class CreateArticleFragment : Fragment() {
         postButton.setOnClickListener {
             postNewArticle()
         }
+
+        viewModel.categories.observe(viewLifecycleOwner, Observer { t ->
+            Timber.d("Mock API Get Categories Response::${t}")
+
+            val categoryNames: List<String> = t.map { it.categoryName }
+            view.category_edit.setDropDownBox(categoryNames)
+        })
+
+
 
         return view
     }

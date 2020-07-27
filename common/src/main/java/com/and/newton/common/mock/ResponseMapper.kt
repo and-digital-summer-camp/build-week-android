@@ -11,6 +11,7 @@ class ResponseMapper {
         fun getResponseBody(uriPath:String, httpMethod:String = URIConstants.HTTP_GET ):String {
             when(uriPath) {
                 in URIConstants.ARTICLE_API -> return CommsResponseMapper.getArticleAPi(httpMethod)
+                in URIConstants.CATEGORIES_API -> return CommsResponseMapper.getCategoriesAPi(httpMethod)
                 in URIConstants.USER_API -> return "getAuthUser.json"
                 in Regex(URIConstants.ARTICLE_API+"/\\d") -> return "getArticle.json"
             }
