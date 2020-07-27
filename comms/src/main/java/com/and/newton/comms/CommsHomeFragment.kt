@@ -57,9 +57,7 @@ class CommsHomeFragment : Fragment() {
             }
 
         })
-        layout.button.setOnClickListener {
-            userViewModel.signout()
-        }
+
         viewModel.articles.observe(viewLifecycleOwner, Observer { t ->
             Timber.d("Mock API Articles List Response::${t}")
         })
