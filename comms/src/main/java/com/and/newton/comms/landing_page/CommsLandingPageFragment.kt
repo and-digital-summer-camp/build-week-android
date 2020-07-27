@@ -36,9 +36,9 @@ class CommsLandingPageFragment : Fragment() {
 
         val viewModel: CommsSharedViewModel by viewModels()
 
-        viewModel.articles.observe(viewLifecycleOwner, Observer { otherArticles ->
-            Timber.d("Mock API otherArticles Articles List Response::${otherArticles.size}")
-            articlesAdapter.bindData(otherArticles)
+        viewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
+            Timber.d("Mock API all Articles List Response::${articles}")
+            articlesAdapter.bindData(articles)
             layout.articles.adapter = articlesAdapter
             layout.articles.adapter?.notifyDataSetChanged()
         })

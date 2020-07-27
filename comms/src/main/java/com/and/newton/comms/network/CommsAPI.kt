@@ -1,7 +1,6 @@
 package com.and.newton.comms.network
 
 import com.and.newton.comms.domain.data.Article
-import com.and.newton.comms.domain.data.Articles
 import com.and.newton.comms.domain.data.User
 import retrofit2.http.*
 
@@ -18,7 +17,7 @@ interface CommsAPI {
 
     //Gets ALL articles
     @GET("/articles")
-    suspend fun getArticles(@Header("Authorization") JWT_token: String) : Articles
+    suspend fun getArticles(@Header("Authorization") JWT_token: String) : List<Article>
 
     //Gets SPECIFIC article by ID
     @GET("/articles/{id}")

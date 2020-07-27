@@ -11,6 +11,10 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.0"
 
+    buildFeatures {
+        dataBinding true
+    }
+
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 30

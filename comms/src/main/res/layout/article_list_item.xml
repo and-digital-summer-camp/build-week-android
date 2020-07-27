@@ -1,82 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/categoryItemCardView"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:layout_margin="3dp"
-    android:elevation="5dp"
-    app:cardBackgroundColor="@android:color/white"
-    app:cardCornerRadius="8dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="article" type="com.and.newton.comms.domain.data.Article"/>
+    </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/articleConstraintLayout"
+<androidx.cardview.widget.CardView
+        android:id="@+id/categoryItemCardView"
         android:layout_width="match_parent"
-        android:layout_height="219dp">
+        android:layout_height="200dp"
+        android:layout_margin="3dp"
+        android:elevation="5dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="8dp">
 
-        <ImageView
-            android:id="@+id/articleImage"
-            android:layout_width="140dp"
-            android:layout_height="125dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:contentDescription="thumbnail"
-            android:scaleType="centerCrop"
-            android:src="@drawable/coronavirus_thumbnail"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txtArticleDesc"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.102" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/articleConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="219dp">
 
-        <TextView
-            android:id="@+id/txtArticleDesc"
-            android:layout_width="236dp"
-            android:layout_height="171dp"
-            android:layout_marginStart="@dimen/global_600"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:width="@dimen/global_100"
-            android:lines="6"
-            android:padding="5dp"
-            android:text="@string/comms_category"
-            android:textAlignment="gravity"
-            android:textColor="#353434"
-            android:textSize="20sp"
-            android:justificationMode="inter_word"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.058" />
+            <ImageView
+                android:id="@+id/articleImage"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="thumbnail"
+                android:scaleType="centerCrop"
+                android:src="@drawable/article_default"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txtArticleDesc"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.102" />
 
-        <TextView
-            android:id="@+id/txtArticleLabel"
-            android:layout_width="142dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="@dimen/global_75"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="@dimen/global_75"
-            android:background="@drawable/article_label_border"
-            android:padding="5dp"
-            android:text="@string/comms_category_label"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.826" />
+            <TextView
+                android:id="@+id/txtArticleDesc"
+                android:layout_width="236dp"
+                android:layout_height="171dp"
+                android:layout_marginStart="@dimen/global_600"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:width="@dimen/global_100"
+                android:justificationMode="inter_word"
+                android:lines="6"
+                android:padding="5dp"
+                android:text="@string/comms_category"
+                android:textAlignment="gravity"
+                android:textColor="#353434"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.058" />
+
+            <TextView
+                android:id="@+id/txtArticleLabel"
+                android:layout_width="142dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="@dimen/global_75"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/global_75"
+                android:background="@drawable/article_label_border"
+                android:padding="5dp"
+                android:text="@{article.title}"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.826" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.cardview.widget.CardView>
+
+</layout>
