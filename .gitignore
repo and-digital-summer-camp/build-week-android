@@ -2,5 +2,4 @@
 .gradle/
 /build
 **/.DS_Store
-android/local.properties
-.android/local.properties
+local.properties
