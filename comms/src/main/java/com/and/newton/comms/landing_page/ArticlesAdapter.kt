@@ -1,22 +1,16 @@
 package com.and.newton.comms.landing_page
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.and.newton.comms.R
 import com.and.newton.comms.databinding.ArticleListItemBinding
 import com.and.newton.comms.domain.data.Article
-import com.and.newton.comms.domain.data.Category
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 //import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.article_list_item.view.*
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 
 class ArticlesAdapter @Inject constructor():
@@ -26,20 +20,38 @@ class ArticlesAdapter @Inject constructor():
 
     private var articleFilteredDataSet:List<Article> = listOf()
 
+
+    var isArticleEmpty: ConflatedBroadcastChannel<Boolean> = ConflatedBroadcastChannel()
+        // getter
+        get() = field
+
+        // setter
+        set(value) {
+            field = value
+        }
+
     fun bindData(dataSet: List<Article>) {
         articleDataSet = dataSet
         articleFilteredDataSet= articleDataSet
+        onDataSetUpdated()
+    }
+
+    fun onDataSetUpdated() {
+        isArticleEmpty.offer(articleFilteredDataSet.size == 0)
     }
 
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val filterCategory = constraint.toString()
-                if (filterCategory.isEmpty() || ("All").toLowerCase(Locale.ROOT).contains(filterCategory.toLowerCase(Locale.ROOT))) {
-                    articleFilteredDataSet = articleDataSet
+                var filteredDataSet: List<Article> = listOf()
+
+                val filterResults = FilterResults()
+                if (filterCategory.isEmpty() || ("All Categories").toLowerCase(Locale.ROOT).contains(filterCategory.toLowerCase(Locale.ROOT))) {
+                    filteredDataSet = articleDataSet
                 }
                 else {
-                    articleFilteredDataSet =  articleDataSet.filter { article:Article ->
+                    filteredDataSet =  articleDataSet.filter { article:Article ->
                         var categoryFound = false
                         article.categories?.forEach{
                             if((it.name?:"").toLowerCase(Locale.ROOT).contains(filterCategory.toLowerCase(Locale.ROOT))) {
@@ -49,15 +61,17 @@ class ArticlesAdapter @Inject constructor():
                         categoryFound
                     }
                 }
-                val filterResults = FilterResults()
-                filterResults.values = articleFilteredDataSet
+                filterResults.values = filteredDataSet
+                filterResults.count = filteredDataSet.size;
                 return filterResults
             }
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                articleFilteredDataSet = results?.values as ArrayList<Article>
+                articleFilteredDataSet = results?.values as List<Article>
                 notifyDataSetChanged()
+
+                onDataSetUpdated()
             }
 
         }
@@ -98,7 +112,8 @@ class ArticlesAdapter @Inject constructor():
         )
     }
 
-    override fun getItemCount(): Int = articleFilteredDataSet.size
+    override fun getItemCount(): Int  = articleFilteredDataSet.size
+
 
     override fun onBindViewHolder(holder: ThumbnailViewHolder, position: Int) {
         holder.bindViewData(articleFilteredDataSet[position])

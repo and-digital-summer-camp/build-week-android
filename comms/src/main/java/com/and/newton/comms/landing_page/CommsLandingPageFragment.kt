@@ -14,6 +14,9 @@ import com.and.newton.comms.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.*
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.view.*
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -30,7 +33,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 
     private var categoryFilter:Spinner? = null
 
-    private var categoryList: MutableList<String> = mutableListOf("All")
+    private var categoryList: MutableList<String> = mutableListOf("All Categories")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +80,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
                 it.name?:"N/A"
             } as MutableList<String>
 
-            categoryList.add("All")
+            categoryList.add("All Categories")
 
             updateCategoriesFilter(categoryList.sorted())
         })
@@ -103,18 +106,22 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     }
 
     override fun onItemSelected(spinnerAdapter: AdapterView<*>?, itemView: View?, option: Int, p3: Long) {
-        Timber.d("option :: ${option}")
         articlesAdapter?.filter?.filter(categoryList.sorted().get(option))
         articlesAdapter?.notifyDataSetChanged()
-        Timber.d("size::${articlesAdapter?.itemCount == 0}")
-        updateArticleListView(articlesAdapter?.itemCount == 0)
+
+        MainScope().launch {
+            articlesAdapter?.isArticleEmpty.consumeEach {
+                updateArticleListView(it)
+            }
+        }
+
+
     }
 
-    fun updateArticleListView (isEmpty:Boolean) {
+    private fun updateArticleListView (isEmpty:Boolean) {
         if(isEmpty) {
             noArticleItemCardView.visibility = View.VISIBLE
             articles.visibility = View.GONE
-            Timber.d("size::visible")
         }
         else {
             noArticleItemCardView.visibility = View.GONE

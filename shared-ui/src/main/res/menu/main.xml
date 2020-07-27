@@ -7,6 +7,9 @@
         android:orderInCategory="100"
         app:actionViewClass="android.widget.Spinner"
         android:title="@string/action_filter"
+
+        android:gravity="right"
+        android:layout_gravity="right"
         app:showAsAction="always" />
 
 

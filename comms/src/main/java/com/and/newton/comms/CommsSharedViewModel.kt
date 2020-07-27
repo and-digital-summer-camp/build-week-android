@@ -12,12 +12,19 @@ import com.and.newton.comms.domain.data.User
 class CommsSharedViewModel @ViewModelInject constructor(private val commsRepository: CommsRepository) :
     ViewModel() {
 
+
+
     val user: LiveData<User> = liveData {
         commsRepository.getUser("Bearer googletoken")?.also { emit(it)}
     }
 
     val articles: LiveData<List<Article>> = liveData {
-        commsRepository.getArticles()?.also { emit(it)}
+        commsRepository.getArticles()?.also { articleList : List<Article> ->
+            val sortedArticleList = articleList.sortedWith(compareByDescending <Article> { it.highlighted }.thenByDescending { it.date }
+            )
+          emit(sortedArticleList)
+        }
+
     }
 
     val article: LiveData<Article> = liveData {
