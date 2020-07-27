@@ -1,5 +1,6 @@
 package com.and.newton.summercamp
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -33,7 +34,10 @@ class MainActivity : AppCompatActivity() {
     private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.SplashTheme)
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme_NoActionBar)
+
         setContentView(R.layout.activity_main)
 
         this.drawerLayout = findViewById(R.id.drawer_layout)
