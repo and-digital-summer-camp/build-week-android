@@ -15,4 +15,5 @@ class NavLayout @JvmOverloads constructor(
             .inflate(R.layout.nav_layout, this, true)
 
     }
+
 }
