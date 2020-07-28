@@ -18,7 +18,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        app:itemTextColor="#442C2E"
         android:fitsSystemWindows="true"
+        android:background="@color/color_secondary_shrine_pink"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_drawer" />
 </androidx.drawerlayout.widget.DrawerLayout>

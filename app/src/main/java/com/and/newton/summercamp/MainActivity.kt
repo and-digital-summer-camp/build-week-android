@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.SplashTheme)
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme_NoActionBar)
+        window.statusBarColor = getColor(R.color.color_primary_shrine_pink)
 
         setContentView(R.layout.activity_main)
 
