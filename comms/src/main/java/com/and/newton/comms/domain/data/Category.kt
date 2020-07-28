@@ -1,13 +1,11 @@
 package com.and.newton.comms.domain.data
 
-import java.io.Serializable
+import com.google.gson.annotations.SerializedName
 
 data class Category constructor(
-    val categoryID: Int,
+    @field:SerializedName("categoryID")
+    val id: Int?,
 
-    val categoryName: String
-
-): Serializable
-
-
-
+    @field:SerializedName("categoryName")
+    val name: String?
+)

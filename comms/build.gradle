@@ -12,8 +12,12 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.0"
 
+    buildFeatures {
+        dataBinding true
+    }
+
     defaultConfig {
-        minSdkVersion 23
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -34,6 +38,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += [
+                "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi"]
     }
 }
 

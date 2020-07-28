@@ -23,49 +23,49 @@ class CommsHomeFragment : Fragment() {
     ): View? {
         val layout = inflater.inflate(R.layout.fragment_comms_home, container, false)
 
-        val viewModel: CommsHomeViewModel by viewModels()
-
-        viewModel.articles.observe(viewLifecycleOwner, Observer { t ->
-            Timber.d("Mock API Articles List Response::${t}")
-        })
-
-        viewModel.user.observe(viewLifecycleOwner, Observer { t ->
-            Timber.d("Mock API fragment User Response::${t}")
-        })
-
-        viewModel.article.observe(viewLifecycleOwner, Observer { t ->
-            Timber.d("Mock API Article id:1 Response::${t}")
-        })
-
-        val createArticleButton = layout.findViewById<Button>(R.id.button_create_article)
-        createArticleButton.setOnClickListener {
-            openCreateArticleFragment()
-        }
-
-        val editArticleButton = layout.findViewById<Button>(R.id.button_edit_article)
-        editArticleButton.setOnClickListener {
-            openEditArticleFragment()
-        }
+//        val viewModel: CommsHomeViewModel by viewModels()
+//
+//        viewModel.articles.observe(viewLifecycleOwner, Observer { t ->
+//            Timber.d("Mock API Articles List Response::${t}")
+//        })
+//
+//        viewModel.user.observe(viewLifecycleOwner, Observer { t ->
+//            Timber.d("Mock API fragment User Response::${t}")
+//        })
+//
+//        viewModel.article.observe(viewLifecycleOwner, Observer { t ->
+//            Timber.d("Mock API Article id:1 Response::${t}")
+//        })
+//
+//        val createArticleButton = layout.findViewById<Button>(R.id.button_create_article)
+//        createArticleButton.setOnClickListener {
+//            openCreateArticleFragment()
+//        }
+//
+//        val editArticleButton = layout.findViewById<Button>(R.id.button_edit_article)
+//        editArticleButton.setOnClickListener {
+//            openEditArticleFragment()
+//        }
 
         return layout
     }
 
     private fun openCreateArticleFragment() {
-        val homeToCreateFragment =
-            CommsHomeFragmentDirections
-                .actionFragmentCommsHomeToFragmentCreateArticle()
-        this.findNavController().navigate(homeToCreateFragment)
+//        val homeToCreateFragment =
+//            CommsHomeFragmentDirections
+//                .actionFragmentCommsHomeToFragmentCreateArticle()
+//        this.findNavController().navigate(homeToCreateFragment)
     }
 
     private fun openEditArticleFragment() {
-        //TODO: Feed in actual data from the landing page
-        val category = Category(1, "Corona")
-        val article = Article(1,"title", "content", category)
-
-        val homeToEditFragment =
-            CommsHomeFragmentDirections.actionFragmentCommsHomeToFragmentCreateArticle()
-        homeToEditFragment.article = article
-        this.findNavController().navigate(homeToEditFragment)
+//        //TODO: Feed in actual data from the landing page
+//        val category = Category(1, "Corona")
+//        val article = Article(1,"title", "content", category)
+//
+//        val homeToEditFragment =
+//            CommsHomeFragmentDirections.actionFragmentCommsHomeToFragmentCreateArticle()
+//        homeToEditFragment.article = article
+//        this.findNavController().navigate(homeToEditFragment)
     }
 
 

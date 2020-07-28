@@ -11,6 +11,9 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.NavHostFragment
+import com.and.newton.comms.landing_page.CommsLandingPageFragmentDirections
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +26,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initNavigationDrawerWithToolBar()
+        initCreateArticleButton()
+    }
+
+    private fun initCreateArticleButton() {
+        val floatingActionButton: FloatingActionButton = findViewById(R.id.fab)
+        floatingActionButton.setOnClickListener {
+            val navController = findNavController(R.id.nav_host_fragment)
+            navController.navigate(R.id.action_commsLandingPageFragment_to_fragment_create_article)
+        }
     }
 
     private fun initNavigationDrawerWithToolBar() {
@@ -33,8 +45,11 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.nav_articles ), drawerLayout)
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_articles
+            ), drawerLayout
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

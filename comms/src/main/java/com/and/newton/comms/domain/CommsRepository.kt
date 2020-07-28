@@ -13,6 +13,6 @@ interface CommsRepository {
 
     suspend fun createArticle(article: String) : Article?
 
-    suspend fun getAllCategories() : List<Category>
+    suspend fun getCategories(): List<Category>?
 }
 

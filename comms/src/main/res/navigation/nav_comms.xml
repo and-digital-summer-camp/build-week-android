@@ -3,31 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_articles"
-    app:startDestination="@id/fragment_comms_home">
+    app:startDestination="@id/nav_landing_page">
 
     <fragment
-        android:id="@+id/fragment_comms_home"
-        android:name="com.and.newton.comms.CommsHomeFragment"
-        android:label="articles_home_fragment"
-        tools:layout="@layout/fragment_comms_home" >
-        <action
-            android:id="@+id/action_fragment_comms_home_to_fragment_create_article"
-            app:destination="@id/fragment_create_article">
-            <argument
-                android:name="article"
-                android:defaultValue="@null"
-                app:nullable="true"
-                app:argType="com.and.newton.comms.domain.data.Article"
-                />
-        </action>
-    </fragment>
-    <fragment
-        android:id="@+id/fragment_create_article"
+        android:id="@+id/createArticleFragment"
         android:name="com.and.newton.comms.CreateArticleFragment"
         android:label="create_article_fragment"
         tools:layout="@layout/fragment_create_article" >
         <action
-            android:id="@+id/action_fragment_create_article_to_fragment_comms_home"
-            app:destination="@id/fragment_comms_home" />
+            android:id="@+id/action_fragment_create_article_to_commsLandingPageFragment"
+            app:destination="@id/nav_landing_page" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_landing_page"
+        android:name="com.and.newton.comms.landing_page.CommsLandingPageFragment"
+        android:label="comms_landing_page_fragment"
+        tools:layout="@layout/comms_landing_page_fragment" >
+        <action
+            android:id="@+id/action_commsLandingPageFragment_to_fragment_create_article"
+            app:destination="@id/createArticleFragment">
+        <argument
+            android:name="article"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="com.and.newton.comms.domain.data.Article"
+            />
+        </action>
     </fragment>
 </navigation>

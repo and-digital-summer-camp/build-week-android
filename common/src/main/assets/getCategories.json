@@ -1,22 +1,14 @@
 [
   {
     "categoryID": 0,
-    "categoryName": "COVID-19"
+    "categoryName": "Summer Camp"
   },
   {
-    "categoryID": 1,
-    "categoryName": "Business update"
+    "categoryID": 0,
+    "categoryName": "Biz update"
   },
   {
-    "categoryID": 2,
-    "categoryName": "Android Native"
-  },
-  {
-    "categoryID": 3,
-    "categoryName": "React"
-  },
-  {
-    "categoryID": 4,
-    "categoryName": "iOS"
+    "categoryID": 0,
+    "categoryName": "Covid-19"
   }
 ]

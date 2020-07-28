@@ -24,7 +24,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class CreateArticleFragment : Fragment() {
 
-    private val viewModel: CommsHomeViewModel by viewModels()
+    private val viewModel: CommsSharedViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,8 +51,8 @@ class CreateArticleFragment : Fragment() {
         viewModel.categories.observe(viewLifecycleOwner, Observer { t ->
             Timber.d("Mock API Get Categories Response::${t}")
 
-            val categoryNames: List<String> = t.map { it.categoryName }
-            view.category_edit.setDropDownBox(categoryNames)
+            val categoryNames: List<String?> = t.map { it.name }
+            view.category_edit.setDropDownBox(categoryNames as List<String>)
         })
 
         return view
@@ -62,9 +62,10 @@ class CreateArticleFragment : Fragment() {
         if (!edittext_title.text.isNullOrEmpty() && !edittext_content.text.isNullOrEmpty()) {
 
             // TODO : Remove hardcoded IDs from category
-            var category: Category? = null
+            var categories = ArrayList<Category>()
             if (!category_edit.text.isNullOrEmpty()) {
-                category = Category(1, category_edit.text.toString())
+                val category = Category(1, category_edit.text.toString())
+                categories.add(category)
             }
 
             // TODO : Remove hardcoded IDs from article
@@ -72,7 +73,7 @@ class CreateArticleFragment : Fragment() {
                 1,
                 edittext_title.text.toString(),
                 edittext_content.text.toString(),
-                category
+                null, null, false, categories
             )
 
             viewModel.postArticle(newArticle).observe(viewLifecycleOwner, Observer { article ->
@@ -125,15 +126,17 @@ class CreateArticleFragment : Fragment() {
         createArticleTitle.text = getString(R.string.edit_post_title)
         editTextTitle.setText(article.title)
         editTextContent.setText(article.content)
-        if (article.category != null) {
-            categoryDropdown.setText(article.category.categoryName)
+        if (!article.categories.isNullOrEmpty()) {
+            // TODO: Fix this set dropdown text - how the hell do you deal with a whole list of them?
+            categoryDropdown.setText(article.categories[0].name)
         }
     }
 
     private fun navigateToCommsHome() {
-        val createArticleToHomeAction =
-            CreateArticleFragmentDirections.actionFragmentCreateArticleToFragmentCommsHome()
-        this.findNavController().navigate(createArticleToHomeAction)
+        val createArticleToLandingAction =
+            CreateArticleFragmentDirections.actionFragmentCreateArticleToCommsLandingPageFragment()
+
+        findNavController().navigate(R.id.action_fragment_create_article_to_commsLandingPageFragment)
     }
 
 

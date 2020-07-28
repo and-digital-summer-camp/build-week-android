@@ -3,11 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/nav_comms">
+    app:startDestination="@navigation/nav_comms">
 
-    <fragment
-        android:id="@+id/nav_comms"
-        android:name="com.and.newton.comms.CommsMainFragment"
-        android:label="@string/menu_communication"
-        tools:layout="@layout/fragment_comms_main" />
+    <include app:graph="@navigation/nav_comms" />
+
 </navigation>

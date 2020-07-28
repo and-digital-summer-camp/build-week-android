@@ -1,14 +1,11 @@
 package com.and.newton.common.di
 
-import android.content.Context
-import com.and.newton.common.NetworkAPI
 import com.and.newton.common.mock.MockInterceptor
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -32,7 +29,7 @@ object NetworkModule {
             .addInterceptor(mockInterceptor)
             .build()
 
-        val gsonBuilder = GsonBuilder()
+        val gsonBuilder = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         val gson = gsonBuilder.create()
 
         return Retrofit.Builder()
