@@ -28,7 +28,7 @@ class UserViewModel @ViewModelInject constructor(@ApplicationContext var context
 
     init {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("594316770168-07dhnt20g4svgtp6vqqua9cucp4moqc2.apps.googleusercontent.com")
+            .requestIdToken("720340655248-ql1qmrgsuj9267ch3lgar94r2dccqm3r.apps.googleusercontent.com")
             .requestEmail()
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(context, gso);
