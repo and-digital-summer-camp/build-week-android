@@ -16,9 +16,8 @@ import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.Category
 import com.and.newton.shared_ui.CustomAutoCompleteTextView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_create_article.*
-import kotlinx.android.synthetic.main.fragment_create_article.view.*
-import retrofit2.HttpException
+import kotlinx.android.synthetic.main.create_article_fragment.*
+import kotlinx.android.synthetic.main.create_article_fragment.view.*
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -31,7 +30,7 @@ class CreateArticleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_create_article, container, false)
+        val view = inflater.inflate(R.layout.create_article_fragment, container, false)
 
         val article = arguments?.get("article") as? Article
         if (article != null) {

@@ -9,7 +9,7 @@
         android:id="@+id/createArticleFragment"
         android:name="com.and.newton.comms.CreateArticleFragment"
         android:label="create_article_fragment"
-        tools:layout="@layout/fragment_create_article" >
+        tools:layout="@layout/create_article_fragment" >
         <action
             android:id="@+id/action_fragment_create_article_to_commsLandingPageFragment"
             app:destination="@id/nav_landing_page" />
