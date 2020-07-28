@@ -5,7 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
-import android.util.Log
+import timber.log.Timber
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,15 +17,15 @@ class CustomAutoCompleteTextView @JvmOverloads constructor(context:Context, attr
     fun setDropDownBox(data:List<String>) {
         this.adapterCategories = ArrayAdapter<String>(context, R.layout.simple_spinner_item, data)
         this.setAdapter(adapterCategories)
-        Log.d("setDropDownBox", "here")
     }
 
     override fun onFocusChanged(focused: Boolean, direction: Int, previouslyFocusedRect: Rect?) {
         super.onFocusChanged(focused, direction, previouslyFocusedRect)
-        if(focused) {this.showDropDown()
-            Log.d("onFocusChange", "here")
+        if(focused) {
+            this.showDropDown()
+            Timber.d("onFocusChange")
         } else {this.dismissDropDown()
-            Log.d("onFocusChange", "else statement")
+            Timber.d("onFocusChange")
         }
     }
 
