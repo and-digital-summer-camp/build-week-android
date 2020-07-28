@@ -7,7 +7,10 @@
 
     <fragment
         android:id="@+id/nav_comms"
-        android:name="com.and.newton.comms.CommsHomeFragment">
+        android:name="com.and.newton.comms.landing_page.CommsLandingPageFragment"
+        android:label="@string/menu_communication"
+        tools:layout="@layout/comms_landing_page_fragment"
+        >
         <deepLink app:uri="App://nav_comms" />
     </fragment>
 

@@ -29,7 +29,7 @@ object NetworkModule {
             .addInterceptor(mockInterceptor)
             .build()
 
-        val gsonBuilder = GsonBuilder()
+        val gsonBuilder = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         val gson = gsonBuilder.create()
 
         return Retrofit.Builder()
