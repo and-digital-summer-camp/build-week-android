@@ -1,6 +1,7 @@
 package com.and.newton.comms.domain
 
 import com.and.newton.comms.domain.data.Article
+import com.and.newton.comms.domain.data.Category
 import com.and.newton.comms.domain.data.User
 import com.and.newton.comms.network.CommsAPI
 import javax.inject.Inject
@@ -19,6 +20,10 @@ class CommsRepositoryImpl @Inject constructor(private val commsAPI: CommsAPI) : 
 
     override suspend fun getArticle(id: Int): Article? {
         return commsAPI.getArticle(id, google_auth_token)
+    }
+
+    override suspend fun getCategories(): List<Category>? {
+        return commsAPI.getAllCategories(google_auth_token)
     }
 
 
