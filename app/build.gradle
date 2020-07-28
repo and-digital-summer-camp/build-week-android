@@ -23,6 +23,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         signingConfigs {
+            debug {
+                storeFile file("../.github/workflows/keystore/summercamp_keystore.jks")
+                storePassword "android"
+                keyAlias "club"
+                keyPassword "newton"
+            }
             release {
                 storeFile file("../.github/workflows/keystore/summercamp_keystore.jks")
                 storePassword "android"
@@ -33,6 +39,17 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "CommsApp-v${versionName}.apk"
+                }
+            }
+            signingConfig signingConfigs.release
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
