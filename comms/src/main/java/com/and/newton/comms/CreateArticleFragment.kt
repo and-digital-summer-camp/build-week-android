@@ -13,12 +13,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.and.newton.comms.domain.data.Article
+import com.and.newton.comms.domain.data.Category
+import com.and.newton.shared_ui.CustomAutoCompleteTextView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_create_article.*
 import kotlinx.android.synthetic.main.fragment_create_article.view.*
 import retrofit2.HttpException
 import timber.log.Timber
-import java.util.stream.Collectors
 
 @AndroidEntryPoint
 class CreateArticleFragment : Fragment() {
@@ -78,7 +79,7 @@ class CreateArticleFragment : Fragment() {
                 Timber.d("Mock API Post Article Response::${article}")
 
                 // TODO: Handle status codes
-                createAlertDialog()
+                createSuccessDialog()
                 //
             })
         } else {
@@ -91,7 +92,7 @@ class CreateArticleFragment : Fragment() {
         }
     }
 
-    private fun createAlertDialog() {
+    private fun createSuccessDialog() {
         val builder = activity?.let { AlertDialog.Builder(it) }
 
         builder?.setTitle("Article Created")
@@ -101,6 +102,32 @@ class CreateArticleFragment : Fragment() {
             navigateToCommsHome()
         }
         builder?.show()
+    }
+
+    private fun createErrorDialog() {
+        val builder = activity?.let { AlertDialog.Builder(it) }
+
+        builder?.setTitle("Error")
+        builder?.setMessage("A Network Error has occurred in creating the Article. Please try again")
+
+        val alertDialog = builder?.show()
+        builder?.setPositiveButton(android.R.string.yes) { _, _ ->
+            alertDialog?.dismiss()
+        }
+    }
+
+    private fun populateEditArticle(view: View, article: Article) {
+        val createArticleTitle = view.findViewById<TextView>(R.id.textview_main_title)
+        val editTextTitle = view.findViewById<EditText>(R.id.edittext_title)
+        val editTextContent = view.findViewById<EditText>(R.id.edittext_content)
+        val categoryDropdown = view.findViewById<CustomAutoCompleteTextView>(R.id.category_edit)
+
+        createArticleTitle.text = getString(R.string.edit_post_title)
+        editTextTitle.setText(article.title)
+        editTextContent.setText(article.content)
+        if (article.category != null) {
+            categoryDropdown.setText(article.category.categoryName)
+        }
     }
 
     private fun navigateToCommsHome() {
