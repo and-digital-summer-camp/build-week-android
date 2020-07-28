@@ -30,7 +30,7 @@ object AppPreferences {
     fun clear() {
       val editor: SharedPreferences.Editor = preferences.edit()
         editor.clear()
-        editor.commit()
+        editor.apply()
     }
 
     //SharedPreferences variables getters/setters

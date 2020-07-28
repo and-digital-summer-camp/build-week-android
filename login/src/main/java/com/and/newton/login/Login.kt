@@ -26,28 +26,24 @@ import kotlinx.android.synthetic.main.fragment_login.view.*
 
 @AndroidEntryPoint
 class Login : Fragment() {
-
-
     private val RC_SIGN_IN = 0
     private val userViewModel: UserViewModel by activityViewModels()
-    private lateinit var savedStateHandle: SavedStateHandle
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val layout =  inflater.inflate(R.layout.fragment_login, container, false)
-
-
-
         layout.sign_in_button.setOnClickListener {
             val signInIntent: Intent =  userViewModel.mGoogleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
-
         return layout
     }
 
+
+    //STILL NEEDS TO BE FIXED WITH ERROR MESSAGE BUT JUST NOTHING FOR NOW
     fun updateUI(){
         findNavController().popBackStack()
     }
@@ -55,7 +51,6 @@ class Login : Fragment() {
     fun handleSignInResult(completedTask: Task<GoogleSignInAccount>){
         try{
             val account = completedTask.getResult(ApiException::class.java)
-            val idToken = account?.idToken
             userViewModel.verifyUser(account)
             updateUI()
         }catch (e: ApiException){

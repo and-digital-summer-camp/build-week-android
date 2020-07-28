@@ -12,7 +12,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 
 
 //Shared Usermodel
-class UserViewModel @ViewModelInject constructor(@ApplicationContext val context: Context) : ViewModel() {
+class UserViewModel @ViewModelInject constructor(@ApplicationContext var context: Context) : ViewModel() {
+
+
+
     enum class AuthenticationState {
         AUTHENTICATED,
         UNAUTHENTICATED,
