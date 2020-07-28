@@ -44,7 +44,7 @@ class ArticlesAdapter @Inject constructor():
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val filterCategory = constraint.toString()
-                var filteredDataSet: List<Article> = listOf()
+                var filteredDataSet: List<Article>
 
                 val filterResults = FilterResults()
                 if (filterCategory.isEmpty() || ("All Categories").toLowerCase(Locale.ROOT).contains(filterCategory.toLowerCase(Locale.ROOT))) {

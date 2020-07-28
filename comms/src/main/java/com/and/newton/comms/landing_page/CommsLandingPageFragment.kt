@@ -106,11 +106,11 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     }
 
     override fun onItemSelected(spinnerAdapter: AdapterView<*>?, itemView: View?, option: Int, p3: Long) {
-        articlesAdapter?.filter?.filter(categoryList.sorted().get(option))
-        articlesAdapter?.notifyDataSetChanged()
+        articlesAdapter.filter.filter(categoryList.sorted()[option])
+        articlesAdapter.notifyDataSetChanged()
 
         MainScope().launch {
-            articlesAdapter?.isArticleEmpty.consumeEach {
+            articlesAdapter.isArticleEmpty.consumeEach {
                 updateArticleListView(it)
             }
         }

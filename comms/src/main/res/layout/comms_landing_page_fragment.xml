@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="No Articles found"/>
+            android:text="@string/no_articles_found"/>
 
 
     </androidx.cardview.widget.CardView>
