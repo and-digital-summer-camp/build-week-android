@@ -16,6 +16,7 @@ import com.and.newton.comms.domain.data.Article
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_create_article.*
 import kotlinx.android.synthetic.main.fragment_create_article.view.*
+import retrofit2.HttpException
 import timber.log.Timber
 import java.util.stream.Collectors
 
@@ -36,11 +37,15 @@ class CreateArticleFragment : Fragment() {
         val createArticleTitle = view.findViewById<TextView>(R.id.textview_main_title)
         val editTextTitle = view.findViewById<EditText>(R.id.edittext_title)
         val editTextContent = view.findViewById<EditText>(R.id.edittext_content)
+        val categoryDropdown = view.findViewById<CustomAutoCompleteTextView>(R.id.category_edit)
         
         if (article != null) {
             createArticleTitle.text = getString(R.string.edit_post_title)
             editTextTitle.setText(article.title)
             editTextContent.setText(article.content)
+            if (article.category != null) {
+                categoryDropdown.setText(article.category.categoryName)
+            }
         }
 
         val cancelButton = view.findViewById<Button>(R.id.button_cancel)
@@ -66,7 +71,14 @@ class CreateArticleFragment : Fragment() {
     private fun postNewArticle() {
         if (!edittext_title.text.isNullOrEmpty() && !edittext_content.text.isNullOrEmpty()) {
 
-            val newArticle = Article(1, edittext_title.text.toString(), edittext_content.text.toString())
+            // TODO : Remove hardcoded IDs from category
+            var category : Category ? = null
+            if (!category_edit.text.isNullOrEmpty()) {
+                category = Category(1, category_edit.text.toString())
+            }
+
+            // TODO : Remove hardcoded IDs from article
+            val newArticle = Article(1, edittext_title.text.toString(), edittext_content.text.toString(), category)
 
             viewModel.postArticle(newArticle).observe(viewLifecycleOwner, Observer { article ->
                 Timber.d("Mock API Post Article Response::${article}")

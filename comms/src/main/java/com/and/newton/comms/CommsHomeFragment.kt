@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.and.newton.comms.domain.data.Article
+import com.and.newton.comms.domain.data.Category
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -58,7 +59,8 @@ class CommsHomeFragment : Fragment() {
 
     private fun openEditArticleFragment() {
         //TODO: Feed in actual data from the landing page
-        val article = Article(1,"title", "content")
+        val category = Category(1, "Corona")
+        val article = Article(1,"title", "content", category)
 
         val homeToEditFragment =
             CommsHomeFragmentDirections.actionFragmentCommsHomeToFragmentCreateArticle()
