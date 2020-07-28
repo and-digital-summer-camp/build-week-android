@@ -1,6 +1,7 @@
 package com.and.newton.login
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.fragment.findNavController
+import com.and.newton.common.utils.AppPreferences
 
 import com.and.newton.common.viewmodel.UserViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -39,13 +41,28 @@ class Login : Fragment() {
             val signInIntent: Intent =  userViewModel.mGoogleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
+
+        if(AppPreferences.isLogged){
+            userViewModel.authenticatedUser()
+        }
+
+        userViewModel.authenticatedState.observe(viewLifecycleOwner, Observer { authenticatedState ->
+            when(authenticatedState){
+                UserViewModel.AuthenticationState.AUTHENTICATED -> {
+                    val uri = Uri.parse("App://nav_comms")
+                    findNavController().navigate(uri)
+                }
+            }
+
+        })
+
         return layout
     }
 
 
     //STILL NEEDS TO BE FIXED WITH ERROR MESSAGE BUT JUST NOTHING FOR NOW
     fun updateUI(){
-        findNavController().popBackStack()
+
     }
 
     fun handleSignInResult(completedTask: Task<GoogleSignInAccount>){

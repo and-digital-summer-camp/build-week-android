@@ -1,6 +1,7 @@
 package com.and.newton.common.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.and.newton.common.utils.AppPreferences
@@ -40,12 +41,16 @@ class UserViewModel @ViewModelInject constructor(@ApplicationContext var context
 
     fun signout() {
         AppPreferences.clear()
-        mGoogleSignInClient.signOut()
         _authenticatedState.value = AuthenticationState.UNAUTHENTICATED
+        mGoogleSignInClient.signOut()
     }
 
     fun unAuthenticatedUser() {
         _authenticatedState.value = AuthenticationState.UNAUTHENTICATED
+    }
+
+    fun authenticatedUser() {
+        _authenticatedState.value = AuthenticationState.AUTHENTICATED
     }
 
     fun verifyUser(account: GoogleSignInAccount?) {

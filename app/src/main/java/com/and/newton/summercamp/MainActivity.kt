@@ -1,6 +1,7 @@
 package com.and.newton.summercamp
 
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
@@ -15,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.and.newton.common.viewmodel.UserViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -73,6 +75,7 @@ class MainActivity : AppCompatActivity() {
 
         navView.menu.findItem(R.id.nav_logout).setOnMenuItemClickListener {
             userViewModel.signout()
+            navController.popBackStack(R.id.login, false)
             return@setOnMenuItemClickListener true
         }
 

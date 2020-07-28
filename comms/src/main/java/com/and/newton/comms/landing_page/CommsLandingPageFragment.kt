@@ -8,6 +8,7 @@ import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -70,30 +71,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         val layout = inflater.inflate(R.layout.comms_landing_page_fragment, container, false)
 
 
-
-        if(!AppPreferences.isLogged){
-            userViewModel.unAuthenticatedUser()
-        }
-
-        userViewModel.authenticatedState.observe(viewLifecycleOwner, Observer { authenticatedState ->
-            when(authenticatedState){
-                UserViewModel.AuthenticationState.AUTHENTICATED -> {
-
-                }
-                UserViewModel.AuthenticationState.UNAUTHENTICATED -> {
-                    val uri = Uri.parse("App://login")
-                    findNavController().navigate(uri)
-                }
-                else -> {
-                    Log.d("login",authenticatedState.toString()  )
-                }
-            }
-
-        })
-
-
-
-
         viewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
             Timber.d("Mock API all Articles List Response::${articles}")
             articlesAdapter.bindData(articles)
@@ -141,12 +118,13 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 
 
 
+
     override fun onNothingSelected(p0: AdapterView<*>?) {
         Timber.d("No option selected")
     }
 
     override fun onItemSelected(spinnerAdapter: AdapterView<*>?, itemView: View?, option: Int, p3: Long) {
-        articlesAdapter.filter.filter(categoryList.sorted()[option])
+//        articlesAdapter.filter.filter(categoryList.sorted()[option])
         articlesAdapter.notifyDataSetChanged()
 
         MainScope().launch {
