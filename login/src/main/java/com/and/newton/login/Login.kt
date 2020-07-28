@@ -23,7 +23,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.view.*
-
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -60,18 +60,14 @@ class Login : Fragment() {
     }
 
 
-    //STILL NEEDS TO BE FIXED WITH ERROR MESSAGE BUT JUST NOTHING FOR NOW
-    fun updateUI(){
 
-    }
 
     fun handleSignInResult(completedTask: Task<GoogleSignInAccount>){
         try{
             val account = completedTask.getResult(ApiException::class.java)
             userViewModel.verifyUser(account)
-            updateUI()
         }catch (e: ApiException){
-            Log.d("error", e.toString())
+            Timber.d(e.toString())
         }
 
     }
