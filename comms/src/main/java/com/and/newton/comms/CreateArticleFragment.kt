@@ -132,9 +132,6 @@ class CreateArticleFragment : Fragment() {
     }
 
     private fun navigateToCommsHome() {
-        val createArticleToLandingAction =
-            CreateArticleFragmentDirections.actionFragmentCreateArticleToCommsLandingPageFragment()
-
         findNavController().navigate(R.id.action_fragment_create_article_to_commsLandingPageFragment)
     }
 
