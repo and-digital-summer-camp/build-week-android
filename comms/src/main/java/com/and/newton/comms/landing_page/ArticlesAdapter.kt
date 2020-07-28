@@ -34,8 +34,12 @@ class ArticlesAdapter @Inject constructor():
             binding.txtArticleLabel.visibility = if(article.highlighted == true) View.VISIBLE else View.GONE
             binding.executePendingBindings()
 
-//            cardView.txtArticleDesc.text = article.content
-//            cardView.txtArticleLabel.text = article.categories?.get(0)?.name
+            binding.txtArticleDesc.text = article.content
+            binding.txtArticleTitle.text = article.title
+
+
+              //cardView.txtArticleDesc.text = article.content
+              // cardView.txtArticleLabel.text = article.categories?.get(0)?.name
 
 //            Picasso.get()
 //                .load("https://images-na.ssl-images-amazon.com/images/I/810FiMQwZ5L._AC_SL1500_.jpg")
