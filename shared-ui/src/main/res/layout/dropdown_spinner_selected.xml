@@ -4,6 +4,6 @@
     android:singleLine="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_white"
-    android:textColor="@color/color_black"
+    android:background="@color/color_secondary_shrine_pink"
+    android:textColor="@color/color_brown_900"
     android:ellipsize="marquee"/>
