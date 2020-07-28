@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_comms"
-        android:name="com.and.newton.comms.CommsHomeFragment"
+        android:name="com.and.newton.comms.landing_page.CommsLandingPageFragment"
         android:label="@string/menu_communication"
-        tools:layout="@layout/comms_home_fragment" />
+        tools:layout="@layout/comms_landing_page_fragment" />
 </navigation>

@@ -5,4 +5,5 @@
         <issue id="AllowBackup" severity="ignore" />
         <issue id="FragmentTagUsage" severity="ignore" />
         <issue id="RtlEnabled" severity="ignore" />
+        <issue id="Overdraw" severity="ignore"/>
 </lint>
