@@ -124,7 +124,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     }
 
     override fun onItemSelected(spinnerAdapter: AdapterView<*>?, itemView: View?, option: Int, p3: Long) {
-//        articlesAdapter.filter.filter(categoryList.sorted()[option])
+        articlesAdapter.filter.filter(categoryList.sorted()[option])
         articlesAdapter.notifyDataSetChanged()
 
         MainScope().launch {
