@@ -5,7 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.and.newton.comms.R
 import com.and.newton.comms.databinding.ArticleListItemBinding
 import com.and.newton.comms.domain.data.Article
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -97,14 +99,14 @@ class ArticlesAdapter @Inject constructor():
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThumbnailViewHolder {
-        val cardView =
-            LayoutInflater.from(parent.context)
-        val binding = ArticleListItemBinding.inflate(cardView)
 
         //Todo Implement click listener on the cardview to navigate to the Arcticle/Comms View fragment
 
         return ThumbnailViewHolder(
-            binding
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.article_list_item, parent, false
+            )
         )
     }
 
