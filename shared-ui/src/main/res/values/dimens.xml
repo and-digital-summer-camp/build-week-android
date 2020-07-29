@@ -2,6 +2,8 @@
 <resources>
     <dimen name="global_75">8dp</dimen>
     <dimen name="global_100">16dp</dimen>
+
+
     <dimen name="global_600">176dp</dimen>
 
     <dimen name="small_50">4dp</dimen>

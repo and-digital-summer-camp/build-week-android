@@ -11,5 +11,12 @@ class CommsResponseMapper {
             }
             return ""
         }
+
+        fun getCategoriesAPi(httpMethod:String):String {
+            when(httpMethod) {
+                URIConstants.HTTP_GET -> return "getCategories.json"
+            }
+            return ""
+        }
     }
 }

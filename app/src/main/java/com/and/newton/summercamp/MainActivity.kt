@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         this.fab = findViewById(R.id.fab)
 
         initNavigationDrawerWithToolBar()
-
+        initCreateArticleButton()
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when(destination.id) {
@@ -60,9 +60,15 @@ class MainActivity : AppCompatActivity() {
                     fab?.show()
                 }
             }
+        }}
+
+    private fun initCreateArticleButton() {
+        val floatingActionButton: FloatingActionButton = findViewById(R.id.fab)
+        floatingActionButton.setOnClickListener {
+            val uri = Uri.parse("App://nav_create_article")
+            navController.navigate(uri)
         }
     }
-
 
 
     private fun initNavigationDrawerWithToolBar() {
@@ -79,7 +85,6 @@ class MainActivity : AppCompatActivity() {
             return@setOnMenuItemClickListener true
         }
 
-
         appBarConfiguration = AppBarConfiguration(setOf(
             R.id.nav_comms ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -95,5 +100,4 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
 }

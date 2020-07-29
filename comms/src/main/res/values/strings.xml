@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="article_text">Imagine this is the landing page</string>
+    <string name="content_text">Content</string>
+    <string name="title_name">Title Name</string>
+    <string name="title_text">Title</string>
+    <string name="new_post_title">Create A New Post</string>
+    <string name="edit_post_title">Edit Article</string>
+    <string name="post_text">Post</string>
+    <string name="cancel_text">Cancel</string>
     <string name="comms_text">This is communication fragment</string>
     <string name="comms_category">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
     <string name="comms_category_label">COVID-19</string>

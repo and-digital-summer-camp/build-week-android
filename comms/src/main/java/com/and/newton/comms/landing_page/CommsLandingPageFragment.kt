@@ -1,21 +1,14 @@
 package com.and.newton.comms.landing_page
 
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
-import com.and.newton.common.utils.AppPreferences
-import com.and.newton.common.viewmodel.UserViewModel
 import com.and.newton.comms.CommsSharedViewModel
 import com.and.newton.comms.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,8 +24,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
-    private val userViewModel: UserViewModel by activityViewModels()
-
     @Inject
     lateinit var articlesAdapter: ArticlesAdapter
 
@@ -46,10 +37,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setHasOptionsMenu(true)
-
-
     }
 
     private fun updateCategoriesFilter(categories : List<String>){
@@ -60,9 +48,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 
     private fun setDropDownAdapter(categories : List<String>){
         adapter  = context?.let { ArrayAdapter(it, R.layout.dropdown_spinner, categories) }
-
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,18 +56,12 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     ): View? {
         val layout = inflater.inflate(R.layout.comms_landing_page_fragment, container, false)
 
-
         viewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
             Timber.d("Mock API all Articles List Response::${articles}")
             articlesAdapter.bindData(articles)
             layout.articles.adapter = articlesAdapter
             layout.articles.adapter?.notifyDataSetChanged()
-
         })
-
-
-
-
 
         viewModel.user.observe(viewLifecycleOwner, Observer { user ->
             Timber.d("Mock API fragment User Response::${user}")
@@ -105,7 +85,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         return layout
     }
 
-
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         val item = menu.findItem(R.id.action_filter)
@@ -115,9 +94,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         adapter?.setDropDownViewResource(R.layout.dropdown_spinner_selected)
         categoryFilter?.onItemSelectedListener = this
     }
-
-
-
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
         Timber.d("No option selected")
