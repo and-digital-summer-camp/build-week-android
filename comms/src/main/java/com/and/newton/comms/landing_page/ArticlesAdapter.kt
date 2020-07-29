@@ -1,6 +1,7 @@
 package com.and.newton.comms.landing_page
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -85,18 +86,10 @@ class ArticlesAdapter @Inject constructor():
 
         fun bindViewData(article: Article) {
             binding.article = article
-//            binding.txtArticleLabel.visibility = if(article.highlighted == true) View.VISIBLE else View.GONE
+            binding.ivHighlight.visibility = if(article.highlighted == true) View.VISIBLE else View.INVISIBLE
             binding.executePendingBindings()
-
-//            cardView.txtArticleDesc.text = article.content
-//            cardView.txtArticleLabel.text = article.categories?.get(0)?.name
-
-//            Picasso.get()
-//                .load("https://images-na.ssl-images-amazon.com/images/I/810FiMQwZ5L._AC_SL1500_.jpg")
-//                .resize(250, 250).centerCrop().into(cardView.ivArticleImage)
+            binding.txtArticleDesc.text = article.content
             //TOdo init the item view with the article data
-
-
         }
 
 
