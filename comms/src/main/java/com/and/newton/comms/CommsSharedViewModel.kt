@@ -4,10 +4,10 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.and.newton.common.domain.data.User
 import com.and.newton.comms.domain.CommsRepository
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.Category
-import com.and.newton.comms.domain.data.User
 import com.google.gson.Gson
 
 class CommsSharedViewModel @ViewModelInject constructor(private val commsRepository: CommsRepository) :
