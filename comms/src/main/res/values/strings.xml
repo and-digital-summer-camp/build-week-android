@@ -13,4 +13,5 @@
     <string name="comms_category_label">COVID-19</string>
     <string name="iv_thumbnail_desc">thumbnail</string>
     <string name="no_articles_found">No Articles found</string>
+    <string name="highlighted_text">Highlighted</string>
 </resources>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -74,7 +75,7 @@ class CreateArticleFragment : Fragment() {
                 1,
                 edittext_title.text.toString(),
                 edittext_content.text.toString(),
-                null, null, false, categories
+                null, null, highlighted_checkBox.isChecked, categories
             )
 
             viewModel.postArticle(newArticle).observe(viewLifecycleOwner, Observer { article ->
@@ -123,10 +124,12 @@ class CreateArticleFragment : Fragment() {
         val editTextTitle = view.findViewById<EditText>(R.id.edittext_title)
         val editTextContent = view.findViewById<EditText>(R.id.edittext_content)
         val categoryDropdown = view.findViewById<CustomAutoCompleteTextView>(R.id.category_edit)
+        val highlightedCheckbox = view.findViewById<CheckBox>(R.id.highlighted_checkBox)
 
         createArticleTitle.text = getString(R.string.edit_post_title)
         editTextTitle.setText(article.title)
         editTextContent.setText(article.content)
+        highlightedCheckbox.isChecked = article.highlighted!!
         if (!article.categories.isNullOrEmpty()) {
             // TODO: Fix this set dropdown text - how the hell do you deal with a whole list of them?
             categoryDropdown.setText(article.categories[0].name)
