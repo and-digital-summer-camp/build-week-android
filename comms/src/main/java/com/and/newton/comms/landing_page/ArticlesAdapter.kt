@@ -1,10 +1,13 @@
 package com.and.newton.comms.landing_page
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.and.newton.common.utils.AppPreferences
 import com.and.newton.comms.databinding.ArticleListItemBinding
 import com.and.newton.comms.domain.data.Article
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -13,18 +16,17 @@ import java.util.*
 import javax.inject.Inject
 
 
-class ArticlesAdapter @Inject constructor():
+class ArticlesAdapter @Inject constructor() :
     RecyclerView.Adapter<ArticlesAdapter.ThumbnailViewHolder>(), Filterable {
 
-    private var articleDataSet:List<Article> = listOf()
+    private var articleDataSet: List<Article> = listOf()
 
-    private var articleFilteredDataSet:List<Article> = listOf()
+    private var articleFilteredDataSet: List<Article> = listOf()
 
 
     var isArticleEmpty: ConflatedBroadcastChannel<Boolean> = ConflatedBroadcastChannel()
         // getter
         get() = field
-
         // setter
         set(value) {
             field = value
@@ -32,7 +34,7 @@ class ArticlesAdapter @Inject constructor():
 
     fun bindData(dataSet: List<Article>) {
         articleDataSet = dataSet
-        articleFilteredDataSet= articleDataSet
+        articleFilteredDataSet = articleDataSet
         onDataSetUpdated()
     }
 
@@ -47,14 +49,17 @@ class ArticlesAdapter @Inject constructor():
                 var filteredDataSet: List<Article>
 
                 val filterResults = FilterResults()
-                if (filterCategory.isEmpty() || ("All Categories").toLowerCase(Locale.ROOT).contains(filterCategory.toLowerCase(Locale.ROOT))) {
+                if (filterCategory.isEmpty() || ("All Categories").toLowerCase(Locale.ROOT)
+                        .contains(filterCategory.toLowerCase(Locale.ROOT))
+                ) {
                     filteredDataSet = articleDataSet
-                }
-                else {
-                    filteredDataSet =  articleDataSet.filter { article:Article ->
+                } else {
+                    filteredDataSet = articleDataSet.filter { article: Article ->
                         var categoryFound = false
-                        article.categories?.forEach{
-                            if((it.name?:"").toLowerCase(Locale.ROOT).contains(filterCategory.toLowerCase(Locale.ROOT))) {
+                        article.categories?.forEach {
+                            if ((it.name ?: "").toLowerCase(Locale.ROOT)
+                                    .contains(filterCategory.toLowerCase(Locale.ROOT))
+                            ) {
                                 categoryFound = true
                             }
                         }
@@ -69,7 +74,7 @@ class ArticlesAdapter @Inject constructor():
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
 
-                articleFilteredDataSet = (results?.values as? List<Article> ) ?: articleDataSet
+                articleFilteredDataSet = (results?.values as? List<Article>) ?: articleDataSet
                 notifyDataSetChanged()
 
                 onDataSetUpdated()
@@ -79,7 +84,8 @@ class ArticlesAdapter @Inject constructor():
         }
     }
 
-    class ThumbnailViewHolder(val binding: ArticleListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ThumbnailViewHolder(val binding: ArticleListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         private lateinit var article: Article
 
 
@@ -88,6 +94,11 @@ class ArticlesAdapter @Inject constructor():
 //            binding.txtArticleLabel.visibility = if(article.highlighted == true) View.VISIBLE else View.GONE
             binding.executePendingBindings()
 
+                if (AppPreferences.access_level == "Admin") {
+                    binding.editBtn.visibility = View.VISIBLE
+                } else {
+                    binding.editBtn.visibility = View.GONE
+                }
 //            cardView.txtArticleDesc.text = article.content
 //            cardView.txtArticleLabel.text = article.categories?.get(0)?.name
 
@@ -114,7 +125,7 @@ class ArticlesAdapter @Inject constructor():
         )
     }
 
-    override fun getItemCount(): Int  = articleFilteredDataSet.size
+    override fun getItemCount(): Int = articleFilteredDataSet.size
 
 
     override fun onBindViewHolder(holder: ThumbnailViewHolder, position: Int) {
