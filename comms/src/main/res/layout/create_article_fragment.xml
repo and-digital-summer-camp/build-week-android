@@ -81,6 +81,17 @@
             app:layout_constraintStart_toStartOf="@+id/edittext_content"
             app:layout_constraintTop_toBottomOf="@+id/edittext_content" />
 
+        <CheckBox
+            android:id="@+id/highlighted_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_175"
+            android:text="@string/highlighted_text"
+            android:textSize="@dimen/hint_font_size"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/category_edit" />
+
         <Button
             android:id="@+id/button_post"
             android:layout_width="wrap_content"
@@ -89,7 +100,7 @@
             android:layout_marginTop="@dimen/normal_150"
             android:text="@string/post_text"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/category_edit" />
+            app:layout_constraintTop_toBottomOf="@+id/highlighted_checkBox" />
 
         <Button
             android:id="@+id/button_cancel"
@@ -99,7 +110,7 @@
             android:layout_marginEnd="@dimen/normal_225"
             android:text="@string/cancel_text"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/category_edit" />
+            app:layout_constraintTop_toBottomOf="@+id/highlighted_checkBox" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
