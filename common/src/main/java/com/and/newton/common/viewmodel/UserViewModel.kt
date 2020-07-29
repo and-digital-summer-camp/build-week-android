@@ -55,6 +55,7 @@ class UserViewModel @ViewModelInject constructor(@ApplicationContext var context
 
     fun verifyUser(account: GoogleSignInAccount?) {
         AppPreferences.isLogged = true
+        AppPreferences.authToken = account?.idToken?:""
         _authenticatedState.value = AuthenticationState.AUTHENTICATED
     }
 

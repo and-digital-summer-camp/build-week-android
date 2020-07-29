@@ -14,6 +14,7 @@ object AppPreferences {
     private val IS_LOGGED = Pair("is_Logged", false)
     private val USERNAME = Pair("username", "")
     private val ACCESS_LEVEL =  Pair("access_level", "")
+    private val USER_AUTH_TOKEN = Pair("token", "")
 
 
     fun init(context: Context) {
@@ -51,5 +52,11 @@ object AppPreferences {
         get() = preferences.getString(ACCESS_LEVEL.first, ACCESS_LEVEL.second) ?: ""
         set(value) = preferences.edit {
             it.putString(ACCESS_LEVEL.first, value)
+        }
+
+    var authToken: String
+        get() = preferences.getString(USER_AUTH_TOKEN.first, USER_AUTH_TOKEN.second) ?: ""
+        set(value) = preferences.edit {
+            it.putString(USER_AUTH_TOKEN.first, value)
         }
 }
