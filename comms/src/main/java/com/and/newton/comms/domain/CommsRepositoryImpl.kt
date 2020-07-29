@@ -11,19 +11,19 @@ class CommsRepositoryImpl @Inject constructor(private val commsAPI: CommsAPI) : 
 
     override suspend fun getUser(token: String): User? {
         google_auth_token = token
-        return commsAPI.getAuthUser(google_auth_token)
+        return commsAPI.getAuthUser()
     }
 
     override suspend fun getArticles(): List<Article>? {
-        return commsAPI.getArticles(google_auth_token)
+        return commsAPI.getArticles()
     }
 
     override suspend fun getArticle(id: Int): Article? {
-        return commsAPI.getArticle(id, google_auth_token)
+        return commsAPI.getArticle(id)
     }
 
     override suspend fun getCategories(): List<Category>? {
-        return commsAPI.getAllCategories(google_auth_token)
+        return commsAPI.getAllCategories()
     }
 
 

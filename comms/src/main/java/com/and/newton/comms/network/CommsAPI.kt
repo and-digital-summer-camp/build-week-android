@@ -14,15 +14,15 @@ interface CommsAPI {
 
     //Gets auth users permission
     @POST("/auth/google")
-    suspend fun getAuthUser(@Query("Authorization") JWT_token: String) : User
+    suspend fun getAuthUser() : User
 
     //Gets ALL articles
     @GET("/api/articles")
-    suspend fun getArticles(@Header("Authorization") JWT_token: String) : List<Article>
+    suspend fun getArticles() : List<Article>
 
     //Gets SPECIFIC article by ID
     @GET("/api/articles/{id}")
-    suspend fun getArticle(@Path("id") id: Int, @Header("Authorization") JWT_token: String) : Article
+    suspend fun getArticle(@Path("id") id: Int) : Article
 
     //Gets ALL articles by SPECIFIC category
     @GET("/api/articles/{category}")
@@ -38,7 +38,7 @@ interface CommsAPI {
 
     //Gets ALL categories
     @GET("/api/categories")
-    suspend fun getAllCategories(@Header("Authorization") JWT_token: String) : List<Category>
+    suspend fun getAllCategories() : List<Category>
 
     //Deletes SPECIFIC article
     @DELETE("/api/articles/{id}")

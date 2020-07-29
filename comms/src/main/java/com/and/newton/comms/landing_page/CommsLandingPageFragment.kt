@@ -19,6 +19,7 @@ import com.and.newton.common.viewmodel.UserViewModel
 import com.and.newton.comms.CommsSharedViewModel
 import com.and.newton.comms.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.article_list_item.view.*
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.*
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.view.*
 import kotlinx.coroutines.MainScope
@@ -66,6 +67,14 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     ): View? {
 
         val layout = inflater.inflate(R.layout.comms_landing_page_fragment, container, false)
+//        if(AppPreferences.access_level == "Admin"){
+//            layout.editBtn.visibility = View.VISIBLE
+//        } else {
+//            layout.editBtn.visibility = View.GONE
+//        }
+
+
+
         viewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
             Timber.d("Mock API all Articles List Response::${articles}")
             articlesAdapter.bindData(articles)

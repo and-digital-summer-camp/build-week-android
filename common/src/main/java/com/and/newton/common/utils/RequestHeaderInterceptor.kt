@@ -9,15 +9,13 @@ class RequestHeaderInterceptor @Inject constructor() :
     Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
 
-        val authToken = AppPreferences.authToken
+        val authToken = AppPreferences.token
 
-        val requestBuilder: Request.Builder = chain.request().newBuilder().header("Authorization", "eyasdasdasdasdasdasd")
+        val requestBuilder: Request.Builder = chain.request().newBuilder().header("Authorization", "Bearer eyasdasdasdasdasdasd")
             //if(authToken!=null && authToken.isNotEmpty()) chain.request().newBuilder().header("Authorization", authToken) else chain.request().newBuilder()
 
 
         return chain.proceed(requestBuilder.build())
-            .newBuilder()
-            .build()
 
     }
 }

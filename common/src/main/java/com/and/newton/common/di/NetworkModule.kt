@@ -27,7 +27,7 @@ object NetworkModule {
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(httpLogInterceptor)
-//            .addInterceptor(requestHeaderInterceptor)
+            .addInterceptor(requestHeaderInterceptor)
             .addInterceptor(mockInterceptor)
             .build()
 
