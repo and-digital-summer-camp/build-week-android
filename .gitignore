@@ -33,3 +33,4 @@ build/intermediates/lint-cache/api-versions-0-30.0.3.bin
 .gradle/checksums/md5-checksums.bin
 .gradle/checksums/sha1-checksums.bin
 .idea/
+*.salive

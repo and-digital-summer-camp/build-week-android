@@ -7,7 +7,7 @@ import androidx.lifecycle.liveData
 import com.and.newton.comms.domain.CommsRepository
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.Category
-import com.and.newton.comms.domain.data.User
+import com.and.newton.common.domain.data.User
 
 class CommsSharedViewModel @ViewModelInject constructor(private val commsRepository: CommsRepository) :
     ViewModel() {

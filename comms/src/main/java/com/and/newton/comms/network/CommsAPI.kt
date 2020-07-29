@@ -2,7 +2,7 @@ package com.and.newton.comms.network
 
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.Category
-import com.and.newton.comms.domain.data.User
+import com.and.newton.common.domain.data.User
 import retrofit2.http.*
 
 

@@ -1,4 +1,4 @@
-package com.and.newton.comms.domain.data
+package com.and.newton.common.domain.data
 
 import com.google.gson.annotations.SerializedName
 

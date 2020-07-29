@@ -46,10 +46,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setHasOptionsMenu(true)
-
-
     }
 
     private fun updateCategoriesFilter(categories : List<String>){
@@ -60,7 +57,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 
     private fun setDropDownAdapter(categories : List<String>){
         adapter  = context?.let { ArrayAdapter(it, R.layout.dropdown_spinner, categories) }
-
     }
 
 
@@ -68,9 +64,8 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val layout = inflater.inflate(R.layout.comms_landing_page_fragment, container, false)
-
-
         viewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
             Timber.d("Mock API all Articles List Response::${articles}")
             articlesAdapter.bindData(articles)
@@ -78,10 +73,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
             layout.articles.adapter?.notifyDataSetChanged()
 
         })
-
-
-
-
 
         viewModel.user.observe(viewLifecycleOwner, Observer { user ->
             Timber.d("Mock API fragment User Response::${user}")
@@ -132,8 +123,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
                 updateArticleListView(it)
             }
         }
-
-
     }
 
     private fun updateArticleListView (isEmpty:Boolean) {
