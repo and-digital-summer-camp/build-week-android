@@ -1,12 +1,10 @@
 package com.and.newton.common.viewmodel
 
 import android.content.Context
-import android.util.Log
-import android.util.Log.d
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.and.newton.common.domain.UserRepo
-import com.and.newton.common.domain.data.User
+import com.and.newton.common.domain.data.GoogleUserToken
 import com.and.newton.common.utils.AppPreferences
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -15,7 +13,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 
 //Shared Usermodel
@@ -57,19 +54,19 @@ class UserViewModel @ViewModelInject constructor(
     }
 
     fun verifyUser(account: GoogleSignInAccount?) {
-        val googleToken = account?.idToken
-        AppPreferences.isLogged = true
+        val googleToken:String = account?.idToken?:""
+
         MainScope().launch {
             if (googleToken != null) {
-                val result = userRepo.getUser(googleToken)
+                val result = userRepo.getUser(GoogleUserToken(googleToken))
                 if (result != null) {
-                    if (result.valid) {
+                    if (result.token != null) {
                         AppPreferences.isLogged = true
-                        AppPreferences.access_level = result.accessLevel
                         AppPreferences.token = result.token
-                        AppPreferences.first_name = result.firstName.toString()
-                        AppPreferences.last_name = result.lastName.toString()
-                        AppPreferences.email = result.email.toString()
+//                        AppPreferences.access_level = result.accessLevel
+                        AppPreferences.first_name = account?.displayName?:account?.givenName?:"Guest"
+                        AppPreferences.last_name = account?.familyName?:"User"
+                        AppPreferences.email = account?.email?:""
                         _authenticatedState.value = AuthenticationState.AUTHENTICATED
                     } else {
                         _authenticatedState.value = AuthenticationState.INVALID_AUTHENTICATION

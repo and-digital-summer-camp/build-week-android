@@ -11,6 +11,7 @@ import com.and.newton.common.utils.AppPreferences
 import com.and.newton.comms.databinding.ArticleListItemBinding
 import com.and.newton.comms.domain.data.Article
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import timber.log.Timber
 //import com.squareup.picasso.Picasso
 import java.util.*
 import javax.inject.Inject
@@ -57,7 +58,7 @@ class ArticlesAdapter @Inject constructor() :
                     filteredDataSet = articleDataSet.filter { article: Article ->
                         var categoryFound = false
                         article.categories?.forEach {
-                            if ((it.name ?: "").toLowerCase(Locale.ROOT)
+                            if ((it.category?.name ?: "").toLowerCase(Locale.ROOT)
                                     .contains(filterCategory.toLowerCase(Locale.ROOT))
                             ) {
                                 categoryFound = true
@@ -73,8 +74,9 @@ class ArticlesAdapter @Inject constructor() :
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-
+                Timber.d("Adapter filter before:: ${articleFilteredDataSet.size}")
                 articleFilteredDataSet = (results?.values as? List<Article>) ?: articleDataSet
+                Timber.d("Adapter filter after:: ${articleFilteredDataSet.size}")
                 notifyDataSetChanged()
 
                 onDataSetUpdated()

@@ -1,11 +1,12 @@
 package com.and.newton.common.network
 
-import com.and.newton.common.domain.data.User
+import com.and.newton.common.domain.data.AppJwtUserToken
+import com.and.newton.common.domain.data.GoogleUserToken
+import retrofit2.http.Body
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 interface UserAPI {
     //Gets auth users permission
-    @POST("/auth/google")
-    suspend fun getAuthUser(@Query("Authorization") JWT_token: String) : User
+    @POST("/api/auth/google")
+    suspend fun getAuthUser(@Body token: GoogleUserToken) : AppJwtUserToken
 }

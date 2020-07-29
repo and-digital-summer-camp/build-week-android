@@ -7,6 +7,7 @@ import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
+import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 

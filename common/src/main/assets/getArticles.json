@@ -2,7 +2,7 @@
   "articleID": 1,
   "title": "Article 1 - Title",
   "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n",
-  "categories": [
+  "articleCategories": [
     {
       "categoryID": 1,
       "categoryName": "Covid-19"
@@ -15,7 +15,7 @@
     "articleID": 2,
     "title": "Article 2 - Title",
     "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n",
-    "categories": [
+    "articleCategories": [
       {
         "categoryID": 1,
         "categoryName": "Covid-19"
@@ -28,7 +28,7 @@
     "articleID": 3,
     "title": "Article 3 - Title",
     "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n",
-    "categories": [
+    "articleCategories": [
       {
         "categoryID": 1,
         "categoryName": "Summer Camp"
@@ -41,7 +41,7 @@
     "articleID": 4,
     "title": "Article 4 - Title",
     "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n",
-    "categories": [
+    "articleCategories": [
       {
         "categoryID": 1,
         "categoryName": "Summer Camp"
@@ -54,7 +54,7 @@
     "articleID": 5,
     "title": "Article 5 - Title",
     "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n",
-    "categories": [
+    "articleCategories": [
       {
         "categoryID": 1,
         "categoryName": "Summer Camp"
@@ -67,7 +67,7 @@
     "articleID": 6,
     "title": "Article 6 - Title",
     "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n",
-    "categories": [
+    "articleCategories": [
       {
         "categoryID": 1,
         "categoryName": "Summer Camp"

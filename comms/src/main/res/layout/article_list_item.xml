@@ -81,7 +81,7 @@
             android:layout_marginEnd="@dimen/global_75"
             android:background="@drawable/article_label_border"
             android:padding="5dp"
-            android:text="@{article.categories.get(0).name}"
+            android:text="@{article.categories.get(0).category.name}"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"

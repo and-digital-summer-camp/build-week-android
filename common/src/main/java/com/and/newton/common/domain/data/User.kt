@@ -18,8 +18,5 @@ data class User constructor(
     val accessLevel:String,
 
     @field:SerializedName("valid")
-    val valid:Boolean,
-
-    @field:SerializedName("jwt_token")
-    val token:String
+    val valid:Boolean
 )

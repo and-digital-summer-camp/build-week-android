@@ -5,7 +5,7 @@ class URIConstants {
         val HTTP_GET = "GET"
         val HTTP_POST = "POST"
         val ARTICLE_API = "/api/articles"
-        val USER_API = "/auth/google"
+        val USER_API = "/api/auth/google"
         val CATEGORIES_API = "/api/categories"
     }
 }

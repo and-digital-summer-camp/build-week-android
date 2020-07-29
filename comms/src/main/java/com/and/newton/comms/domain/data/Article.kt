@@ -15,9 +15,14 @@ data class Article constructor(
     @field:SerializedName("picture")
     val imagePath:String?,
 
+    @field:SerializedName("dateCreated")
     val date:Date?,
+
+    @field:SerializedName("dateLastUpdated")
+    val dateUpdated:Date?,
 
     val highlighted:Boolean?,
 
-    val categories:List<Category>?
+    @field:SerializedName("articleCategories")
+    val categories:List<CategoryHolder>?
 ) : Serializable

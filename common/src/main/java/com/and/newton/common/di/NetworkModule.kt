@@ -1,7 +1,7 @@
 package com.and.newton.common.di
 
 import com.and.newton.common.mock.MockInterceptor
-import com.and.newton.common.utils.RequestHeaderInterceptor
+import com.and.newton.common.network.RequestHeaderInterceptor
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -22,21 +22,21 @@ object NetworkModule {
     fun provideRetrofit(mockInterceptor: MockInterceptor, requestHeaderInterceptor: RequestHeaderInterceptor) : Retrofit {
 
         val httpLogInterceptor = HttpLoggingInterceptor()
-        httpLogInterceptor.level = HttpLoggingInterceptor.Level.HEADERS
+        httpLogInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
 
         val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(httpLogInterceptor)
             .addInterceptor(requestHeaderInterceptor)
-            .addInterceptor(mockInterceptor)
+            .addInterceptor(httpLogInterceptor)
+//            .addInterceptor(mockInterceptor)
             .build()
 
-        val gsonBuilder = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        val gsonBuilder = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
         val gson = gsonBuilder.create()
 
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(" https://www.google.com")
+            .baseUrl("https://and-newton.co.uk")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }

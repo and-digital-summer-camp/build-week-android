@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.Category
+import com.and.newton.comms.domain.data.CategoryHolder
 import com.and.newton.shared_ui.CustomAutoCompleteTextView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.create_article_fragment.*
@@ -63,10 +64,10 @@ class CreateArticleFragment : Fragment() {
         if (!edittext_title.text.isNullOrEmpty() && !edittext_content.text.isNullOrEmpty()) {
 
             // TODO : Remove hardcoded IDs from category
-            var categories = ArrayList<Category>()
+            var categories = ArrayList<CategoryHolder>()
             if (!category_edit.text.isNullOrEmpty()) {
                 val category = Category(1, category_edit.text.toString())
-                categories.add(category)
+                categories.add(CategoryHolder(category))
             }
 
             // TODO : Remove hardcoded IDs from article
@@ -74,11 +75,11 @@ class CreateArticleFragment : Fragment() {
                 1,
                 edittext_title.text.toString(),
                 edittext_content.text.toString(),
-                null, null, false, categories
+                null, null, null,false, categories
             )
 
-            viewModel.postArticle(newArticle).observe(viewLifecycleOwner, Observer { article ->
-                Timber.d("Mock API Post Article Response::${article}")
+            viewModel.postArticle(newArticle).observe(viewLifecycleOwner, Observer { success ->
+                Timber.d("Mock API Post Article Response::${success}")
 
                 // TODO: Handle status codes
                 createSuccessDialog()
@@ -129,7 +130,7 @@ class CreateArticleFragment : Fragment() {
         editTextContent.setText(article.content)
         if (!article.categories.isNullOrEmpty()) {
             // TODO: Fix this set dropdown text - how the hell do you deal with a whole list of them?
-            categoryDropdown.setText(article.categories[0].name)
+            categoryDropdown.setText(article.categories[0].category?.name)
         }
     }
 
