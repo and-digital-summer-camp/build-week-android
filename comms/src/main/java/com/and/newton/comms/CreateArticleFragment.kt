@@ -67,13 +67,13 @@ class CreateArticleFragment : Fragment() {
             // TODO : Remove hardcoded IDs from category
             var categories = ArrayList<CategoryHolder>()
             if (!category_edit.text.isNullOrEmpty()) {
-                val category = Category(1, category_edit.text.toString())
+                val category = Category(null, category_edit.text.toString())
                 categories.add(CategoryHolder(category))
             }
 
             // TODO : Remove hardcoded IDs from article
             val newArticle = Article(
-                1,
+                null,
                 edittext_title.text.toString(),
                 edittext_content.text.toString(),
                 null, null, null, highlighted_checkBox.isChecked, categories
