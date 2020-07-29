@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.navigation.NavGraph
 import androidx.navigation.Navigation.findNavController
 
 import androidx.recyclerview.widget.RecyclerView
+import com.and.newton.comms.R
+import com.and.newton.comms.ViewArticleFragment
+import com.and.newton.comms.ViewArticleFragmentArgs
 
 import com.and.newton.comms.databinding.ArticleListItemBinding
 import com.and.newton.comms.domain.data.Article
@@ -99,8 +103,8 @@ class ArticlesAdapter @Inject constructor():
             binding.executePendingBindings()
 
             binding.root.setOnClickListener{
-                val uri = Uri.parse("App://nav_view_article")
-               findNavController(binding.root).navigate(uri)
+                val action = CommsLandingPageFragmentDirections.actionCommsLandingPageFragmentToViewArticleFragment(article)
+               findNavController(binding.root).navigate(action)
             }
 //            cardView.txtArticleDesc.text = article.content
 //            cardView.txtArticleLabel.text = article.categories?.get(0)?.name

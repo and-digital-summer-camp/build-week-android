@@ -6,44 +6,12 @@
     app:startDestination="@id/login">
 
     <fragment
-        android:id="@+id/nav_comms"
-        android:name="com.and.newton.comms.landing_page.CommsLandingPageFragment"
-        android:label="@string/menu_communication"
-        tools:layout="@layout/comms_landing_page_fragment">
-        <deepLink app:uri="App://nav_comms" />
-        <action
-            android:id="@+id/action_nav_comms_to_viewArticleFragment"
-            app:destination="@id/viewArticleFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/createArticleFragment"
-        android:name="com.and.newton.comms.CreateArticleFragment"
-        android:label="create_article_fragment"
-        tools:layout="@layout/create_article_fragment">
-        <deepLink app:uri="App://nav_create_article"/>
-        <argument
-            android:name="article"
-            app:argType="com.and.newton.comms.domain.data.Article"
-            app:nullable="true"
-            android:defaultValue="@null" />
-    </fragment>
-
-    <fragment
         android:id="@+id/login"
         android:name="com.and.newton.login.Login">
      <deepLink app:uri="App://login" />
     </fragment>
-    <fragment
-        android:id="@+id/viewArticleFragment"
-        android:name="com.and.newton.comms.ViewArticleFragment"
-        android:label="ViewArticleFragment">
-    <deepLink app:uri="App://nav_view_article" />
-        <argument
-            android:name="article"
-            app:argType="com.and.newton.comms.domain.data.Article"
-            app:nullable="true"
-            android:defaultValue="@null" />
-    </fragment>
+
+    <include app:graph="@navigation/comms_navigation" />
+
 
 </navigation>

@@ -66,8 +66,7 @@ class MainActivity : AppCompatActivity() {
     private fun initCreateArticleButton() {
         val floatingActionButton: FloatingActionButton = findViewById(R.id.fab)
         floatingActionButton.setOnClickListener {
-            val uri = Uri.parse("App://nav_create_article")
-            navController.navigate(uri)
+            navController.navigate(com.and.newton.comms.R.id.action_commsLandingPageFragment_to_createArticleFragment)
         }
     }
 
@@ -87,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.nav_comms ), drawerLayout)
+            com.and.newton.comms.R.id.commsLandingPageFragment, R.id.login ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
