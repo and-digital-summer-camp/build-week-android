@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="article" type="com.and.newton.comms.domain.data.Article"/>
     </data>
 
-<androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/categoryItemCardView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_margin="3dp"
-        android:elevation="5dp"
+        android:layout_height="@dimen/global_625"
+        android:layout_margin="@dimen/small_100"
+        android:elevation="@dimen/small_100"
         app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="@dimen/small_100">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/articleConstraintLayout"
@@ -22,68 +23,103 @@
 
             <ImageView
                 android:id="@+id/articleImage"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_width="@dimen/global_500"
+                android:layout_height="@dimen/global_500"
+                android:layout_marginStart="@dimen/normal_100"
+                android:layout_marginTop="@dimen/normal_100"
+                android:layout_marginBottom="@dimen/normal_100"
                 android:contentDescription="@string/iv_thumbnail_desc"
                 android:scaleType="centerCrop"
                 android:src="@drawable/article_default"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/txtArticleDesc"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.102" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txtArticleDesc"
-                android:layout_width="236dp"
-                android:layout_height="171dp"
-                android:layout_marginStart="@dimen/global_600"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:width="@dimen/global_100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/global_75"
+                android:layout_marginTop="@dimen/global_75"
+                android:layout_marginEnd="@dimen/global_75"
+                android:fontFamily="@font/droidsans"
                 android:justificationMode="inter_word"
-                android:lines="6"
-                android:padding="5dp"
-                android:text="@string/comms_category"
-                android:textAlignment="gravity"
-                android:textColor="#353434"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@{article.content}"
+                android:textColor="@color/color_natural_dark_black"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.058" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/verticalLine2"
+                app:layout_constraintTop_toBottomOf="@+id/txtArticleTitle" />
+
 
             <TextView
                 android:id="@+id/txtArticleLabel"
-                android:layout_width="142dp"
-                android:layout_height="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/normal_175"
                 android:layout_marginStart="@dimen/global_75"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/global_75"
                 android:layout_marginEnd="@dimen/global_75"
+                android:layout_marginBottom="@dimen/normal_100"
                 android:background="@drawable/article_label_border"
                 android:padding="@dimen/small_50"
                 android:text="@{article.categories.get(0).category.name}"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/verticalLine1"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/verticalLine2"
+                app:layout_constraintTop_toBottomOf="@+id/txtArticleDesc"
+                app:layout_constraintVertical_bias="0.612" />
+
+            <TextView
+                android:id="@+id/txtArticleTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/global_75"
+                android:layout_marginTop="@dimen/normal_100"
+                android:layout_marginEnd="@dimen/global_75"
+                android:text="@{article.title}"
+                android:textAlignment="textStart"
+                android:textColor="@color/color_secondary_night_rider"
+                android:textSize="13sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.826" />
+                app:layout_constraintStart_toStartOf="@+id/verticalLine2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_highlight"
+                android:layout_width="@dimen/large_175"
+                android:layout_height="@dimen/large_100"
+                android:layout_marginTop="@dimen/global_75"
+                android:layout_marginEnd="@dimen/global_75"
+                android:layout_marginBottom="@dimen/normal_100"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtArticleDesc"
+                app:layout_constraintVertical_bias="0.584"
+                app:srcCompat="@drawable/highlight" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/verticalLine1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.77" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/verticalLine2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="169dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </layout>

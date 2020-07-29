@@ -36,7 +36,7 @@ class ViewArticleFragment : Fragment() {
             layout.viewArticleFragment_ArticleTitle.text = article.title
             (activity as AppCompatActivity?)?.supportActionBar?.title = article.title
             layout.viewArticleFragment_ArticleBody.text = article.content
-            layout.viewArticleFragment_ArticleCategory.text = article.categories?.get(0)?.name ?: "no category"
+//            layout.viewArticleFragment_ArticleCategory.text = article.categories
 
 
         }
