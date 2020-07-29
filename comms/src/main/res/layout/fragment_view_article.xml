@@ -15,15 +15,25 @@
 
         <TextView
             android:id="@+id/viewArticleFragment_ArticleTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/normal_100"
             android:textSize="@dimen/normal_125"
             android:textStyle="bold"
             android:textColor="@color/color_primary_owl_blue"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/editArticleBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/small_100"
+            android:visibility="visible"
+            android:textColor="@color/color_brown_900"
+            android:backgroundTint="@color/color_primary_shrine_pink"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/edit_article_txt"/>
         <ImageView
             android:id="@+id/viewArticleFragment_ArticleImage"
             android:layout_width="match_parent"

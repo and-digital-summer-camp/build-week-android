@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.and.newton.common.utils.AppPreferences
 import kotlinx.android.synthetic.main.fragment_view_article.view.*
 
 class ViewArticleFragment : Fragment() {
@@ -34,11 +35,12 @@ class ViewArticleFragment : Fragment() {
         if (article != null) {
             layout.viewArticleFragment_ArticleTitle.text = article.title
             (activity as AppCompatActivity?)?.supportActionBar?.title = article.title
-
             layout.viewArticleFragment_ArticleBody.text = article.content
             layout.viewArticleFragment_ArticleCategory.text = article.categories?.get(0)?.name ?: "no category"
+
+
         }
-        activity?.invalidateOptionsMenu()
+
 
         return layout
     }
