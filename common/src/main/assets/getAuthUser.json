@@ -1,6 +1,3 @@
 {
-  "id": 1,
-  "first_name": "Arttee",
-  "last_name": "Rajasekaran",
-  "email_address": "arttee.rajasekaran@and.digital"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmSTd1UkdsaFB6QWdSN3lsVnpwdm1VdTV6VU9XWnJHQVlYUGMzUXJsM0ZRPSIsImp0aSI6IkhTMjU2IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoidXNlciIsImV4cCI6MTU5NjAzMzAzOH0.UaXWG2ly2mw9aNZ64IShJ6bCE8oQ9Z3s1m-SqFmt8fE"
 }

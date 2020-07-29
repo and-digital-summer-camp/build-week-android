@@ -1,22 +1,26 @@
 package com.and.newton.common.viewmodel
 
 import android.content.Context
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.and.newton.common.utils.AppPreferences
+import com.and.newton.common.domain.UserRepo
+import com.and.newton.common.domain.data.GoogleUserToken
+import com.and.newton.common.utils.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 //Shared Usermodel
-class UserViewModel @ViewModelInject constructor(@ApplicationContext var context: Context) : ViewModel() {
-
-
-
+class UserViewModel @ViewModelInject constructor(
+    private val userRepo: UserRepo,
+    @ApplicationContext var context: Context
+) : ViewModel() {
     enum class AuthenticationState {
         AUTHENTICATED,
         UNAUTHENTICATED,
@@ -45,18 +49,41 @@ class UserViewModel @ViewModelInject constructor(@ApplicationContext var context
         mGoogleSignInClient.signOut()
     }
 
-    fun unAuthenticatedUser() {
-        _authenticatedState.value = AuthenticationState.UNAUTHENTICATED
-    }
 
     fun authenticatedUser() {
         _authenticatedState.value = AuthenticationState.AUTHENTICATED
     }
 
     fun verifyUser(account: GoogleSignInAccount?) {
-        AppPreferences.isLogged = true
-        _authenticatedState.value = AuthenticationState.AUTHENTICATED
+        val googleToken:String = account?.idToken?:""
+
+        MainScope().launch {
+            if (googleToken != null) {
+                val result = userRepo.getUser(GoogleUserToken(googleToken))
+                if (result != null) {
+                    if (result.token != null) {
+                        AppPreferences.isLogged = true
+                        AppPreferences.token = result.token
+                        AppPreferences.access_level = getUserRoleFromToken(result.token)
+                        AppPreferences.first_name = account?.displayName?:account?.givenName?:"Guest"
+                        AppPreferences.last_name = account?.familyName?:"User"
+                        AppPreferences.email = account?.email?:""
+                        _authenticatedState.value = AuthenticationState.AUTHENTICATED
+                    } else {
+                        _authenticatedState.value = AuthenticationState.INVALID_AUTHENTICATION
+                    }
+                } else {
+                    _authenticatedState.value = AuthenticationState.UNAUTHENTICATED
+                }
+            }
+        }
     }
 
+    private fun getUserRoleFromToken(token:String):String {
+        val t: JWTToken<JWTAuthPayload>? = JWTUtils.decode(token, JWTDecoder, Base64DecoderImpl)
+        Timber.d("decodeToken :: ${t?.payload?.role}")
+        Timber.d("decodeToken :: ${t?.payload?.expriryTime}")
+        return t?.payload?.role?:"user"
+    }
 
 }

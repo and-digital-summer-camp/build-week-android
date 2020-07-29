@@ -17,7 +17,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/articleConstraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="219dp">
+            android:layout_height="@dimen/global_600">
+
 
             <ImageView
                 android:id="@+id/articleImage"
@@ -68,8 +69,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="@dimen/global_75"
                 android:background="@drawable/article_label_border"
-                android:padding="5dp"
-                android:text="@{article.categories.get(0).name}"
+                android:padding="@dimen/small_50"
+                android:text="@{article.categories.get(0).category.name}"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 app:layout_constraintBottom_toBottomOf="parent"

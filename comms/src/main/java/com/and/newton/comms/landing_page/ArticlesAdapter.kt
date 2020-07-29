@@ -16,6 +16,7 @@ import com.and.newton.comms.ViewArticleFragmentArgs
 import com.and.newton.comms.databinding.ArticleListItemBinding
 import com.and.newton.comms.domain.data.Article
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import timber.log.Timber
 //import com.squareup.picasso.Picasso
 import java.util.*
 import javax.inject.Inject
@@ -68,7 +69,7 @@ class ArticlesAdapter @Inject constructor():
                     filteredDataSet =  articleDataSet.filter { article:Article ->
                         var categoryFound = false
                         article.categories?.forEach{
-                            if((it.name?:"").toLowerCase(Locale.ROOT).contains(filterCategory.toLowerCase(Locale.ROOT))) {
+                            if((it.category?.name?:"").toLowerCase(Locale.ROOT).contains(filterCategory.toLowerCase(Locale.ROOT))) {
                                 categoryFound = true
                             }
                         }

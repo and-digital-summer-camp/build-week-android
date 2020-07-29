@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import com.and.newton.comms.CommsSharedViewModel
 import com.and.newton.comms.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.article_list_item.view.*
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.*
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.view.*
 import kotlinx.coroutines.MainScope
@@ -60,7 +61,14 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val layout = inflater.inflate(R.layout.comms_landing_page_fragment, container, false)
+//        if(AppPreferences.access_level == "Admin"){
+//            layout.editBtn.visibility = View.VISIBLE
+//        } else {
+//            layout.editBtn.visibility = View.GONE
+//        }
+
 
         (activity as AppCompatActivity?)?.supportActionBar?.setTitle(R.string.comms_landing_fragment_title)
 
@@ -68,11 +76,8 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
             Timber.d("Mock API all Articles List Response::${articles}")
             articlesAdapter.bindData(articles)
             layout.articles.adapter = articlesAdapter
+            articlesAdapter.filter.filter(categoryList.sorted()[0])
             layout.articles.adapter?.notifyDataSetChanged()
-        })
-
-        viewModel.user.observe(viewLifecycleOwner, Observer { user ->
-            Timber.d("Mock API fragment User Response::${user}")
         })
 
         viewModel.article.observe(viewLifecycleOwner, Observer { anArticle ->
@@ -124,8 +129,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
                 updateArticleListView(it)
             }
         }
-
-
     }
 
     private fun updateArticleListView (isEmpty:Boolean) {

@@ -12,8 +12,11 @@ object AppPreferences {
 
     //SharedPreferences variables
     private val IS_LOGGED = Pair("is_Logged", false)
-    private val USERNAME = Pair("username", "")
+    private val FIRST_NAME = Pair("first_name", "")
+    private val LAST_NAME = Pair("last_name", "")
+    private val EMAIL = Pair("email", "")
     private val ACCESS_LEVEL =  Pair("access_level", "")
+    private val TOKEN =  Pair("token", "")
 
 
     fun init(context: Context) {
@@ -41,15 +44,33 @@ object AppPreferences {
         }
 
 
-    var username: String
-        get() = preferences.getString(USERNAME.first, USERNAME.second) ?: ""
+    var first_name: String
+        get() = preferences.getString(FIRST_NAME.first, FIRST_NAME.second) ?: ""
         set(value) = preferences.edit {
-            it.putString(USERNAME.first, value)
+            it.putString(FIRST_NAME.first, value)
+        }
+
+    var last_name: String
+        get() = preferences.getString(LAST_NAME.first, LAST_NAME.second) ?: ""
+        set(value) = preferences.edit {
+            it.putString(LAST_NAME.first, value)
+        }
+
+    var email: String
+        get() = preferences.getString(EMAIL.first, EMAIL.second) ?: ""
+        set(value) = preferences.edit {
+            it.putString(EMAIL.first, value)
         }
 
     var access_level: String
         get() = preferences.getString(ACCESS_LEVEL.first, ACCESS_LEVEL.second) ?: ""
         set(value) = preferences.edit {
             it.putString(ACCESS_LEVEL.first, value)
+        }
+
+    var token: String
+        get() = preferences.getString(TOKEN.first, TOKEN.second) ?: ""
+        set(value) = preferences.edit {
+            it.putString(TOKEN.first, value)
         }
 }

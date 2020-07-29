@@ -22,7 +22,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 
@@ -43,7 +46,8 @@ class Login : Fragment() {
         }
 
         if(AppPreferences.isLogged){
-            userViewModel.authenticatedUser()
+            val uri = Uri.parse("App://nav_comms")
+            findNavController().navigate(uri)
         }
 
         userViewModel.authenticatedState.observe(viewLifecycleOwner, Observer { authenticatedState ->
@@ -52,10 +56,16 @@ class Login : Fragment() {
                     val uri = Uri.parse("App://nav_comms")
                     findNavController().navigate(uri)
                 }
+                UserViewModel.AuthenticationState.UNAUTHENTICATED -> {
+                   Timber.d("UNAUTHENTICATED USER")
+                }
+                UserViewModel.AuthenticationState.INVALID_AUTHENTICATION -> {
+                    errorMessage.visibility = View.VISIBLE
+                    errorMessage.text = "INVALID USER PLEASE TRY AGAIN!"
+                    userViewModel.signout()
+                }
             }
-
         })
-
         return layout
     }
 
