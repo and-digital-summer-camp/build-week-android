@@ -2,5 +2,8 @@
   "id": 1,
   "first_name": "Arttee",
   "last_name": "Rajasekaran",
-  "email_address": "arttee.rajasekaran@and.digital"
+  "email_address": "arttee.rajasekaran@and.digital",
+  "access_level": "Admin",
+  "valid": true,
+  "jwt_token": "h234328d23d23fd23f2"
 }

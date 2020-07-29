@@ -2,21 +2,27 @@ package com.and.newton.common.viewmodel
 
 import android.content.Context
 import android.util.Log
+import android.util.Log.d
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.and.newton.common.domain.UserRepo
+import com.and.newton.common.domain.data.User
 import com.and.newton.common.utils.AppPreferences
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 //Shared Usermodel
-class UserViewModel @ViewModelInject constructor(@ApplicationContext var context: Context) : ViewModel() {
-
-
-
+class UserViewModel @ViewModelInject constructor(
+    private val userRepo: UserRepo,
+    @ApplicationContext var context: Context
+) : ViewModel() {
     enum class AuthenticationState {
         AUTHENTICATED,
         UNAUTHENTICATED,
@@ -45,19 +51,35 @@ class UserViewModel @ViewModelInject constructor(@ApplicationContext var context
         mGoogleSignInClient.signOut()
     }
 
-    fun unAuthenticatedUser() {
-        _authenticatedState.value = AuthenticationState.UNAUTHENTICATED
-    }
 
     fun authenticatedUser() {
         _authenticatedState.value = AuthenticationState.AUTHENTICATED
     }
 
     fun verifyUser(account: GoogleSignInAccount?) {
+        val googleToken = account?.idToken
         AppPreferences.isLogged = true
-        AppPreferences.authToken = account?.idToken?:""
-        _authenticatedState.value = AuthenticationState.AUTHENTICATED
-    }
+        MainScope().launch {
+            if (googleToken != null) {
+                val result = userRepo.getUser(googleToken)
+                if (result != null) {
+                    if (result.valid) {
+                        AppPreferences.isLogged = true
+                        AppPreferences.access_level = result.accessLevel
+                        AppPreferences.token = result.token
+                        AppPreferences.first_name = result.firstName.toString()
+                        AppPreferences.last_name = result.lastName.toString()
+                        AppPreferences.email = result.email.toString()
+                        _authenticatedState.value = AuthenticationState.AUTHENTICATED
+                    } else {
+                        _authenticatedState.value = AuthenticationState.INVALID_AUTHENTICATION
+                    }
+                } else {
+                    _authenticatedState.value = AuthenticationState.UNAUTHENTICATED
+                }
+            }
+        }
 
+    }
 
 }
