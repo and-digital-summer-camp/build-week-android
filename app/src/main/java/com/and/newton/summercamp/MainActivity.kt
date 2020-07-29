@@ -65,8 +65,6 @@ class MainActivity : AppCompatActivity() {
     private fun initCreateArticleButton() {
         val floatingActionButton: FloatingActionButton = findViewById(R.id.fab)
         floatingActionButton.setOnClickListener {
-//            val navController = findNavController(R.id.nav_host_fragment)
-//            navController.navigate(R.id.action_commsLandingPageFragment_to_fragment_create_article)
             val uri = Uri.parse("App://nav_create_article")
             navController.navigate(uri)
         }
