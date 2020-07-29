@@ -11,6 +11,9 @@
         android:label="@string/menu_communication"
         tools:layout="@layout/comms_landing_page_fragment">
         <deepLink app:uri="App://nav_comms" />
+        <action
+            android:id="@+id/action_nav_comms_to_viewArticleFragment"
+            app:destination="@id/viewArticleFragment" />
     </fragment>
 
     <fragment
@@ -30,6 +33,17 @@
         android:id="@+id/login"
         android:name="com.and.newton.login.Login">
      <deepLink app:uri="App://login" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewArticleFragment"
+        android:name="com.and.newton.comms.ViewArticleFragment"
+        android:label="ViewArticleFragment">
+    <deepLink app:uri="App://nav_view_article" />
+        <argument
+            android:name="article"
+            app:argType="com.and.newton.comms.domain.data.Article"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 
 </navigation>

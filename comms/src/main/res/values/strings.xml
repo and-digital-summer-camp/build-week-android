@@ -14,4 +14,6 @@
     <string name="iv_thumbnail_desc">thumbnail</string>
     <string name="no_articles_found">No Articles found</string>
     <string name="highlighted_text">Highlighted</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

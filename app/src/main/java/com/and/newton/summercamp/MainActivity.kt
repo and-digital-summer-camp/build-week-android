@@ -16,8 +16,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
 import com.and.newton.common.viewmodel.UserViewModel
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
                     fab?.show()
                 }
             }
+
         }}
 
     private fun initCreateArticleButton() {

@@ -1,10 +1,14 @@
 package com.and.newton.comms.landing_page
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.navigation.Navigation.findNavController
+
 import androidx.recyclerview.widget.RecyclerView
+
 import com.and.newton.comms.databinding.ArticleListItemBinding
 import com.and.newton.comms.domain.data.Article
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -15,6 +19,9 @@ import javax.inject.Inject
 
 class ArticlesAdapter @Inject constructor():
     RecyclerView.Adapter<ArticlesAdapter.ThumbnailViewHolder>(), Filterable {
+
+
+
 
     private var articleDataSet:List<Article> = listOf()
 
@@ -39,6 +46,9 @@ class ArticlesAdapter @Inject constructor():
     fun onDataSetUpdated() {
         isArticleEmpty.offer(articleFilteredDataSet.size == 0)
     }
+
+
+
 
     override fun getFilter(): Filter {
         return object : Filter() {
@@ -88,6 +98,10 @@ class ArticlesAdapter @Inject constructor():
 //            binding.txtArticleLabel.visibility = if(article.highlighted == true) View.VISIBLE else View.GONE
             binding.executePendingBindings()
 
+            binding.root.setOnClickListener{
+                val uri = Uri.parse("App://nav_view_article")
+               findNavController(binding.root).navigate(uri)
+            }
 //            cardView.txtArticleDesc.text = article.content
 //            cardView.txtArticleLabel.text = article.categories?.get(0)?.name
 
@@ -107,7 +121,7 @@ class ArticlesAdapter @Inject constructor():
             LayoutInflater.from(parent.context)
         val binding = ArticleListItemBinding.inflate(cardView)
 
-        //Todo Implement click listener on the cardview to navigate to the Arcticle/Comms View fragment
+
 
         return ThumbnailViewHolder(
             binding
