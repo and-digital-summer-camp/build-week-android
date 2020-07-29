@@ -4,14 +4,17 @@ package com.and.newton.comms.landing_page
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.and.newton.comms.CommsSharedViewModel
 import com.and.newton.comms.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,7 +61,9 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         savedInstanceState: Bundle?
     ): View? {
         val layout = inflater.inflate(R.layout.comms_landing_page_fragment, container, false)
-        Log.d("viewLifeCycle", findNavController().currentDestination.toString())
+
+        (activity as AppCompatActivity?)?.supportActionBar?.setTitle(R.string.comms_landing_fragment_title)
+
         viewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
             Timber.d("Mock API all Articles List Response::${articles}")
             articlesAdapter.bindData(articles)
@@ -96,7 +101,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        Log.d("viewLifeCycle", "called")
         val item = menu.findItem(R.id.action_filter)
         categoryFilter = item.actionView as Spinner
 

@@ -8,6 +8,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -41,7 +42,7 @@ class CreateArticleFragment : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.create_article_fragment, container, false)
-
+        (activity as AppCompatActivity?)?.supportActionBar?.setTitle(R.string.create_article_fragment_title)
         // This deals with populating the Fragment with Article data so it is an Edit page
         val article = arguments?.get("article") as? Article
         if (article != null) {

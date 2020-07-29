@@ -3,6 +3,7 @@ package com.and.newton.comms
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
@@ -32,6 +33,8 @@ class ViewArticleFragment : Fragment() {
         val article = args.article
         if (article != null) {
             layout.viewArticleFragment_ArticleTitle.text = article.title
+            (activity as AppCompatActivity?)?.supportActionBar?.title = article.title
+
             layout.viewArticleFragment_ArticleBody.text = article.content
             layout.viewArticleFragment_ArticleCategory.text = article.categories?.get(0)?.name ?: "no category"
         }
