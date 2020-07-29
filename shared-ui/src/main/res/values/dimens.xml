@@ -2,12 +2,10 @@
 <resources>
     <dimen name="global_75">8dp</dimen>
     <dimen name="global_100">16dp</dimen>
-    <dimen name="global_425">120dp</dimen>
-    <dimen name="global_500">144dp</dimen>
-    <dimen name="global_600">176dp</dimen>
-    <dimen name="global_625">184dp</dimen>
 
-    <dimen name="small_25">2dp</dimen>
+
+    <dimen name="global_600">176dp</dimen>
+
     <dimen name="small_50">4dp</dimen>
     <dimen name="small_100">8dp</dimen>
 
