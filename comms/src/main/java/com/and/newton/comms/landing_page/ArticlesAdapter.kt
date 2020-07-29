@@ -1,7 +1,9 @@
 package com.and.newton.comms.landing_page
 
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -100,7 +102,14 @@ class ArticlesAdapter @Inject constructor():
 
         fun bindViewData(article: Article) {
             binding.article = article
-//            binding.txtArticleLabel.visibility = if(article.highlighted == true) View.VISIBLE else View.GONE
+            if(article.highlighted == true) {
+                binding.articleConstraintLayout.setBackgroundResource(R.drawable.article_highlight_border)
+                binding.highlightedFire.visibility = View.VISIBLE
+            } else {
+                binding.articleConstraintLayout.background = null
+                binding.highlightedFire.visibility = View.GONE
+            }
+
             binding.executePendingBindings()
 
             binding.root.setOnClickListener{
@@ -122,15 +131,8 @@ class ArticlesAdapter @Inject constructor():
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThumbnailViewHolder {
-        val cardView =
-            LayoutInflater.from(parent.context)
-        val binding = ArticleListItemBinding.inflate(cardView)
-
-
-
-        return ThumbnailViewHolder(
-            binding
-        )
+        val binding = ArticleListItemBinding.inflate( LayoutInflater.from(parent.context), parent, false)
+        return ThumbnailViewHolder(binding)
     }
 
     override fun getItemCount(): Int  = articleFilteredDataSet.size
