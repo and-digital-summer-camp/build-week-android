@@ -1,10 +1,7 @@
 package com.and.newton.comms.domain.data
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.google.gson.annotations.SerializedName
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import java.io.Serializable
 import java.util.*
 
 data class Article constructor(
@@ -23,4 +20,4 @@ data class Article constructor(
     val highlighted:Boolean?,
 
     val categories:List<Category>?
-)
+) : Serializable
