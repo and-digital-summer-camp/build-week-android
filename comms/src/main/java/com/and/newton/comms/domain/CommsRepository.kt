@@ -11,6 +11,8 @@ interface CommsRepository {
 
     suspend fun getArticle(id: Int): Article?
 
+    suspend fun createArticle(article: String) : Article?
+
     suspend fun getCategories(): List<Category>?
 }
 

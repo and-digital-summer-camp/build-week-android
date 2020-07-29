@@ -48,9 +48,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 
     private fun setDropDownAdapter(categories : List<String>){
         adapter  = context?.let { ArrayAdapter(it, R.layout.dropdown_spinner, categories) }
-
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +61,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
             articlesAdapter.bindData(articles)
             layout.articles.adapter = articlesAdapter
             layout.articles.adapter?.notifyDataSetChanged()
-
         })
 
         viewModel.user.observe(viewLifecycleOwner, Observer { user ->
@@ -88,7 +85,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         return layout
     }
 
-
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         val item = menu.findItem(R.id.action_filter)
@@ -98,8 +94,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         adapter?.setDropDownViewResource(R.layout.dropdown_spinner_selected)
         categoryFilter?.onItemSelectedListener = this
     }
-
-
 
     override fun onNothingSelected(p0: AdapterView<*>?) {
         Timber.d("No option selected")
