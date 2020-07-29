@@ -76,7 +76,7 @@ class CreateArticleFragment : Fragment() {
                 1,
                 edittext_title.text.toString(),
                 edittext_content.text.toString(),
-                null, null, highlighted_checkBox.isChecked, categories
+                null, null, null, highlighted_checkBox.isChecked, categories
             )
 
             viewModel.postArticle(newArticle).observe(viewLifecycleOwner, Observer { success ->
@@ -133,7 +133,7 @@ class CreateArticleFragment : Fragment() {
         highlightedCheckbox.isChecked = article.highlighted!!
         if (!article.categories.isNullOrEmpty()) {
             // TODO: Fix this set dropdown text - how the hell do you deal with a whole list of them?
-            categoryDropdown.setText(article.categories[0].name)
+            categoryDropdown.setText(article.categories[0].category?.name)
         }
     }
 

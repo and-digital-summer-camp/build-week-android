@@ -68,6 +68,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
             Timber.d("Mock API all Articles List Response::${articles}")
             articlesAdapter.bindData(articles)
             layout.articles.adapter = articlesAdapter
+            articlesAdapter.filter.filter(categoryList.sorted()[0])
             layout.articles.adapter?.notifyDataSetChanged()
         })
 

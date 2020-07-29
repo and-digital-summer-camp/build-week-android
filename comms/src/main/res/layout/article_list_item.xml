@@ -17,7 +17,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/articleConstraintLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/global_600">
 
 
@@ -62,7 +62,7 @@
                 android:layout_marginBottom="@dimen/normal_100"
                 android:background="@drawable/article_label_border"
                 android:padding="@dimen/small_50"
-                android:text="@{article.categories.get(0).name}"
+                android:text="@{article.categories.get(0).category.name}"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
