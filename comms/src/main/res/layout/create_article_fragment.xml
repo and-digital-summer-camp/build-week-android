@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateArticleFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/global_100"
+        android:layout_marginRight="@dimen/global_100">
+
+        <TextView
+            android:id="@+id/textview_main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_100"
+            android:text="@string/new_post_title"
+            android:textSize="@dimen/title_font_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/header_font_size"
+            android:text="@string/title_text"
+            app:layout_constraintBottom_toTopOf="@+id/edittext_title"
+            app:layout_constraintStart_toStartOf="@+id/edittext_title" />
+
+        <EditText
+            android:id="@+id/edittext_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_200"
+            android:background="@drawable/edittext_frame"
+            android:hint="@string/title_name"
+            android:textSize="@dimen/hint_font_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_main_title" />
+
+        <TextView
+            android:id="@+id/textview_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/content_text"
+            android:textSize="@dimen/header_font_size"
+            app:layout_constraintBottom_toTopOf="@+id/edittext_content"
+            app:layout_constraintStart_toStartOf="@+id/edittext_content" />
+
+        <EditText
+            android:id="@+id/edittext_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/global_600"
+            android:layout_marginTop="@dimen/normal_200"
+            android:background="@drawable/edittext_frame"
+            android:gravity="top|left"
+            android:hint="@string/content_text"
+            android:textSize="@dimen/hint_font_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_title" />
+
+        <com.and.newton.shared_ui.CustomAutoCompleteTextView
+            android:id="@+id/category_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_175"
+            android:completionThreshold="1"
+            android:enabled="true"
+            android:focusable="true"
+            android:hint="@string/choose_category"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="@+id/edittext_content"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/edittext_content"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_content" />
+
+        <Button
+            android:id="@+id/button_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_225"
+            android:layout_marginTop="@dimen/normal_150"
+            android:text="@string/post_text"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/category_edit" />
+
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_150"
+            android:layout_marginEnd="@dimen/normal_225"
+            android:text="@string/cancel_text"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/category_edit" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

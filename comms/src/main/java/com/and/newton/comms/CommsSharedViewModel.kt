@@ -4,15 +4,14 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.and.newton.common.domain.data.User
 import com.and.newton.comms.domain.CommsRepository
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.Category
-import com.and.newton.common.domain.data.User
+import com.google.gson.Gson
 
 class CommsSharedViewModel @ViewModelInject constructor(private val commsRepository: CommsRepository) :
     ViewModel() {
-
-
 
     val user: LiveData<User> = liveData {
         commsRepository.getUser("Bearer googletoken")?.also { emit(it)}
@@ -38,4 +37,10 @@ class CommsSharedViewModel @ViewModelInject constructor(private val commsReposit
     val categories: LiveData<List<Category>> = liveData {
         commsRepository.getCategories()?.also { emit(it)}
     }
+
+    fun postArticle(article: Article): LiveData<Article> = liveData {
+        val articleJson: String = Gson().toJson(article)
+        commsRepository.createArticle(articleJson)?.also { emit(it)}
+    }
+
 }
