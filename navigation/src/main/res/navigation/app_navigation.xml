@@ -17,8 +17,13 @@
         android:id="@+id/createArticleFragment"
         android:name="com.and.newton.comms.CreateArticleFragment"
         android:label="create_article_fragment"
-        tools:layout="@layout/create_article_fragment" >
+        tools:layout="@layout/create_article_fragment">
         <deepLink app:uri="App://nav_create_article"/>
+        <argument
+            android:name="article"
+            app:argType="com.and.newton.comms.domain.data.Article"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 
     <fragment
