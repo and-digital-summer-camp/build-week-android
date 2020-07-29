@@ -2,5 +2,5 @@
 .gradle/
 /build
 **/.DS_Store
-local.properties
 **/local.properties
+*.properties

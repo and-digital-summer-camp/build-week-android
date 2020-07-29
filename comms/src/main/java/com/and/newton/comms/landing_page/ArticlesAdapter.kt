@@ -16,7 +16,7 @@ import javax.inject.Inject
 class ArticlesAdapter @Inject constructor():
     RecyclerView.Adapter<ArticlesAdapter.ThumbnailViewHolder>(), Filterable {
 
-    private lateinit var articleDataSet:List<Article>
+    private var articleDataSet:List<Article> = listOf()
 
     private var articleFilteredDataSet:List<Article> = listOf()
 
@@ -68,10 +68,12 @@ class ArticlesAdapter @Inject constructor():
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                articleFilteredDataSet = results?.values as List<Article>
+
+                articleFilteredDataSet = (results?.values as? List<Article> ) ?: articleDataSet
                 notifyDataSetChanged()
 
                 onDataSetUpdated()
+
             }
 
         }

@@ -18,8 +18,8 @@ jobs:
       - name: build release
         run: ./gradlew assembleRelease
         
-      - name:  Run Android lint
-        run: ./gradlew lint
+#       - name:  Run Android lint
+#         run: ./gradlew lint
 
       - uses: actions/setup-node@v1
         with:

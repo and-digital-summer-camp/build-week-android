@@ -1,5 +1,6 @@
 package com.and.newton.comms
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,7 @@ class CreateArticleFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.create_article_fragment, container, false)
 
+        // This deals with populating the Fragment with Article data so it is an Edit page
         val article = arguments?.get("article") as? Article
         if (article != null) {
             populateEditArticle(view, article)
@@ -132,7 +134,8 @@ class CreateArticleFragment : Fragment() {
     }
 
     private fun navigateToCommsHome() {
-        findNavController().navigate(R.id.action_fragment_create_article_to_commsLandingPageFragment)
+        val uri = Uri.parse("App://nav_comms")
+        findNavController().navigate(uri)
     }
 
 
