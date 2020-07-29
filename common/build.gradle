@@ -69,7 +69,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     api 'com.google.android.gms:play-services-auth:18.1.0'
     api project(":shared-ui")
-//    implementation 'com.github.PhilJay:JWT:1.1.5'
     implementation 'commons-codec:commons-codec:1.14'
 
 }
