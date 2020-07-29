@@ -5,7 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.and.newton.common.domain.UserRepo
 import com.and.newton.common.domain.data.GoogleUserToken
-import com.and.newton.common.utils.AppPreferences
+import com.and.newton.common.utils.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -13,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 //Shared Usermodel
@@ -63,7 +64,7 @@ class UserViewModel @ViewModelInject constructor(
                     if (result.token != null) {
                         AppPreferences.isLogged = true
                         AppPreferences.token = result.token
-//                        AppPreferences.access_level = result.accessLevel
+                        AppPreferences.access_level = getUserRoleFromToken(result.token)
                         AppPreferences.first_name = account?.displayName?:account?.givenName?:"Guest"
                         AppPreferences.last_name = account?.familyName?:"User"
                         AppPreferences.email = account?.email?:""
@@ -76,7 +77,13 @@ class UserViewModel @ViewModelInject constructor(
                 }
             }
         }
+    }
 
+    private fun getUserRoleFromToken(token:String):String {
+        val t: JWTToken<JWTAuthPayload>? = JWTUtils.decode(token, JWTDecoder, Base64DecoderImpl)
+        Timber.d("decodeToken :: ${t?.payload?.role}")
+        Timber.d("decodeToken :: ${t?.payload?.expriryTime}")
+        return t?.payload?.role?:"user"
     }
 
 }
