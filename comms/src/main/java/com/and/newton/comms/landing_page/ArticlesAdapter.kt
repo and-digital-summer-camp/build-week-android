@@ -84,22 +84,10 @@ class ArticlesAdapter @Inject constructor():
 
         fun bindViewData(article: Article) {
             binding.article = article
-            binding.imageFireView.visibility = if(article.highlighted == true) View.VISIBLE else View.INVISIBLE
+            binding.ivHighlight.visibility = if(article.highlighted == true) View.VISIBLE else View.INVISIBLE
             binding.executePendingBindings()
-
             binding.txtArticleDesc.text = article.content
-            //binding. = article.title
-
-
-              //cardView.txtArticleDesc.text = article.content
-              // cardView.txtArticleLabel.text = article.categories?.get(0)?.name
-
-//            Picasso.get()
-//                .load("https://images-na.ssl-images-amazon.com/images/I/810FiMQwZ5L._AC_SL1500_.jpg")
-//                .resize(250, 250).centerCrop().into(cardView.ivArticleImage)
             //TOdo init the item view with the article data
-
-
         }
 
 

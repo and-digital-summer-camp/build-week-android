@@ -9,7 +9,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/categoryItemCardView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/global_800"
+        android:layout_height="@dimen/global_625"
         android:layout_margin="@dimen/small_100"
         android:elevation="@dimen/small_100"
         app:cardBackgroundColor="@android:color/white"
@@ -17,7 +17,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/articleConstraintLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/global_600">
 
 
@@ -42,11 +42,10 @@
                 android:layout_marginStart="@dimen/global_75"
                 android:layout_marginTop="@dimen/global_75"
                 android:layout_marginEnd="@dimen/global_75"
-                android:fontFamily="sans-serif"
-                android:minWidth="200dp"
+                android:fontFamily="@font/droidsans"
                 android:justificationMode="inter_word"
                 android:text="@{article.content}"
-                android:textColor="#353434"
+                android:textColor="@color/color_natural_dark_black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/verticalLine2"
@@ -55,15 +54,14 @@
 
             <TextView
                 android:id="@+id/txtArticleLabel"
-                android:layout_width="119dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/normal_175"
                 android:layout_marginStart="@dimen/global_75"
                 android:layout_marginTop="@dimen/global_75"
                 android:layout_marginEnd="@dimen/global_75"
                 android:layout_marginBottom="@dimen/normal_100"
-                android:minWidth="100dp"
                 android:background="@drawable/article_label_border"
-                android:padding="5dp"
+                android:padding="@dimen/small_50"
                 android:text="@{article.categories.get(0).name}"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
@@ -80,11 +78,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/global_75"
                 android:layout_marginTop="@dimen/normal_100"
-                android:minWidth="200dp"
                 android:layout_marginEnd="@dimen/global_75"
                 android:text="@{article.title}"
                 android:textAlignment="textStart"
-                android:textColor="#323232"
+                android:textColor="@color/color_secondary_night_rider"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -93,9 +90,9 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageFireView"
-                android:layout_width="54dp"
-                android:layout_height="26dp"
+                android:id="@+id/iv_highlight"
+                android:layout_width="@dimen/large_175"
+                android:layout_height="@dimen/large_100"
                 android:layout_marginTop="@dimen/global_75"
                 android:layout_marginEnd="@dimen/global_75"
                 android:layout_marginBottom="@dimen/normal_100"
@@ -117,7 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="168dp" />
+                app:layout_constraintGuide_begin="169dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
