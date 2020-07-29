@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -15,8 +16,9 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
+import com.and.newton.common.utils.AppPreferences
 import com.and.newton.common.viewmodel.UserViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: Toolbar
     private lateinit var fab: FloatingActionButton
+    private lateinit var userEMail: TextView
     private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         this.drawerLayout = findViewById(R.id.drawer_layout)
         this.toolbar = findViewById(R.id.toolbar)
         this.fab = findViewById(R.id.fab)
+        this.userEMail = findViewById(R.id.user_email)
 
         initNavigationDrawerWithToolBar()
         initCreateArticleButton()
@@ -89,6 +93,16 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_comms ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    private fun initAfterLogin() {
+        userViewModel.authenticatedState.observe(this, Observer { authenticatedState ->
+            when(authenticatedState){
+                UserViewModel.AuthenticationState.AUTHENTICATED -> {
+                    userEMail.text = AppPreferences.email
+                }
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

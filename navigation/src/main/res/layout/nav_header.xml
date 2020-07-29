@@ -27,7 +27,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/user_email"
         android:gravity="end"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
