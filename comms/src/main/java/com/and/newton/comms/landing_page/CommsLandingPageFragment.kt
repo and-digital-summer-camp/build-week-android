@@ -1,7 +1,9 @@
 package com.and.newton.comms.landing_page
 
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -9,6 +11,7 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.and.newton.comms.CommsSharedViewModel
 import com.and.newton.comms.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,12 +30,12 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     @Inject
     lateinit var articlesAdapter: ArticlesAdapter
 
-    private var adapter: ArrayAdapter<String>? = null
+    private lateinit var adapter: ArrayAdapter<String>
 
     private val viewModel: CommsSharedViewModel by viewModels()
 
-    private var categoryFilter:Spinner? = null
-
+    private lateinit var categoryFilter:Spinner
+    private lateinit var ctx: Context
     private var categoryList: MutableList<String> = mutableListOf("All Categories")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,21 +44,21 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     }
 
     private fun updateCategoriesFilter(categories : List<String>){
-        setDropDownAdapter(categories)
-        categoryFilter?.adapter = adapter
-        adapter?.notifyDataSetChanged()
+        Log.d("viewLifeCycle", categories.toString())
+        requireActivity().invalidateOptionsMenu()
+    }
+    private fun setDropDownAdapter(){
+        adapter = ArrayAdapter(ctx, R.layout.dropdown_spinner, categoryList)
+        adapter.setDropDownViewResource(R.layout.dropdown_spinner_selected)
     }
 
-    private fun setDropDownAdapter(categories : List<String>){
-        adapter  = context?.let { ArrayAdapter(it, R.layout.dropdown_spinner, categories) }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val layout = inflater.inflate(R.layout.comms_landing_page_fragment, container, false)
-
+        Log.d("viewLifeCycle", findNavController().currentDestination.toString())
         viewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
             Timber.d("Mock API all Articles List Response::${articles}")
             articlesAdapter.bindData(articles)
@@ -80,19 +83,28 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
             categoryList.add("All Categories")
 
             updateCategoriesFilter(categoryList.sorted())
+
         })
 
         return layout
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        ctx = context
+    }
+
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
+        Log.d("viewLifeCycle", "called")
         val item = menu.findItem(R.id.action_filter)
         categoryFilter = item.actionView as Spinner
 
-        setDropDownAdapter(listOf("All"))
-        adapter?.setDropDownViewResource(R.layout.dropdown_spinner_selected)
-        categoryFilter?.onItemSelectedListener = this
+        adapter = ArrayAdapter(ctx, R.layout.dropdown_spinner, categoryList.sorted())
+        adapter.setDropDownViewResource(R.layout.dropdown_spinner_selected)
+
+        categoryFilter.adapter = adapter
+        categoryFilter.onItemSelectedListener = this
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {

@@ -54,6 +54,12 @@ class MainActivity : AppCompatActivity() {
                     drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                     fab?.hide()
                 }
+                R.id.createArticleFragment -> {
+                    fab?.hide()
+                }
+                R.id.viewArticleFragment -> {
+                    fab?.hide()
+                }
                 else -> {
                     toolbar?.visibility = View.VISIBLE
                     drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)

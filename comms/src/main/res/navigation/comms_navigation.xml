@@ -17,6 +17,10 @@
             app:argType="com.and.newton.comms.domain.data.Article"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_createArticleFragment_pop_including_commsLandingPageFragment"
+            app:popUpTo="@id/commsLandingPageFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/commsLandingPageFragment"
@@ -30,6 +34,10 @@
         <action
             android:id="@+id/action_commsLandingPageFragment_to_createArticleFragment"
             app:destination="@id/createArticleFragment" />
+        <action
+            android:id="@+id/action_commsLandingPageFragment_pop"
+            app:popUpTo="@id/commsLandingPageFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/viewArticleFragment"
@@ -41,5 +49,9 @@
             app:argType="com.and.newton.comms.domain.data.Article"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_viewArticleFragment_pop_including_commsLandingPageFragment"
+            app:popUpTo="@id/commsLandingPageFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
