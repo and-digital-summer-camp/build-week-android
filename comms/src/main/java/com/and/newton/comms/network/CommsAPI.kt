@@ -2,7 +2,7 @@ package com.and.newton.comms.network
 
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.Category
-import com.and.newton.comms.domain.data.User
+import com.and.newton.common.domain.data.GoogleUserToken
 import retrofit2.http.*
 
 
@@ -12,17 +12,14 @@ interface CommsAPI {
      * TODO: STRING RETURN TYPE NEEDS TO BE CHANGED TO ARTICLE DATA MODEL, ATM
      */
 
-    //Gets auth users permission
-    @POST("/auth/google")
-    suspend fun getAuthUser(@Query("Authorization") JWT_token: String) : User
 
     //Gets ALL articles
     @GET("/api/articles")
-    suspend fun getArticles(@Header("Authorization") JWT_token: String) : List<Article>
+    suspend fun getArticles() : List<Article>
 
     //Gets SPECIFIC article by ID
     @GET("/api/articles/{id}")
-    suspend fun getArticle(@Path("id") id: Int, @Header("Authorization") JWT_token: String) : Article
+    suspend fun getArticle(@Path("id") id: Int) : Article
 
     //Gets ALL articles by SPECIFIC category
     @GET("/api/articles/{category}")
@@ -34,11 +31,11 @@ interface CommsAPI {
 
     //creates article
     @POST("/api/articles")
-    suspend fun createArticle(@Query("article") article: String, @Header("Authorization") JWT_token: String) : Article
+    suspend fun createArticle(@Body article: Article)
 
     //Gets ALL categories
     @GET("/api/categories")
-    suspend fun getAllCategories(@Header("Authorization") JWT_token: String) : List<Category>
+    suspend fun getAllCategories() : List<Category>
 
     //Deletes SPECIFIC article
     @DELETE("/api/articles/{id}")
