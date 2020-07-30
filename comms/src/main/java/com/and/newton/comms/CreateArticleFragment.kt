@@ -200,10 +200,13 @@ class CreateArticleFragment : Fragment() {
         val editTextContent = view.findViewById<EditText>(R.id.edittext_content)
         val categoryDropdown = view.findViewById<CustomAutoCompleteTextView>(R.id.category_edit)
         val highlightedSwitch = view.findViewById<Switch>(R.id.highlighted_switch)
+        val editImageContent = view.findViewById<EditText>(R.id.edittext_image)
 
         editTextTitle.setText(article.title)
         editTextContent.setText(article.content)
-        highlightedSwitch.isChecked = article.highlighted!!
+        editImageContent.setText(article.imagePath)
+
+        highlightedSwitch.isChecked = article.highlighted == true
         if (!article.categories.isNullOrEmpty()) {
             // TODO: Fix this set dropdown text - how the hell do you deal with a whole list of them?
             categoryDropdown.setText(article.categories!![0].category?.name)
