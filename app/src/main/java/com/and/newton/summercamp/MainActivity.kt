@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: Toolbar
     private lateinit var fab: FloatingActionButton
-    private lateinit var userEMail: TextView
+    private lateinit var user_email: TextView
     private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         this.drawerLayout = findViewById(R.id.drawer_layout)
         this.toolbar = findViewById(R.id.toolbar)
         this.fab = findViewById(R.id.fab)
-        this.userEMail = findViewById(R.id.user_email)
 
         initNavigationDrawerWithToolBar()
         initCreateArticleButton()
@@ -99,7 +98,8 @@ class MainActivity : AppCompatActivity() {
         userViewModel.authenticatedState.observe(this, Observer { authenticatedState ->
             when(authenticatedState){
                 UserViewModel.AuthenticationState.AUTHENTICATED -> {
-                    userEMail.text = AppPreferences.email
+                    user_email = findViewById(R.id.user_email)
+                    user_email.text = AppPreferences.email
                 }
             }
         })
