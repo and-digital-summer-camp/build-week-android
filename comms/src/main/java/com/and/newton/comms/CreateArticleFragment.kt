@@ -73,14 +73,13 @@ class CreateArticleFragment : Fragment() {
     private fun postNewArticle() {
         if (!edittext_title.text.isNullOrEmpty() && !edittext_content.text.isNullOrEmpty()) {
 
-            // TODO : Remove hardcoded IDs from category
+            // TODO : map the user selected category with the category ID
             var categories = ArrayList<CategoryHolder>()
             if (!category_edit.text.isNullOrEmpty()) {
                 val category = Category(null, category_edit.text.toString())
                 categories.add(CategoryHolder(category))
             }
 
-            // TODO : Remove hardcoded IDs from article
             val newArticle = Article(
                 null,
                 edittext_title.text.toString(),

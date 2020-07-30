@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="article_text">Imagine this is the landing page</string>
-    <string name="content_text">Content(mandatory)</string>
-    <string name="title_name">Title Name(mandatory)</string>
+    <string name="content_text">Content (mandatory)</string>
+    <string name="article_image">Image Selector</string>
+    <string name="title_name">Title Name (mandatory)</string>
     <string name="image_text">Title Selector</string>
     <string name="title_text">Title</string>
     <string name="new_post_title">Create A New Post</string>

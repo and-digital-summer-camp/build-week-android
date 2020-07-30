@@ -27,7 +27,7 @@
                 android:layout_height="@dimen/global_500"
                 android:contentDescription="@string/iv_thumbnail_desc"
                 android:scaleType="centerCrop"
-                android:src="@drawable/article_default"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
