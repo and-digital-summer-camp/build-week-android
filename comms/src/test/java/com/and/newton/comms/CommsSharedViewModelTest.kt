@@ -36,7 +36,7 @@ class CommsSharedViewModelTest {
 
     @Test
     fun testGetArticles() = runBlocking {
-        val article:Article = Article(0,"title1","content1",null,null,true,null)
+        val article:Article = Article(0,"title1","content1",null,null,null, true,null)
         Mockito.`when`(commsRepository.getArticles()).thenReturn(listOf(article))
 
         assertEquals(commsRepository.getArticles(),listOf(article));

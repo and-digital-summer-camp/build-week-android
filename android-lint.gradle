@@ -1,7 +1,7 @@
 android {
     lintOptions {
         quiet true
-        abortOnError true
+        abortOnError false
         warningsAsErrors true
         lintConfig file('../lint.xml')
     }

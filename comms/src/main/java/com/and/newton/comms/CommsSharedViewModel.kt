@@ -22,6 +22,14 @@ class CommsSharedViewModel @ViewModelInject constructor(private val commsReposit
 
     }
 
+    fun fetchArticles(): LiveData<List<Article>> = liveData {
+        commsRepository.getArticles()?.also { articleList : List<Article> ->
+            val sortedArticleList = articleList.sortedWith(compareByDescending <Article> { it.highlighted }.thenByDescending { it.date }
+            )
+            emit(sortedArticleList)
+        }
+    }
+
     val article: LiveData<Article> = liveData {
         commsRepository.getArticle(6)?.also { emit(it)}
     }
