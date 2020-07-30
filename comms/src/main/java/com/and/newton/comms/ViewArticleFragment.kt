@@ -3,6 +3,8 @@ package com.and.newton.comms
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
+import android.webkit.URLUtil
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -10,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.and.newton.common.utils.AppConstants
 import com.and.newton.common.utils.AppPreferences
 import com.and.newton.comms.domain.data.Article
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_view_article.view.*
 
 class ViewArticleFragment : Fragment() {
@@ -45,11 +48,17 @@ class ViewArticleFragment : Fragment() {
             layout.viewArticleFragment_ArticleBody.text = article!!.content
 
             //TODO needs to change when we get actual picture
-            if(article!!.imagePath != null){
-                val imagePath: Uri = Uri.parse(article!!.imagePath)
-                layout.viewArticleFragment_ArticleImage.setImageURI(imagePath)
+            if(article!!.imagePath != null && URLUtil.isValidUrl(article!!.imagePath)){
+                Picasso.get()
+                    .load(article!!.imagePath)
+                    .fit().centerCrop().into((layout.viewArticleFragment_ArticleImage) as ImageView)
+                layout.viewArticleFragment_ArticleImage.visibility = View.VISIBLE
             } else {
                 layout.viewArticleFragment_ArticleImage.visibility = View.GONE
+            }
+
+            if(article!!.highlighted == true){
+                layout.highlighted_image.visibility = View.VISIBLE
             }
             layout.viewArticleFragment_ArticleCategory.text = article!!.categories?.get(0)?.category?.name
         }
