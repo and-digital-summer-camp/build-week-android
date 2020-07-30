@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         initNavigationDrawerWithToolBar()
         initCreateArticleButton()
+        initAfterLogin()
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when(destination.id) {
