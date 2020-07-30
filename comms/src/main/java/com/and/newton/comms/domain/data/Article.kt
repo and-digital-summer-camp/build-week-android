@@ -13,7 +13,7 @@ data class Article constructor(
     var content: String?,
 
     @field:SerializedName("picture")
-    val imagePath:String?,
+    var imagePath:String?,
 
     @field:SerializedName("dateCreated")
     val date:Date?,

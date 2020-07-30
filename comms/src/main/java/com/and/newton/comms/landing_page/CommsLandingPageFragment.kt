@@ -21,6 +21,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.and.newton.comms.CommsSharedViewModel
 import com.and.newton.comms.R
+import com.and.newton.comms.domain.data.Category
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.*
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.view.*
@@ -39,7 +40,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     private lateinit var adapter: ArrayAdapter<String>
     private val viewModel: CommsSharedViewModel by viewModels()
     private lateinit var categoryFilter:Spinner
-    private var categoryList: MutableList<String> = mutableListOf("All Categories")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,8 +60,14 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
                 Timber.d("Mock API called again all Articles List Response::${articlesData}")
                 articlesAdapter.bindData(articlesData)
                 articles.adapter = articlesAdapter
-                articlesAdapter.filter.filter(categoryList.sorted()[0])
+                articlesAdapter.filter.filter(viewModel.categoryList[0])
                 articles.adapter?.notifyDataSetChanged()
+                itemsswipetorefresh.isRefreshing = false
+            })
+
+            viewModel.fetchCategories().observe(viewLifecycleOwner, Observer { categories ->
+                Timber.d("Mock API all categories List Response::${categories}")
+                updateCategoriesFilter(categories)
                 itemsswipetorefresh.isRefreshing = false
             })
         }
@@ -85,7 +91,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
             Timber.d("Mock API all Articles List Response::${articles}")
             articlesAdapter.bindData(articles)
             layout.articles.adapter = articlesAdapter
-            articlesAdapter.filter.filter(categoryList.sorted()[0])
+            articlesAdapter.filter.filter(viewModel.categoryList[0])
             layout.articles.adapter?.notifyDataSetChanged()
         })
 
@@ -95,18 +101,13 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 
         viewModel.categories.observe(viewLifecycleOwner, Observer { categories ->
             Timber.d("Mock API all categories List Response::${categories}")
-            categoryList = categories.map {
-                it.name?:"N/A"
-            } as MutableList<String>
-
-            categoryList.add("All Categories")
-
-            updateCategoriesFilter(categoryList.sorted())
-
+            updateCategoriesFilter(categories)
         })
 
         return layout
     }
+
+
 
 
 
@@ -120,7 +121,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         val item = menu.findItem(R.id.action_filter)
         categoryFilter = item.actionView as Spinner
 
-        adapter = ArrayAdapter(requireContext() , R.layout.dropdown_spinner, categoryList.sorted())
+        adapter = ArrayAdapter(requireContext() , R.layout.dropdown_spinner, viewModel.categoryList)
         adapter.setDropDownViewResource(R.layout.dropdown_spinner_selected)
 
         categoryFilter.adapter = adapter
@@ -132,7 +133,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     }
 
     override fun onItemSelected(spinnerAdapter: AdapterView<*>?, itemView: View?, option: Int, p3: Long) {
-        articlesAdapter.filter.filter(categoryList.sorted()[option])
+        articlesAdapter.filter.filter(viewModel.categoryList[option])
         articlesAdapter.notifyDataSetChanged()
 
         MainScope().launch {

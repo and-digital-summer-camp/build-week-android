@@ -5,6 +5,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.URLUtil
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.and.newton.comms.R
 import com.and.newton.comms.databinding.ArticleListItemBinding
 import com.and.newton.comms.domain.data.Article
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import timber.log.Timber
 //import com.squareup.picasso.Picasso
@@ -113,13 +115,15 @@ class ArticlesAdapter @Inject constructor():
                 binding.root.findNavController().navigate(action)
 
             }
-//            cardView.txtArticleDesc.text = article.content
-//            cardView.txtArticleLabel.text = article.categories?.get(0)?.name
 
-//            Picasso.get()
-//                .load("https://images-na.ssl-images-amazon.com/images/I/810FiMQwZ5L._AC_SL1500_.jpg")
-//                .resize(250, 250).centerCrop().into(cardView.ivArticleImage)
-            //TOdo init the item view with the article data
+            if(article.imagePath!=null && URLUtil.isValidUrl(article.imagePath)) {
+                Picasso.get()
+                    .load(article.imagePath)
+                    .resize(144, 144).centerCrop().into(binding.articleImage)
+                binding.articleImage.visibility = View.VISIBLE
+            }else{
+                binding.articleImage.visibility = View.GONE
+            }
 
 
         }

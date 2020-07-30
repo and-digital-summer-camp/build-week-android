@@ -74,6 +74,7 @@ class UserViewModel @ViewModelInject constructor(
                         AppPreferences.first_name = account?.displayName?:account?.givenName?:"Guest"
                         AppPreferences.last_name = account?.familyName?:"User"
                         AppPreferences.email = account?.email?:""
+                        AppPreferences.user_pic = account?.photoUrl?.toString()?:""
                         _authenticatedState.value = AuthenticationState.AUTHENTICATED
 
                     } else {

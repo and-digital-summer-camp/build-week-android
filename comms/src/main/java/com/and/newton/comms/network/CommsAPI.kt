@@ -37,6 +37,9 @@ interface CommsAPI {
     @GET("/api/categories")
     suspend fun getAllCategories() : List<Category>
 
+    @POST("/api/categories")
+    suspend fun postCategories(@Body category: Category) : Category
+
     //Deletes SPECIFIC article
     @DELETE("/api/articles/{id}")
     suspend fun deleteArticle(@Path("id") id: Int, @Header("Authorization") JWT_token: String) : String

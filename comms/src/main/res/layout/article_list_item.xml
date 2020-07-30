@@ -27,7 +27,7 @@
                 android:layout_height="@dimen/global_500"
                 android:contentDescription="@string/iv_thumbnail_desc"
                 android:scaleType="centerCrop"
-                android:src="@drawable/article_default"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,15 +37,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_100"
+                android:ellipsize="end"
                 android:fontFamily="@font/droidsans"
+                android:lines="4"
+                android:paddingLeft="@dimen/small_100"
+                android:paddingRight="@dimen/small_100"
                 android:justificationMode="inter_word"
-                tools:text="Content"
                 android:text="@{article.content}"
                 android:textColor="@color/color_natural_dark_black"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:paddingLeft="@dimen/small_100"
                 app:layout_constraintStart_toEndOf="@+id/articleImage"
-                app:layout_constraintTop_toBottomOf="@+id/txtArticleTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/txtArticleTitle"
+                tools:text="Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It's not a story the Jedi would tell you. It's a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life… He had such a knowledge of the dark side that he could even keep the ones he cared about from dying. The dark side of the Force is a pathway to many abilities some consider to be unnatural. He became so powerful… the only thing he was afraid of was losing his power, which eventually, of course, he did. Unfortunately, he taught his apprentice everything he knew, then his apprentice killed him in his sleep. Ironic. He could save others from death, but not himself." />
 
 
             <TextView
@@ -60,11 +63,11 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/small_50"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@+id/articleImage"
                 app:layout_constraintTop_toBottomOf="@+id/txtArticleDesc"
-                app:layout_constraintVertical_bias="0.9"
                 tools:text="category" />
 
             <TextView
@@ -72,9 +75,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_50"
-                android:text="@{article.title}"
                 android:paddingLeft="@dimen/small_100"
-                tools:text="Title"
+                android:text="@{article.title}"
                 android:textAlignment="textStart"
                 android:textColor="@color/color_secondary_night_rider"
                 android:textSize="13sp"
@@ -82,7 +84,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toEndOf="@+id/articleImage"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="The Tragedy of Darth Plagueis The Wise" />
 
             <ImageView
                 android:id="@+id/iv_highlight"
@@ -93,7 +96,7 @@
                 app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toEndOf="@id/txtArticleLabel"
                 app:layout_constraintTop_toBottomOf="@+id/txtArticleDesc"
-                app:layout_constraintVertical_bias="0.9"
+                android:layout_marginBottom="@dimen/small_50"
                 app:srcCompat="@drawable/highlight" />
 
 

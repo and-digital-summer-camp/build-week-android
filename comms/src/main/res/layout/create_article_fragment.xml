@@ -54,7 +54,7 @@
             android:padding="@dimen/small_50"
             android:textColorHint="@color/color_black"
             android:gravity="top|left"
-            android:hint="@string/content_text"
+            android:hint="@string/article_image"
             android:textSize="@dimen/hint_font_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
