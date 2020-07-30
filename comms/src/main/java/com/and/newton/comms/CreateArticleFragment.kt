@@ -52,7 +52,9 @@ class CreateArticleFragment : Fragment() {
         (activity as AppCompatActivity?)?.supportActionBar?.setTitle(R.string.create_article_fragment_title)
         // This deals with populating the Fragment with Article data so it is an Edit page
         editArticle = args.article
-        editArticle?.let { populateEditArticle(view, it) }
+        editArticle?.let {
+            (activity as AppCompatActivity?)?.supportActionBar?.title = "Edit Article"
+            populateEditArticle(view, it) }
 
         val cancelButton = view.findViewById<Button>(R.id.button_cancel)
         cancelButton.setOnClickListener {
@@ -210,6 +212,7 @@ class CreateArticleFragment : Fragment() {
         if (!article.categories.isNullOrEmpty()) {
             // TODO: Fix this set dropdown text - how the hell do you deal with a whole list of them?
             categoryDropdown.setText(article.categories!![0].category?.name)
+            isNewCategory = false
         }
     }
 
