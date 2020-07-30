@@ -4,6 +4,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -12,22 +15,26 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.and.newton.common.utils.AppConstants
 import com.and.newton.common.utils.AppPreferences
 import com.and.newton.common.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_view_article.view.*
 
 class ViewArticleFragment : Fragment() {
-
     val args: ViewArticleFragmentArgs by navArgs()
-    private val userViewModel: UserViewModel by activityViewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.admin_menu_options, menu)
         super.onCreateOptionsMenu(menu, inflater)
-        menu.clear()
+        AppPreferences.access_level
+        if(AppPreferences.access_level == AppConstants.ROLE_USER.toString()){
+            menu.clear()
+        }
     }
 
     override fun onCreateView(
@@ -45,23 +52,27 @@ class ViewArticleFragment : Fragment() {
 
             //TODO needs to change when we get actual picture
             if(article.imagePath != null){
-                Log.d("articleimg", article.imagePath)
                 val imagePath: Uri = Uri.parse(article.imagePath)
                 layout.viewArticleFragment_ArticleImage.setImageURI(imagePath)
             } else {
-                //just an empty border image
-                layout.viewArticleFragment_ArticleImage.setBackgroundResource(R.drawable.highlight)
+                layout.viewArticleFragment_ArticleImage.visibility = View.GONE
             }
             layout.viewArticleFragment_ArticleCategory.text = article.categories?.get(0)?.category?.name
-
-
-
         }
-
-
         return layout
     }
 
-
+    //TODO FUNCTIONALITY FOR OPTION MENU
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.edit_article_option -> {
+                //TODO NAVIGATE SOMEWHERE
+            }
+            R.id.delete_article_option -> {
+                //TODO DELETE SOMETHING
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
 }
