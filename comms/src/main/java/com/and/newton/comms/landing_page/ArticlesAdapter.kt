@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.and.newton.comms.R
 import com.and.newton.comms.databinding.ArticleListItemBinding
@@ -109,7 +110,8 @@ class ArticlesAdapter @Inject constructor():
 
             binding.root.setOnClickListener{
                 val action = CommsLandingPageFragmentDirections.actionCommsLandingPageFragmentToViewArticleFragment(article)
-               findNavController(binding.root).navigate(action)
+                binding.root.findNavController().navigate(action)
+
             }
 //            cardView.txtArticleDesc.text = article.content
 //            cardView.txtArticleLabel.text = article.categories?.get(0)?.name
