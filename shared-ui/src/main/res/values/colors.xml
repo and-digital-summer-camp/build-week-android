@@ -11,8 +11,8 @@
     <color name="color_primary_lima">#5AC328</color>
     <color name="color_primary_deep_cerise">#D73CA4</color>
     <color name="color_primary_owl_blue">#0336FF</color>
-    <color name="color_primary_shrine_pink">#FEDBD0</color>
-
+    <color name="color_primary_shrine_pink">#f0c8bb</color>
+    <color name="color_wireframe_blue">#B5DBFF</color>
 
 
     <!--Secondary-->
@@ -32,6 +32,9 @@
     <color name="color_brown_900">#442C2E</color>
     <color name="color_white">#FFFFFF</color>
     <color name="color_black">#000000</color>
+    <color name="color_text">#424242</color>
+    <color name="color_title">#212121</color>
+
 
 
 </resources>

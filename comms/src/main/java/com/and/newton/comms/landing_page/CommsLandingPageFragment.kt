@@ -2,13 +2,23 @@ package com.and.newton.comms.landing_page
 
 
 import android.content.Context
+
 import android.graphics.Color
+
 import android.os.Bundle
-import android.view.*
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+
+import androidx.appcompat.app.AppCompatActivity
+
 import androidx.core.content.ContextCompat
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -29,13 +39,9 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 
     @Inject
     lateinit var articlesAdapter: ArticlesAdapter
-
-    private var adapter: ArrayAdapter<String>? = null
-
+    private lateinit var adapter: ArrayAdapter<String>
     private val viewModel: CommsSharedViewModel by viewModels()
-
-    private var categoryFilter:Spinner? = null
-
+    private lateinit var categoryFilter:Spinner
     private var categoryList: MutableList<String> = mutableListOf("All Categories")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,14 +66,9 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     }
 
     private fun updateCategoriesFilter(categories : List<String>){
-        setDropDownAdapter(categories)
-        categoryFilter?.adapter = adapter
-        adapter?.notifyDataSetChanged()
+        requireActivity().invalidateOptionsMenu()
     }
 
-    private fun setDropDownAdapter(categories : List<String>){
-        adapter  = context?.let { ArrayAdapter(it, R.layout.dropdown_spinner, categories) }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,6 +82,8 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 //            layout.editBtn.visibility = View.GONE
 //        }
 
+
+        (activity as AppCompatActivity?)?.supportActionBar?.setTitle(R.string.comms_landing_fragment_title)
 
         viewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
             Timber.d("Mock API all Articles List Response::${articles}")
@@ -103,10 +106,13 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
             categoryList.add("All Categories")
 
             updateCategoriesFilter(categoryList.sorted())
+
         })
 
         return layout
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -118,9 +124,11 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         val item = menu.findItem(R.id.action_filter)
         categoryFilter = item.actionView as Spinner
 
-        setDropDownAdapter(listOf("All"))
-        adapter?.setDropDownViewResource(R.layout.dropdown_spinner_selected)
-        categoryFilter?.onItemSelectedListener = this
+        adapter = ArrayAdapter(requireContext() , R.layout.dropdown_spinner, categoryList.sorted())
+        adapter.setDropDownViewResource(R.layout.dropdown_spinner_selected)
+
+        categoryFilter.adapter = adapter
+        categoryFilter.onItemSelectedListener = this
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {

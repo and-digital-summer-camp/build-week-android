@@ -20,6 +20,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import com.and.newton.common.utils.AppPreferences
 import com.and.newton.common.viewmodel.UserViewModel
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -58,19 +59,25 @@ class MainActivity : AppCompatActivity() {
                     drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                     fab?.hide()
                 }
+                R.id.createArticleFragment -> {
+                    fab?.hide()
+                }
+                R.id.viewArticleFragment -> {
+                    fab?.hide()
+                }
                 else -> {
                     toolbar?.visibility = View.VISIBLE
                     drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                     fab?.show()
                 }
             }
+
         }}
 
     private fun initCreateArticleButton() {
         val floatingActionButton: FloatingActionButton = findViewById(R.id.fab)
         floatingActionButton.setOnClickListener {
-            val uri = Uri.parse("App://nav_create_article")
-            navController.navigate(uri)
+            navController.navigate(com.and.newton.comms.R.id.action_commsLandingPageFragment_to_createArticleFragment)
         }
     }
 
@@ -90,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.nav_comms ), drawerLayout)
+            com.and.newton.comms.R.id.commsLandingPageFragment, R.id.login ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

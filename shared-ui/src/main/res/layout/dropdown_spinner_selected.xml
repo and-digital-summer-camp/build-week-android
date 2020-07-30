@@ -6,4 +6,8 @@
     android:layout_height="wrap_content"
     android:background="@color/color_secondary_shrine_pink"
     android:textColor="@color/color_brown_900"
-    android:ellipsize="marquee"/>
+    android:ellipsize="marquee"
+    android:gravity="center"
+    android:textSize="@dimen/normal_100"
+    android:paddingStart="@dimen/small_100"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"/>

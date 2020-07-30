@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ViewArticleFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/normal_100"
+        android:layout_marginLeft="@dimen/normal_100"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/viewArticleFragment_ArticleImage"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/article_highlight_border"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:layout_marginTop="@dimen/small_100"
+            app:layout_constraintTop_toBottomOf="@id/viewArticleFragment_ArticleTitle"
+            android:layout_marginBottom="@dimen/normal_100"
+            />
+
+        <TextView
+            android:id="@+id/viewArticleFragment_ArticleTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_100"
+            android:textSize="@dimen/normal_125"
+            android:textStyle="bold"
+            android:textColor="@color/color_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <TextView
+            android:id="@+id/viewArticleFragment_ArticleCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hello_blank_fragment"
+            android:layout_marginBottom="@dimen/small_100"
+            android:layout_marginTop="@dimen/small_100"
+            android:textColor="@color/color_black"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingRight="@dimen/normal_100"
+            android:paddingLeft="@dimen/normal_100"
+            android:paddingTop="@dimen/small_25"
+            android:paddingBottom="@dimen/small_25"
+            app:layout_constraintTop_toBottomOf="@id/viewArticleFragment_ArticleImage"
+            android:background="@drawable/article_label_border"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/global_200"
+            android:layout_height="@dimen/normal_175"
+            android:src="@drawable/fire"
+           app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/small_100"
+            app:layout_constraintTop_toBottomOf="@id/viewArticleFragment_ArticleImage"
+           />
+
+        <View
+            android:id="@+id/category_content_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/small_100"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewArticleFragment_ArticleCategory"/>
+        <TextView
+            android:id="@+id/viewArticleFragment_ArticleBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hello_blank_fragment"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="@dimen/normal_100"
+            android:textSize="@dimen/normal_100"
+            android:textColor="@color/color_text"
+            android:layout_marginTop="@dimen/normal_100"
+            app:layout_constraintTop_toBottomOf="@id/category_content_divider"
+           />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>

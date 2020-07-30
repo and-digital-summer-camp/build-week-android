@@ -1,11 +1,14 @@
 package com.and.newton.comms.landing_page
 
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.and.newton.comms.R
 import com.and.newton.comms.databinding.ArticleListItemBinding
@@ -19,6 +22,9 @@ import javax.inject.Inject
 
 class ArticlesAdapter @Inject constructor():
     RecyclerView.Adapter<ArticlesAdapter.ThumbnailViewHolder>(), Filterable {
+
+
+
 
     private var articleDataSet:List<Article> = listOf()
 
@@ -43,6 +49,9 @@ class ArticlesAdapter @Inject constructor():
     fun onDataSetUpdated() {
         isArticleEmpty.offer(articleFilteredDataSet.size == 0)
     }
+
+
+
 
     override fun getFilter(): Filter {
         return object : Filter() {
@@ -89,16 +98,37 @@ class ArticlesAdapter @Inject constructor():
 
         fun bindViewData(article: Article) {
             binding.article = article
-            binding.ivHighlight.visibility = if(article.highlighted == true) View.VISIBLE else View.INVISIBLE
+            if(article.highlighted == true) {
+                binding.articleConstraintLayout.setBackgroundResource(R.drawable.article_highlight_border)
+                binding.ivHighlight.visibility = View.VISIBLE
+            } else {
+                binding.articleConstraintLayout.background = null
+                binding.ivHighlight.visibility = View.GONE
+            }
+
             binding.executePendingBindings()
-            binding.txtArticleDesc.text = article.content
+
+            binding.root.setOnClickListener{
+                val action = CommsLandingPageFragmentDirections.actionCommsLandingPageFragmentToViewArticleFragment(article)
+                binding.root.findNavController().navigate(action)
+
+            }
+//            cardView.txtArticleDesc.text = article.content
+//            cardView.txtArticleLabel.text = article.categories?.get(0)?.name
+
+//            Picasso.get()
+//                .load("https://images-na.ssl-images-amazon.com/images/I/810FiMQwZ5L._AC_SL1500_.jpg")
+//                .resize(250, 250).centerCrop().into(cardView.ivArticleImage)
             //TOdo init the item view with the article data
+
+
         }
 
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThumbnailViewHolder {
+
 
         //Todo Implement click listener on the cardview to navigate to the Arcticle/Comms View fragment
 
@@ -108,6 +138,7 @@ class ArticlesAdapter @Inject constructor():
                 R.layout.article_list_item, parent, false
             )
         )
+
     }
 
     override fun getItemCount(): Int  = articleFilteredDataSet.size

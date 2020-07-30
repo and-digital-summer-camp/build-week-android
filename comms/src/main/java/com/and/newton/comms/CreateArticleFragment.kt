@@ -2,14 +2,13 @@ package com.and.newton.comms
 
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -27,6 +26,16 @@ import timber.log.Timber
 class CreateArticleFragment : Fragment() {
 
     private val viewModel: CommsSharedViewModel by viewModels()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +43,7 @@ class CreateArticleFragment : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.create_article_fragment, container, false)
-
+        (activity as AppCompatActivity?)?.supportActionBar?.setTitle(R.string.create_article_fragment_title)
         // This deals with populating the Fragment with Article data so it is an Edit page
         val article = arguments?.get("article") as? Article
         if (article != null) {
@@ -136,8 +145,7 @@ class CreateArticleFragment : Fragment() {
     }
 
     private fun navigateToCommsHome() {
-        val uri = Uri.parse("App://nav_comms")
-        findNavController().navigate(uri)
+        findNavController().popBackStack()
     }
 
 
