@@ -1,27 +1,25 @@
 package com.and.newton.summercamp
 
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
-import androidx.navigation.NavController
 import com.and.newton.common.utils.AppPreferences
 import com.and.newton.common.viewmodel.UserViewModel
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         initAfterLogin()
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            when(destination.id) {
+            when (destination.id) {
                 R.id.login -> {
                     toolbar?.visibility = View.GONE
                     drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
@@ -71,8 +69,8 @@ class MainActivity : AppCompatActivity() {
                     fab?.show()
                 }
             }
-
-        }}
+        }
+    }
 
     private fun initCreateArticleButton() {
         val floatingActionButton: FloatingActionButton = findViewById(R.id.fab)
@@ -104,7 +102,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initAfterLogin() {
         userViewModel.authenticatedState.observe(this, Observer { authenticatedState ->
-            when(authenticatedState){
+            when (authenticatedState) {
                 UserViewModel.AuthenticationState.AUTHENTICATED -> {
                     user_email = findViewById(R.id.user_email)
                     user_email.text = AppPreferences.email

@@ -27,7 +27,7 @@ interface CommsAPI {
 
     //Updates SPECIFIC article
     @PUT("/api/articles/{id}")
-    suspend fun updateArticle(@Path("id") id: Int, @Query("article") article: String, @Header("Authorization") JWT_token: String) : String
+    suspend fun updateArticle(@Path("id") id: Int, @Body article: Article) : Article
 
     //creates article
     @POST("/api/articles")

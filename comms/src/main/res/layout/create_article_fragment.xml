@@ -100,7 +100,7 @@
                 android:text="@string/highlighted_text"/>
 
             <Switch
-                android:id="@+id/highlighted_checkBox"
+                android:id="@+id/highlighted_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
