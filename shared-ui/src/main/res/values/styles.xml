@@ -23,4 +23,8 @@
         <item name="android:titleTextColor">@color/color_brown_900</item>
         <item name="android:textColorPrimary">@color/color_brown_900</item>
     </style>
+
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlActivated">@color/color_secondary_light_blue</item>
+    </style>
 </resources>

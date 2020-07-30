@@ -12,42 +12,31 @@
         android:layout_marginLeft="@dimen/global_100"
         android:layout_marginRight="@dimen/global_100">
 
-        <TextView
-            android:id="@+id/textview_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/header_font_size"
-            android:text="@string/title_text"
-            app:layout_constraintBottom_toTopOf="@+id/edittext_title"
-            app:layout_constraintStart_toStartOf="@+id/edittext_title" />
-
         <EditText
             android:id="@+id/edittext_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/global_275"
             android:layout_marginTop="@dimen/normal_200"
             android:background="@drawable/edittext_frame"
+            android:padding="@dimen/small_50"
+            android:textColorHint="@color/color_black"
             android:hint="@string/title_name"
+            tools:hint="@string/title_name"
+            android:gravity="top|left"
             android:textSize="@dimen/hint_font_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textview_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/content_text"
-            android:textSize="@dimen/header_font_size"
-            app:layout_constraintBottom_toTopOf="@+id/edittext_content"
-            app:layout_constraintStart_toStartOf="@+id/edittext_content" />
 
         <EditText
             android:id="@+id/edittext_content"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/global_600"
+            android:layout_height="@dimen/global_825"
             android:layout_marginTop="@dimen/normal_200"
             android:background="@drawable/edittext_frame"
+            android:padding="@dimen/small_50"
+            android:textColorHint="@color/color_black"
             android:gravity="top|left"
             android:hint="@string/content_text"
             android:textSize="@dimen/hint_font_size"
@@ -55,51 +44,101 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edittext_title" />
 
+
+        <EditText
+            android:id="@+id/edittext_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/global_275"
+            android:layout_marginTop="@dimen/normal_200"
+            android:background="@drawable/edittext_frame"
+            android:padding="@dimen/small_50"
+            android:textColorHint="@color/color_black"
+            android:gravity="top|left"
+            android:hint="@string/content_text"
+            android:textSize="@dimen/hint_font_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edittext_content" />
+
         <com.and.newton.shared_ui.CustomAutoCompleteTextView
             android:id="@+id/category_edit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/normal_175"
+            android:layout_height="@dimen/global_200"
+            android:background="@drawable/edittext_frame"
+            android:layout_marginTop="@dimen/normal_200"
+            android:padding="@dimen/small_50"
+            android:textColorHint="@color/color_black"
+            android:gravity="top|left"
+            android:textSize="@dimen/hint_font_size"
             android:completionThreshold="1"
             android:enabled="true"
             android:focusable="true"
             android:hint="@string/choose_category"
-            android:textAlignment="textStart"
-            app:layout_constraintEnd_toEndOf="@+id/edittext_content"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/edittext_content"
-            app:layout_constraintTop_toBottomOf="@+id/edittext_content" />
-
-        <CheckBox
-            android:id="@+id/highlighted_checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/normal_175"
-            android:text="@string/highlighted_text"
-            android:textSize="@dimen/hint_font_size"
-            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/category_edit" />
+            app:layout_constraintTop_toBottomOf="@+id/edittext_image" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/global_200"
+            android:id="@+id/highlight_row"
+            android:padding="@dimen/small_50"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/normal_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/edittext_frame"
+            app:layout_constraintTop_toBottomOf="@+id/category_edit"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/hint_font_size"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/color_black"
+                android:text="@string/highlighted_text"/>
+
+            <Switch
+                android:id="@+id/highlighted_checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:checked="true"
+                android:switchMinWidth="@dimen/global_225"
+                android:textOff="OFF"
+                android:textOn="ON"
+                android:theme="@style/SwitchTheme"
+                android:thumb="@drawable/switch_thumb_selector"
+                android:track="@drawable/switch_track_selector" />
+        </RelativeLayout>
+
 
         <Button
             android:id="@+id/button_post"
             android:layout_width="wrap_content"
+            android:minWidth="@dimen/global_425"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/normal_225"
             android:layout_marginTop="@dimen/normal_150"
             android:text="@string/post_text"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/highlighted_checkBox" />
+            android:background="@drawable/button_bg"
+            app:layout_constraintTop_toBottomOf="@+id/highlight_row"
+            app:layout_constraintStart_toEndOf="@+id/button_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"  />
 
         <Button
             android:id="@+id/button_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="@dimen/global_425"
+            android:background="@drawable/button_bg"
             android:layout_marginTop="@dimen/normal_150"
-            android:layout_marginEnd="@dimen/normal_225"
             android:text="@string/cancel_text"
-            app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/highlighted_checkBox" />
+            app:layout_constraintEnd_toStartOf="@+id/button_post"
+            app:layout_constraintTop_toBottomOf="@+id/highlight_row"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

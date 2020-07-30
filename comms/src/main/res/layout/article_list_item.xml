@@ -5,120 +5,101 @@
     <data>
         <variable name="article" type="com.and.newton.comms.domain.data.Article"/>
     </data>
-    <FrameLayout
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/categoryItemCardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/highlighted_fire"
-            android:layout_width="@dimen/large_125"
-            android:layout_height="@dimen/large_125"
-            app:srcCompat="@drawable/fire"
-            android:layout_gravity="end"
-            android:elevation="@dimen/small_100"
-            android:visibility="visible"
+        android:layout_height="@dimen/global_500"
+        android:layout_margin="@dimen/small_100"
+        android:elevation="@dimen/small_100"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="@dimen/small_100">
 
-            />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/categoryItemCardView"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/articleConstraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="@dimen/small_100"
-            android:padding="@dimen/small_50"
-
-            android:layout_marginTop="@dimen/small_100"
-            android:layout_marginRight="@dimen/small_100"
-            android:layout_marginLeft="@dimen/small_100"
-            app:cardBackgroundColor="@android:color/white"
-
-            app:cardCornerRadius="@dimen/small_100">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/articleConstraintLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:layout_height="@dimen/global_500">
 
 
-                <ImageView
-                    android:id="@+id/articleImage"
-                    android:layout_width="@dimen/global_425"
-                    android:layout_height="@dimen/global_425"
-                    android:layout_marginTop="@dimen/small_25"
-                    android:contentDescription="@string/iv_thumbnail_desc"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/article_default"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/articleImage"
+                android:layout_width="@dimen/global_500"
+                android:layout_height="@dimen/global_500"
+                android:contentDescription="@string/iv_thumbnail_desc"
+                android:scaleType="centerCrop"
+                android:src="@drawable/article_default"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtArticleDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_100"
+                android:fontFamily="@font/droidsans"
+                android:justificationMode="inter_word"
+                tools:text="Content"
+                android:text="@{article.content}"
+                android:textColor="@color/color_natural_dark_black"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:paddingLeft="@dimen/small_100"
+                app:layout_constraintStart_toEndOf="@+id/articleImage"
+                app:layout_constraintTop_toBottomOf="@+id/txtArticleTitle" />
 
 
-                <TextView
-                    android:id="@+id/txtArticleTitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/small_100"
-                    android:layout_marginTop="@dimen/small_100"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="@{article.title}"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/color_secondary_night_rider"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/txtArticleLabel"
+            <TextView
+                android:id="@+id/txtArticleLabel"
+                android:layout_width="wrap_content"
+                android:minWidth="@dimen/global_425"
+                android:layout_height="@dimen/normal_175"
+                android:background="@drawable/article_label_border"
+                android:padding="@dimen/small_50"
+                tools:text="category"
+                android:text="@{article.categories.get(0).category.name}"
+                android:textAlignment="center"
+                android:layout_marginLeft="@dimen/small_100"
+                app:layout_constraintVertical_bias="0.9"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/articleImage"
+                app:layout_constraintTop_toBottomOf="@+id/txtArticleDesc" />
 
-                    app:layout_constraintStart_toEndOf="@id/articleImage"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/txtArticleTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_50"
+                android:text="@{article.title}"
+                android:paddingLeft="@dimen/small_100"
+                tools:text="Title"
+                android:textAlignment="textStart"
+                android:textColor="@color/color_secondary_night_rider"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toEndOf="@+id/articleImage"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/txtArticleDesc"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/small_100"
-                    android:layout_marginTop="@dimen/small_100"
-                    android:layout_marginEnd="@dimen/global_75"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/droidsans"
-                    android:gravity="start"
-                    android:justificationMode="inter_word"
-                    android:maxLines="4"
-                    android:text="@{article.content}"
-                    android:textColor="@color/color_natural_dark_black"
-                    android:textSize="14sp"
-
-                    app:layout_constraintBottom_toTopOf="@id/txtArticleLabel"
-                    app:layout_constraintEnd_toStartOf="@id/txtArticleLabel"
-                    app:layout_constraintStart_toEndOf="@id/articleImage"
-                    app:layout_constraintTop_toBottomOf="@id/txtArticleTitle" />
-
-
-                <TextView
-                    android:id="@+id/txtArticleLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/normal_100"
-                    android:layout_marginBottom="@dimen/small_100"
-                    android:background="@drawable/article_label_border"
-                    android:ellipsize="end"
-                    android:maxLength="10"
-                    android:maxLines="1"
-                    android:paddingLeft="@dimen/normal_100"
-                    android:paddingTop="@dimen/small_25"
-                    android:paddingRight="@dimen/normal_100"
-                    android:paddingBottom="@dimen/small_25"
-                    android:text="@{article.categories.get(0).category.name}"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+            <ImageView
+                android:id="@+id/iv_highlight"
+                android:layout_width="@dimen/global_225"
+                android:layout_height="@dimen/global_150"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@id/txtArticleLabel"
+                app:layout_constraintTop_toBottomOf="@+id/txtArticleDesc"
+                app:layout_constraintVertical_bias="0.9"
+                app:srcCompat="@drawable/highlight" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </androidx.cardview.widget.CardView>
-
-
-    </FrameLayout>
+    </androidx.cardview.widget.CardView>
 
 </layout>
