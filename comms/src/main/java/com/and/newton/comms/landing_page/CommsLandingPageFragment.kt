@@ -78,12 +78,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     ): View? {
 
         val layout = inflater.inflate(R.layout.comms_landing_page_fragment, container, false)
-//        if(AppPreferences.access_level == "Admin"){
-//            layout.editBtn.visibility = View.VISIBLE
-//        } else {
-//            layout.editBtn.visibility = View.GONE
-//        }
-
 
         (activity as AppCompatActivity?)?.supportActionBar?.setTitle(R.string.comms_landing_fragment_title)
 

@@ -15,6 +15,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.and.newton.common.utils.AppConstants
 import com.and.newton.common.utils.AppPreferences
 import com.and.newton.common.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_view_article.view.*
@@ -35,6 +36,10 @@ class ViewArticleFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.admin_menu_options, menu)
         super.onCreateOptionsMenu(menu, inflater)
+        AppPreferences.access_level
+        if(AppPreferences.access_level == AppConstants.ROLE_USER.toString()){
+            menu.clear()
+        }
     }
 
     override fun onCreateView(
