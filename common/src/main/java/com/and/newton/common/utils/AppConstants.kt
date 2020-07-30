@@ -1,5 +1,6 @@
 package com.and.newton.common.utils
 
-object AppConstants {
-    val ROLE_ADMIN = "admin"
+enum class AppConstants {
+        ROLE_ADMIN,
+        ROLE_USER
 }

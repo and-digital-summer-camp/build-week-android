@@ -53,5 +53,8 @@
             android:id="@+id/action_viewArticleFragment_pop_including_commsLandingPageFragment"
             app:popUpTo="@id/commsLandingPageFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_viewArticleFragment_to_createArticleFragment"
+            app:destination="@id/createArticleFragment" />
     </fragment>
 </navigation>

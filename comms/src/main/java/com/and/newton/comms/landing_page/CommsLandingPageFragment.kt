@@ -7,10 +7,7 @@ import android.graphics.Color
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
@@ -49,6 +46,11 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         setHasOptionsMenu(true)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
     private fun initSwipeToRefresh(){
         itemsswipetorefresh.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(requireContext(), R.color.color_secondary_pink))
         itemsswipetorefresh.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.color_primary_shrine_pink))
@@ -76,12 +78,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     ): View? {
 
         val layout = inflater.inflate(R.layout.comms_landing_page_fragment, container, false)
-//        if(AppPreferences.access_level == "Admin"){
-//            layout.editBtn.visibility = View.VISIBLE
-//        } else {
-//            layout.editBtn.visibility = View.GONE
-//        }
-
 
         (activity as AppCompatActivity?)?.supportActionBar?.setTitle(R.string.comms_landing_fragment_title)
 
