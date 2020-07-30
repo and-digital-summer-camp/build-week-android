@@ -47,7 +47,6 @@ class ViewArticleFragment : Fragment() {
             (activity as AppCompatActivity?)?.supportActionBar?.title = "Article"
             layout.viewArticleFragment_ArticleBody.text = article!!.content
 
-            //TODO needs to change when we get actual picture
             if(article!!.imagePath != null && URLUtil.isValidUrl(article!!.imagePath)){
                 Picasso.get()
                     .load(article!!.imagePath)
