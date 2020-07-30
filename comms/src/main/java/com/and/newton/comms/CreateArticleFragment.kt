@@ -2,6 +2,7 @@ package com.and.newton.comms
 
 import android.os.Bundle
 import android.view.*
+import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
@@ -28,7 +29,10 @@ class CreateArticleFragment : Fragment() {
 
     private var editArticle: Article? = null
 
+    private var isNewCategory: Boolean = true
+
     private val viewModel: CommsSharedViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -64,27 +68,37 @@ class CreateArticleFragment : Fragment() {
             Timber.d("Mock API Get Categories Response::${t}")
 
             val categoryNames: List<String?> = t.map { it.name }
-            view.category_edit.setDropDownBox(categoryNames as List<String>)
+            initAUtoCompleteCategoryView(categoryNames as List<String>, view)
         })
 
         return view
     }
 
+    private fun initAUtoCompleteCategoryView(categoryNames: List<String>, view: View) {
+        view.category_edit.setDropDownBox(categoryNames)
+
+        view.category_edit.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, _, position, _ ->
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                isNewCategory = !categoryNames.contains(selectedItem)
+            }
+    }
+
     private fun sendArticleRequest() {
-        if (!edittext_title.text.isNullOrEmpty() && !edittext_content.text.isNullOrEmpty()) {
+        if (!edittext_title.text.isNullOrEmpty() && !edittext_content.text.isNullOrEmpty() && !category_edit.text.isNullOrEmpty()) {
 
-            // TODO : Remove hardcoded IDs from category
             var categories = ArrayList<CategoryHolder>()
-            if (!category_edit.text.isNullOrEmpty()) {
-                val category = Category(null, category_edit.text.toString())
-                categories.add(CategoryHolder(category))
+            val categoryName: String = category_edit.text.toString()
+            val category = Category(null, categoryName)
+            categories.add(CategoryHolder(category))
+
+            if (isNewCategory)  {
+                createCategory(categoryName, categories)
+            }
+            else{
+                updateOrCreateArticle(categories)
             }
 
-            if (editArticle != null) {
-                updateArticle(categories)
-            } else {
-                createNewArticle(categories)
-            }
 
         } else {
             if (edittext_title.text.isNullOrEmpty()) {
@@ -93,12 +107,40 @@ class CreateArticleFragment : Fragment() {
             if (edittext_content.text.isNullOrEmpty()) {
                 edittext_content.error = "Content field is required"
             }
+            if (category_edit.text.isNullOrEmpty()) {
+                category_edit.error = "Category field is required"
+            }
         }
     }
 
-    private fun createNewArticle(categories : List<CategoryHolder>) {
-        val newArticle = Article(null, edittext_title.text.toString(),
-            edittext_content.text.toString(), null, null, null,
+
+    private fun createCategory(categoryName:String, categories:List<CategoryHolder>){
+        viewModel.createCategory(Category(null, categoryName))
+            .observe(viewLifecycleOwner, Observer { categoryPosted ->
+
+                Timber.d("isNewCategory API success::${categoryPosted}")
+
+                if (categoryPosted) {
+                    updateOrCreateArticle(categories)
+                }
+                else {
+                    category_edit.error = "Error creating new category"
+                }
+            })
+    }
+
+    private fun updateOrCreateArticle (categories:List<CategoryHolder>){
+        if (editArticle != null) {
+            updateArticle(categories)
+        } else {
+            createNewArticle(categories)
+        }
+    }
+
+    private fun createNewArticle(categories: List<CategoryHolder>) {
+        val newArticle = Article(
+            null, edittext_title.text.toString(),
+            edittext_content.text.toString(), edittext_image.text?.toString(), null, null,
             highlighted_switch.isChecked, categories
         )
 
@@ -114,6 +156,7 @@ class CreateArticleFragment : Fragment() {
         editArticle?.content = edittext_content.text.toString()
         editArticle?.highlighted = highlighted_switch.isChecked
         editArticle?.categories = categories
+        editArticle?.imagePath = edittext_image.text?.toString()
 
         val articleId = editArticle?.id!!
         editArticle?.let {

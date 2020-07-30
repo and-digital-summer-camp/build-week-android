@@ -21,6 +21,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.and.newton.comms.CommsSharedViewModel
 import com.and.newton.comms.R
+import com.and.newton.comms.domain.data.Category
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.*
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.view.*
@@ -64,6 +65,12 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
                 articles.adapter?.notifyDataSetChanged()
                 itemsswipetorefresh.isRefreshing = false
             })
+
+            viewModel.fetchCategories().observe(viewLifecycleOwner, Observer { categories ->
+                Timber.d("Mock API all categories List Response::${categories}")
+                initCategoryFilter(categories)
+                itemsswipetorefresh.isRefreshing = false
+            })
         }
     }
 
@@ -95,17 +102,20 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 
         viewModel.categories.observe(viewLifecycleOwner, Observer { categories ->
             Timber.d("Mock API all categories List Response::${categories}")
-            categoryList = categories.map {
-                it.name?:"N/A"
-            } as MutableList<String>
-
-            categoryList.add("All Categories")
-
-            updateCategoriesFilter(categoryList.sorted())
-
+            initCategoryFilter(categories)
         })
 
         return layout
+    }
+
+    private fun initCategoryFilter(categories: List<Category>){
+        categoryList = categories.map {
+            it.name?:"N/A"
+        } as MutableList<String>
+
+        categoryList.add("All Categories")
+
+        updateCategoriesFilter(categoryList.sorted())
     }
 
 
