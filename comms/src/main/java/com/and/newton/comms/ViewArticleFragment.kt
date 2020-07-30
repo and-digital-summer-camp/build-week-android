@@ -4,6 +4,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -19,15 +22,19 @@ import kotlinx.android.synthetic.main.fragment_view_article.view.*
 class ViewArticleFragment : Fragment() {
 
     val args: ViewArticleFragmentArgs by navArgs()
-    private val userViewModel: UserViewModel by activityViewModels()
+
+    private lateinit var adapter: ArrayAdapter<String>
+    private lateinit var adminMenu: Spinner
+    private var adminOptions: MutableList<String> = mutableListOf("Edit" , "Delete")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.admin_menu_options, menu)
         super.onCreateOptionsMenu(menu, inflater)
-        menu.clear()
     }
 
     override fun onCreateView(
@@ -62,6 +69,17 @@ class ViewArticleFragment : Fragment() {
         return layout
     }
 
-
+    //TODO FUNCTIONALITY FOR OPTION MENU
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.edit_article_option -> {
+                //TODO NAVIGATE SOMEWHERE
+            }
+            R.id.delete_article_option -> {
+                //TODO DELETE SOMETHING
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
 }
