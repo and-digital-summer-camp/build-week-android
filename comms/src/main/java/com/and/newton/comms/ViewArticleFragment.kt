@@ -2,33 +2,33 @@ package com.and.newton.comms
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.and.newton.common.utils.AppConstants
 import com.and.newton.common.utils.AppPreferences
-import com.and.newton.common.viewmodel.UserViewModel
+import com.and.newton.comms.domain.data.Article
 import kotlinx.android.synthetic.main.fragment_view_article.view.*
 
 class ViewArticleFragment : Fragment() {
-
     val args: ViewArticleFragmentArgs by navArgs()
-    private val userViewModel: UserViewModel by activityViewModels()
+
+    private var article : Article? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.admin_menu_options, menu)
         super.onCreateOptionsMenu(menu, inflater)
-        menu.clear()
+        AppPreferences.access_level
+        if(AppPreferences.access_level == AppConstants.ROLE_USER.toString()){
+            menu.clear()
+        }
     }
 
     override fun onCreateView(
@@ -37,35 +37,37 @@ class ViewArticleFragment : Fragment() {
     ): View? {
 
        val layout = inflater.inflate(R.layout.fragment_view_article, container, false)
-        val article = args.article
+        article = args.article
         if (article != null) {
-            layout.viewArticleFragment_ArticleTitle.text = article.title
+            layout.viewArticleFragment_ArticleTitle.text = article!!.title
             //TODO FOR NOW ITS ARTICLE NEEDS TO BE CHANGED TO WHATEVER IS ACTUALLY REQUIRED, DONT KNOW YET THOUGH
             (activity as AppCompatActivity?)?.supportActionBar?.title = "Article"
-            layout.viewArticleFragment_ArticleBody.text = article.content
+            layout.viewArticleFragment_ArticleBody.text = article!!.content
 
             //TODO needs to change when we get actual picture
-            if(article.imagePath != null){
-                Log.d("articleimg", article.imagePath)
-                val imagePath: Uri = Uri.parse(article.imagePath)
+            if(article!!.imagePath != null){
+                val imagePath: Uri = Uri.parse(article!!.imagePath)
                 layout.viewArticleFragment_ArticleImage.setImageURI(imagePath)
             } else {
-                //just an empty border image
-                layout.viewArticleFragment_ArticleImage.setBackgroundResource(R.drawable.highlight)
+                layout.viewArticleFragment_ArticleImage.visibility = View.GONE
             }
-            layout.viewArticleFragment_ArticleCategory.text = article.categories?.get(0)?.category?.name
-
-
-
+            layout.viewArticleFragment_ArticleCategory.text = article!!.categories?.get(0)?.category?.name
         }
-
-        val editArticleButton = layout.findViewById<Button>(R.id.edit_article_button)
-        editArticleButton.setOnClickListener {
-            val action = ViewArticleFragmentDirections.actionViewArticleFragmentToCreateArticleFragment(article)
-            findNavController().navigate(action)
-        }
-
         return layout
+    }
+
+    //TODO FUNCTIONALITY FOR OPTION MENU
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.edit_article_option -> {
+                val action = ViewArticleFragmentDirections.actionViewArticleFragmentToCreateArticleFragment(article)
+                findNavController().navigate(action)
+            }
+            R.id.delete_article_option -> {
+                //TODO DELETE SOMETHING
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

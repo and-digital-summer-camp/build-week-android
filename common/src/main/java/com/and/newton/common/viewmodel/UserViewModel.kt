@@ -1,6 +1,7 @@
 package com.and.newton.common.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.and.newton.common.domain.UserRepo
@@ -64,11 +65,17 @@ class UserViewModel @ViewModelInject constructor(
                     if (result.token != null) {
                         AppPreferences.isLogged = true
                         AppPreferences.token = result.token
-                        AppPreferences.access_level = getUserRoleFromToken(result.token)
+                        val userRole = getUserRoleFromToken(result.token)
+                        if(userRole == "user"){
+                            AppPreferences.access_level = AppConstants.ROLE_USER.toString()
+                        }else if(userRole == "admin"){
+                            AppPreferences.access_level = AppConstants.ROLE_ADMIN.toString()
+                        }
                         AppPreferences.first_name = account?.displayName?:account?.givenName?:"Guest"
                         AppPreferences.last_name = account?.familyName?:"User"
                         AppPreferences.email = account?.email?:""
                         _authenticatedState.value = AuthenticationState.AUTHENTICATED
+
                     } else {
                         _authenticatedState.value = AuthenticationState.INVALID_AUTHENTICATION
                     }

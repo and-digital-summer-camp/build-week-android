@@ -6,6 +6,9 @@ import com.and.newton.common.utils.AppPreferences.clear
 import okhttp3.internal.cache2.Relay.Companion.edit
 
 object AppPreferences {
+
+
+
     private const val NAME = "USER_STATE"
     private const val MODE = Context.MODE_PRIVATE
     private lateinit var preferences: SharedPreferences
