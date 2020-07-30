@@ -130,13 +130,11 @@ class CreateArticleFragment : Fragment() {
     }
 
     private fun populateEditArticle(view: View, article: Article) {
-        val createArticleTitle = view.findViewById<TextView>(R.id.textview_main_title)
         val editTextTitle = view.findViewById<EditText>(R.id.edittext_title)
         val editTextContent = view.findViewById<EditText>(R.id.edittext_content)
         val categoryDropdown = view.findViewById<CustomAutoCompleteTextView>(R.id.category_edit)
         val highlightedCheckbox = view.findViewById<CheckBox>(R.id.highlighted_checkBox)
 
-        createArticleTitle.text = getString(R.string.edit_post_title)
         editTextTitle.setText(article.title)
         editTextContent.setText(article.content)
         highlightedCheckbox.isChecked = article.highlighted!!

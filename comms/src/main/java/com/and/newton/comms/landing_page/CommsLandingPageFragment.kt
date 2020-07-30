@@ -2,6 +2,9 @@ package com.and.newton.comms.landing_page
 
 
 import android.content.Context
+
+import android.graphics.Color
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,14 +14,17 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+
 import androidx.appcompat.app.AppCompatActivity
+
+import androidx.core.content.ContextCompat
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.and.newton.comms.CommsSharedViewModel
 import com.and.newton.comms.R
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.article_list_item.view.*
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.*
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.view.*
 import kotlinx.coroutines.MainScope
@@ -45,6 +51,22 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+    }
+
+    private fun initSwipeToRefresh(){
+        itemsswipetorefresh.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(requireContext(), R.color.color_secondary_pink))
+        itemsswipetorefresh.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.color_primary_shrine_pink))
+
+        itemsswipetorefresh.setOnRefreshListener {
+            viewModel.fetchArticles().observe(viewLifecycleOwner, Observer { articlesData ->
+                Timber.d("Mock API called again all Articles List Response::${articlesData}")
+                articlesAdapter.bindData(articlesData)
+                articles.adapter = articlesAdapter
+                articlesAdapter.filter.filter(categoryList.sorted()[0])
+                articles.adapter?.notifyDataSetChanged()
+                itemsswipetorefresh.isRefreshing = false
+            })
+        }
     }
 
     private fun updateCategoriesFilter(categories : List<String>){
@@ -99,9 +121,14 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         return layout
     }
 
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         ctx = context
+}
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initSwipeToRefresh()
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

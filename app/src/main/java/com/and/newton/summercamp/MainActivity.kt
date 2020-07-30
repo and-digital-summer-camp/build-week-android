@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -15,7 +16,9 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
+import com.and.newton.common.utils.AppPreferences
 import com.and.newton.common.viewmodel.UserViewModel
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: Toolbar
     private lateinit var fab: FloatingActionButton
+    private lateinit var user_email: TextView
     private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         initNavigationDrawerWithToolBar()
         initCreateArticleButton()
+        initAfterLogin()
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when(destination.id) {
@@ -95,6 +100,17 @@ class MainActivity : AppCompatActivity() {
             com.and.newton.comms.R.id.commsLandingPageFragment, R.id.login ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    private fun initAfterLogin() {
+        userViewModel.authenticatedState.observe(this, Observer { authenticatedState ->
+            when(authenticatedState){
+                UserViewModel.AuthenticationState.AUTHENTICATED -> {
+                    user_email = findViewById(R.id.user_email)
+                    user_email.text = AppPreferences.email
+                }
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

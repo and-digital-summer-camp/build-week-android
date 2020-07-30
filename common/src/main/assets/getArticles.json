@@ -1,78 +1,320 @@
-[{
-  "articleID": 1,
-  "title": "Article 1 - Title",
-  "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n",
-  "articleCategories": [
-    {
-      "categoryID": 1,
-      "categoryName": "Covid-19"
-    }
-  ],
-  "date": "2020-07-24T11:47:29.553Z",
-  "highlighted": true
-},
-  {
-    "articleID": 2,
-    "title": "Article 2 - Title",
-    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n",
-    "articleCategories": [
-      {
-        "categoryID": 1,
-        "categoryName": "Covid-19"
-      }
-    ],
-    "date": "2020-07-25T11:47:29.553Z",
-    "highlighted": false
-  },
-  {
-    "articleID": 3,
-    "title": "Article 3 - Title",
-    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n",
-    "articleCategories": [
-      {
-        "categoryID": 1,
-        "categoryName": "Summer Camp"
-      }
-    ],
-    "date": "2020-07-22T11:47:29.553Z",
-    "highlighted": false
-  },
-  {
-    "articleID": 4,
-    "title": "Article 4 - Title",
-    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n",
-    "articleCategories": [
-      {
-        "categoryID": 1,
-        "categoryName": "Summer Camp"
-      }
-    ],
-    "date": "2020-07-28T11:47:29.553Z",
-    "highlighted": false
-  },
-  {
-    "articleID": 5,
-    "title": "Article 5 - Title",
-    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n",
-    "articleCategories": [
-      {
-        "categoryID": 1,
-        "categoryName": "Summer Camp"
-      }
-    ],
-    "date": "2020-07-28T11:47:29.553Z",
-    "highlighted": false
-  },
+[
   {
     "articleID": 6,
-    "title": "Article 6 - Title",
-    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.\n",
+    "title": "My first article",
+    "content": "This is a really good article",
+    "dateCreated": "2020-07-28T12:12:20.035389",
+    "dateLastUpdated": "0001-01-01T00:00:00",
+    "user": {
+      "userID": "c01b89af-ef80-4be4-8d66-3a1f993bfde6",
+      "firstName": "David",
+      "lastName": "Garvie",
+      "picture": "https://lh3.googleusercontent.com/a-/AOh14GgZiIynH4lUSn-EloaH10RnwfbHE96PodPQzNxH=s96-c"
+    },
+    "highlighted": true,
+    "picture": null,
     "articleCategories": [
       {
-        "categoryID": 1,
-        "categoryName": "Summer Camp"
+        "category": {
+          "categoryID": 1,
+          "categoryName": "books"
+        }
+      },
+      {
+        "category": {
+          "categoryID": 3,
+          "categoryName": "test"
+        }
       }
-    ],
-    "date": "2020-07-28T11:47:29.553Z",
-    "highlighted": true
-  }]
+    ]
+  },
+  {
+    "articleID": 15,
+    "title": "Really really updated",
+    "content": "Some even more updated content",
+    "dateCreated": "2020-07-28T14:23:07.375445",
+    "dateLastUpdated": "2020-07-29T15:11:43.59061",
+    "user": {
+      "userID": "c01b89af-ef80-4be4-8d66-3a1f993bfde6",
+      "firstName": "David",
+      "lastName": "Garvie",
+      "picture": "https://lh3.googleusercontent.com/a-/AOh14GgZiIynH4lUSn-EloaH10RnwfbHE96PodPQzNxH=s96-c"
+    },
+    "highlighted": true,
+    "picture": "string",
+    "articleCategories": [
+      {
+        "category": {
+          "categoryID": 1,
+          "categoryName": "books"
+        }
+      },
+      {
+        "category": {
+          "categoryID": 3,
+          "categoryName": "test"
+        }
+      }
+    ]
+  },
+  {
+    "articleID": 16,
+    "title": "string",
+    "content": "string",
+    "dateCreated": "2020-07-28T17:10:18.137047",
+    "dateLastUpdated": "2020-07-28T17:10:18.332126",
+    "user": {
+      "userID": "c01b89af-ef80-4be4-8d66-3a1f993bfde6",
+      "firstName": "David",
+      "lastName": "Garvie",
+      "picture": "https://lh3.googleusercontent.com/a-/AOh14GgZiIynH4lUSn-EloaH10RnwfbHE96PodPQzNxH=s96-c"
+    },
+    "highlighted": true,
+    "picture": "string",
+    "articleCategories": [
+      {
+        "category": {
+          "categoryID": 1,
+          "categoryName": "books"
+        }
+      },
+      {
+        "category": {
+          "categoryID": 3,
+          "categoryName": "test"
+        }
+      }
+    ]
+  },
+  {
+    "articleID": 23,
+    "title": "string",
+    "content": "string",
+    "dateCreated": "2020-07-29T00:40:11.1113862",
+    "dateLastUpdated": "2020-07-29T00:40:11.1218115",
+    "user": {
+      "userID": "c01b89af-ef80-4be4-8d66-3a1f993bfde6",
+      "firstName": "David",
+      "lastName": "Garvie",
+      "picture": "https://lh3.googleusercontent.com/a-/AOh14GgZiIynH4lUSn-EloaH10RnwfbHE96PodPQzNxH=s96-c"
+    },
+    "highlighted": true,
+    "picture": "string",
+    "articleCategories": [
+      {
+        "category": {
+          "categoryID": 1,
+          "categoryName": "books"
+        }
+      },
+      {
+        "category": {
+          "categoryID": 3,
+          "categoryName": "test"
+        }
+      }
+    ]
+  },
+  {
+    "articleID": 24,
+    "title": "Get a users details from their token",
+    "content": "it works!",
+    "dateCreated": "2020-07-29T14:10:27.589306",
+    "dateLastUpdated": "2020-07-29T14:10:29.288737",
+    "user": {
+      "userID": "c01b89af-ef80-4be4-8d66-3a1f993bfde6",
+      "firstName": "David",
+      "lastName": "Garvie",
+      "picture": "https://lh3.googleusercontent.com/a-/AOh14GgZiIynH4lUSn-EloaH10RnwfbHE96PodPQzNxH=s96-c"
+    },
+    "highlighted": true,
+    "picture": "string",
+    "articleCategories": [
+      {
+        "category": {
+          "categoryID": 3,
+          "categoryName": "test"
+        }
+      }
+    ]
+  },
+  {
+    "articleID": 25,
+    "title": "We got the user ID from the auth token!",
+    "content": "Wooo",
+    "dateCreated": "2020-07-28T14:23:07.375445",
+    "dateLastUpdated": "2020-07-29T16:36:50.534768",
+    "user": {
+      "userID": "c01b89af-ef80-4be4-8d66-3a1f993bfde6",
+      "firstName": "David",
+      "lastName": "Garvie",
+      "picture": "https://lh3.googleusercontent.com/a-/AOh14GgZiIynH4lUSn-EloaH10RnwfbHE96PodPQzNxH=s96-c"
+    },
+    "highlighted": true,
+    "picture": "string",
+    "articleCategories": [
+      {
+        "category": {
+          "categoryID": 1,
+          "categoryName": "books"
+        }
+      },
+      {
+        "category": {
+          "categoryID": 3,
+          "categoryName": "test"
+        }
+      }
+    ]
+  },
+  {
+    "articleID": 26,
+    "title": "We got the user ID from the auth token!",
+    "content": "Wooo",
+    "dateCreated": "2020-07-28T14:23:07.375445",
+    "dateLastUpdated": "2020-07-29T16:30:47.98393",
+    "user": {
+      "userID": "c01b89af-ef80-4be4-8d66-3a1f993bfde6",
+      "firstName": "David",
+      "lastName": "Garvie",
+      "picture": "https://lh3.googleusercontent.com/a-/AOh14GgZiIynH4lUSn-EloaH10RnwfbHE96PodPQzNxH=s96-c"
+    },
+    "highlighted": true,
+    "picture": "string",
+    "articleCategories": [
+      {
+        "category": {
+          "categoryID": 1,
+          "categoryName": "books"
+        }
+      }
+    ]
+  },
+  {
+    "articleID": 28,
+    "title": "Android first article from postman",
+    "content": "This is a really good article",
+    "dateCreated": "2020-07-28T12:12:20.035389",
+    "dateLastUpdated": "2020-07-29T17:50:32.7278856",
+    "user": {
+      "userID": "bcee3858-18ca-4ec3-88f0-997c93cd81d6",
+      "firstName": "Arttee",
+      "lastName": "Rajasekaran",
+      "picture": "https://lh3.googleusercontent.com/a-/AOh14GjZSfN3hoQrCUfiLPXDjdn70k9-ofP0X_aUGg7K=s96-c"
+    },
+    "highlighted": true,
+    "picture": null,
+    "articleCategories": [
+      {
+        "category": {
+          "categoryID": 1,
+          "categoryName": "books"
+        }
+      },
+      {
+        "category": {
+          "categoryID": 3,
+          "categoryName": "test"
+        }
+      }
+    ]
+  },
+  {
+    "articleID": 29,
+    "title": "Android second article from postman",
+    "content": "This is a really good article",
+    "dateCreated": "2020-07-28T12:12:20.035389",
+    "dateLastUpdated": "2020-07-29T17:51:14.8748943",
+    "user": {
+      "userID": "bcee3858-18ca-4ec3-88f0-997c93cd81d6",
+      "firstName": "Arttee",
+      "lastName": "Rajasekaran",
+      "picture": "https://lh3.googleusercontent.com/a-/AOh14GjZSfN3hoQrCUfiLPXDjdn70k9-ofP0X_aUGg7K=s96-c"
+    },
+    "highlighted": true,
+    "picture": null,
+    "articleCategories": [
+      {
+        "category": {
+          "categoryID": 1,
+          "categoryName": "books"
+        }
+      },
+      {
+        "category": {
+          "categoryID": 3,
+          "categoryName": "test"
+        }
+      }
+    ]
+  },
+  {
+    "articleID": 30,
+    "title": "Android third article updated from postman",
+    "content": "This is a really good article",
+    "dateCreated": "2020-07-29T17:52:10.4722429",
+    "dateLastUpdated": "2020-07-29T20:36:26.6813129",
+    "user": {
+      "userID": "bcee3858-18ca-4ec3-88f0-997c93cd81d6",
+      "firstName": "Arttee",
+      "lastName": "Rajasekaran",
+      "picture": "https://lh3.googleusercontent.com/a-/AOh14GjZSfN3hoQrCUfiLPXDjdn70k9-ofP0X_aUGg7K=s96-c"
+    },
+    "highlighted": true,
+    "picture": null,
+    "articleCategories": [
+      {
+        "category": {
+          "categoryID": 3,
+          "categoryName": "test"
+        }
+      }
+    ]
+  },
+  {
+    "articleID": 31,
+    "title": "Android test",
+    "content": "first post from android",
+    "dateCreated": "2020-07-29T19:08:59.9603705",
+    "dateLastUpdated": "2020-07-29T19:08:59.9649878",
+    "user": {
+      "userID": "bcee3858-18ca-4ec3-88f0-997c93cd81d6",
+      "firstName": "Arttee",
+      "lastName": "Rajasekaran",
+      "picture": "https://lh3.googleusercontent.com/a-/AOh14GjZSfN3hoQrCUfiLPXDjdn70k9-ofP0X_aUGg7K=s96-c"
+    },
+    "highlighted": true,
+    "picture": null,
+    "articleCategories": [
+      {
+        "category": {
+          "categoryID": 3,
+          "categoryName": "test"
+        }
+      }
+    ]
+  },
+  {
+    "articleID": 32,
+    "title": "Android test",
+    "content": "A test post from android team",
+    "dateCreated": "2020-07-29T20:38:54.0908149",
+    "dateLastUpdated": "2020-07-29T20:38:54.0939185",
+    "user": {
+      "userID": "bcee3858-18ca-4ec3-88f0-997c93cd81d6",
+      "firstName": "Arttee",
+      "lastName": "Rajasekaran",
+      "picture": "https://lh3.googleusercontent.com/a-/AOh14GjZSfN3hoQrCUfiLPXDjdn70k9-ofP0X_aUGg7K=s96-c"
+    },
+    "highlighted": true,
+    "picture": null,
+    "articleCategories": [
+      {
+        "category": {
+          "categoryID": 3,
+          "categoryName": "test"
+        }
+      }
+    ]
+  }
+]
