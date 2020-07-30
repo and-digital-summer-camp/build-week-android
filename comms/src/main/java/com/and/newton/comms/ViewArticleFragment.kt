@@ -52,20 +52,13 @@ class ViewArticleFragment : Fragment() {
 
             //TODO needs to change when we get actual picture
             if(article.imagePath != null){
-                Log.d("articleimg", article.imagePath)
                 val imagePath: Uri = Uri.parse(article.imagePath)
                 layout.viewArticleFragment_ArticleImage.setImageURI(imagePath)
             } else {
-                //just an empty border image
-                layout.viewArticleFragment_ArticleImage.setBackgroundResource(R.drawable.highlight)
+                layout.viewArticleFragment_ArticleImage.visibility = View.GONE
             }
             layout.viewArticleFragment_ArticleCategory.text = article.categories?.get(0)?.category?.name
-
-
-
         }
-
-
         return layout
     }
 
