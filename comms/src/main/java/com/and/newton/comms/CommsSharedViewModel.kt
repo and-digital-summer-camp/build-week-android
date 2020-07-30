@@ -20,7 +20,6 @@ class CommsSharedViewModel @ViewModelInject constructor(private val commsReposit
             )
           emit(sortedArticleList)
         }
-
     }
 
     fun fetchArticles(): LiveData<List<Article>> = liveData {
@@ -45,6 +44,10 @@ class CommsSharedViewModel @ViewModelInject constructor(private val commsReposit
 
     fun postArticle(article: Article): LiveData<Boolean> = liveData {
         commsRepository.createArticle(article)?.also { emit(true)}
+    }
+
+    fun updateArticle(id: Int, article: Article): LiveData<Boolean> = liveData {
+        commsRepository.updateArticle(id, article).also { emit(true)}
     }
 
 }

@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -58,10 +59,13 @@ class ViewArticleFragment : Fragment() {
 
         }
 
+        val editArticleButton = layout.findViewById<Button>(R.id.edit_article_button)
+        editArticleButton.setOnClickListener {
+            val action = ViewArticleFragmentDirections.actionViewArticleFragmentToCreateArticleFragment(article)
+            findNavController().navigate(action)
+        }
 
         return layout
     }
-
-
 
 }

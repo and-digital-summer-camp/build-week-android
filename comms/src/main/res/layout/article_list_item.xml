@@ -51,21 +51,21 @@
             <TextView
                 android:id="@+id/txtArticleLabel"
                 android:layout_width="wrap_content"
-                android:minWidth="@dimen/global_425"
                 android:layout_height="@dimen/normal_175"
+                android:layout_marginLeft="@dimen/small_100"
                 android:background="@drawable/article_label_border"
+                android:minWidth="@dimen/global_425"
                 android:padding="@dimen/small_50"
-                tools:text="category"
                 android:text="@{article.categories.get(0).category.name}"
                 android:textAlignment="center"
-                android:layout_marginLeft="@dimen/small_100"
-                app:layout_constraintVertical_bias="0.9"
                 android:textColor="@android:color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@+id/articleImage"
-                app:layout_constraintTop_toBottomOf="@+id/txtArticleDesc" />
+                app:layout_constraintTop_toBottomOf="@+id/txtArticleDesc"
+                app:layout_constraintVertical_bias="0.9"
+                tools:text="category" />
 
             <TextView
                 android:id="@+id/txtArticleTitle"

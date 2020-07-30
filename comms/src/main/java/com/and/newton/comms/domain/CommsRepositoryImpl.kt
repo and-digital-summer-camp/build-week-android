@@ -24,8 +24,12 @@ class CommsRepositoryImpl @Inject constructor(private val commsAPI: CommsAPI) : 
 
     override suspend fun createArticle(article: Article) {
          commsAPI.createArticle(article)
-
     }
+
+    override suspend fun updateArticle(id : Int, article: Article) {
+        commsAPI.updateArticle(id, article)
+    }
+
     override suspend fun getCategories(): List<Category>? {
         return commsAPI.getAllCategories()
     }

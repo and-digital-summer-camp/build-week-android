@@ -8,9 +8,9 @@ data class Article constructor(
     @field:SerializedName("articleID")
     val id: Int?,
 
-    val title: String?,
+    var title: String?,
 
-    val content: String?,
+    var content: String?,
 
     @field:SerializedName("picture")
     val imagePath:String?,
@@ -21,8 +21,8 @@ data class Article constructor(
     @field:SerializedName("dateLastUpdated")
     val dateUpdated:Date?,
 
-    val highlighted:Boolean?,
+    var highlighted:Boolean?,
 
     @field:SerializedName("articleCategories")
-    val categories:List<CategoryHolder>?
+    var categories:List<CategoryHolder>?
 ) : Serializable

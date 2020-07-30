@@ -8,6 +8,7 @@ class CommsResponseMapper {
             when(httpMethod) {
                 URIConstants.HTTP_GET -> return "getArticles.json"
                 URIConstants.HTTP_POST -> return "postArticle.json"
+                URIConstants.HTTP_PUT -> return "postArticle.json"
             }
             return ""
         }
