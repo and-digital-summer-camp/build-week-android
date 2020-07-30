@@ -13,7 +13,7 @@
             android:layout_width="@dimen/large_125"
             android:layout_height="@dimen/large_125"
             app:srcCompat="@drawable/fire"
-           android:layout_gravity="end"
+            android:layout_gravity="end"
             android:elevation="@dimen/small_100"
             android:visibility="visible"
 
