@@ -16,7 +16,7 @@
     <fragment
         android:id="@+id/createArticleFragment"
         android:name="com.and.newton.comms.CreateArticleFragment"
-        android:label="create_article_fragment"
+        android:label="@string/menu_create"
         tools:layout="@layout/create_article_fragment">
         <deepLink app:uri="App://nav_create_article"/>
         <argument
