@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="@dimen/large_150"
-        android:layout_height="@dimen/large_150"
+        android:layout_width="@dimen/global_200"
+        android:layout_height="@dimen/global_200"
         android:layout_gravity="end"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/global_75"

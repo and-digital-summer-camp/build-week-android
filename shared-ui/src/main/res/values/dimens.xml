@@ -2,11 +2,20 @@
 <resources>
     <dimen name="global_75">8dp</dimen>
     <dimen name="global_100">16dp</dimen>
+
+    <dimen name="global_150">32dp</dimen>
+    <dimen name="global_175">40dp</dimen>
+    <dimen name="global_200">48dp</dimen>
+    <dimen name="global_225">56dp</dimen>
+    <dimen name="global_250">64dp</dimen>
+    <dimen name="global_275">72dp</dimen>
+
     <dimen name="global_425">120dp</dimen>
     <dimen name="global_500">144dp</dimen>
     <dimen name="global_600">176dp</dimen>
     <dimen name="global_625">184dp</dimen>
     <dimen name="global_675">200dp</dimen>
+    <dimen name="global_825">248dp</dimen>
 
     <dimen name="small_25">2dp</dimen>
     <dimen name="small_50">4dp</dimen>
@@ -22,10 +31,5 @@
     <dimen name="normal_250">40dp</dimen>
     <dimen name="normal_275">44dp</dimen>
 
-    <dimen name="large_100">32dp</dimen>
-    <dimen name="large_125">40dp</dimen>
-    <dimen name="large_150">48dp</dimen>
-    <dimen name="large_175">56dp</dimen>
-    <dimen name="large_200">64dp</dimen>
 
 </resources>
