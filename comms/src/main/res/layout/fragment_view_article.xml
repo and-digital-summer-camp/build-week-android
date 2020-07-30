@@ -18,7 +18,9 @@
             android:src="@drawable/article_highlight_border"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+
+            android:layout_marginTop="@dimen/small_100"
+            app:layout_constraintTop_toBottomOf="@id/viewArticleFragment_ArticleTitle"
             android:layout_marginBottom="@dimen/normal_100"
             />
 
@@ -31,8 +33,8 @@
             android:textStyle="bold"
             android:textColor="@color/color_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/viewArticleFragment_ArticleCategory"
-            app:layout_constraintTop_toBottomOf="@id/viewArticleFragment_ArticleImage"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
         <TextView
@@ -42,14 +44,25 @@
             android:text="@string/hello_blank_fragment"
             android:layout_marginBottom="@dimen/small_100"
             android:layout_marginTop="@dimen/small_100"
-            android:textColor="@color/color_white"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/color_black"
+            app:layout_constraintStart_toStartOf="parent"
             android:paddingRight="@dimen/normal_100"
             android:paddingLeft="@dimen/normal_100"
             android:paddingTop="@dimen/small_25"
             android:paddingBottom="@dimen/small_25"
-            app:layout_constraintTop_toBottomOf="@id/viewArticleFragment_ArticleTitle"
+            app:layout_constraintTop_toBottomOf="@id/viewArticleFragment_ArticleImage"
             android:background="@drawable/article_label_border"/>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/large_200"
+            android:layout_height="@dimen/normal_175"
+            android:src="@drawable/fire"
+           app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/small_100"
+            app:layout_constraintTop_toBottomOf="@id/viewArticleFragment_ArticleImage"
+           />
+
         <View
             android:id="@+id/category_content_divider"
             android:layout_width="match_parent"

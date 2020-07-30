@@ -39,16 +39,18 @@ class ViewArticleFragment : Fragment() {
         val article = args.article
         if (article != null) {
             layout.viewArticleFragment_ArticleTitle.text = article.title
-            (activity as AppCompatActivity?)?.supportActionBar?.title = article.title
+            //TODO FOR NOW ITS ARTICLE NEEDS TO BE CHANGED TO WHATEVER IS ACTUALLY REQUIRED, DONT KNOW YET THOUGH
+            (activity as AppCompatActivity?)?.supportActionBar?.title = "Article"
             layout.viewArticleFragment_ArticleBody.text = article.content
 
             //TODO needs to change when we get actual picture
             if(article.imagePath != null){
+                Log.d("articleimg", article.imagePath)
                 val imagePath: Uri = Uri.parse(article.imagePath)
                 layout.viewArticleFragment_ArticleImage.setImageURI(imagePath)
             } else {
                 //just an empty border image
-                layout.viewArticleFragment_ArticleImage.setBackgroundResource(R.drawable.article_highlight_border)
+                layout.viewArticleFragment_ArticleImage.setBackgroundResource(R.drawable.highlight)
             }
             layout.viewArticleFragment_ArticleCategory.text = article.categories?.get(0)?.category?.name
 
