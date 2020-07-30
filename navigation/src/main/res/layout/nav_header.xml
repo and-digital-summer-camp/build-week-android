@@ -10,7 +10,7 @@
     android:paddingBottom="@dimen/global_100">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/user_profile_pic"
         android:layout_width="@dimen/global_200"
         android:layout_height="@dimen/global_200"
         android:layout_gravity="end"

@@ -11,6 +11,9 @@ import com.and.newton.comms.domain.data.Category
 class CommsSharedViewModel @ViewModelInject constructor(private val commsRepository: CommsRepository) :
     ViewModel() {
 
+
+    var categoryList: MutableList<String> = mutableListOf("All Categories")
+
     val articles: LiveData<List<Article>> = liveData {
         commsRepository.getArticles()?.also { articleList : List<Article> ->
             val sortedArticleList = articleList.sortedWith(compareByDescending <Article> { it.highlighted }.thenByDescending { it.date }
@@ -31,12 +34,23 @@ class CommsSharedViewModel @ViewModelInject constructor(private val commsReposit
         commsRepository.getArticle(6)?.also { emit(it)}
     }
 
-    fun fetchCategories(): LiveData<List<Category>> = liveData {
-        commsRepository.getCategories()?.also { emit(it)}
+    fun fetchCategories(): LiveData<List<String>> = liveData {
+        commsRepository.getCategories()?.also { emit(getCategoryNames(it))}
     }
 
-    val categories: LiveData<List<Category>> = liveData {
-        commsRepository.getCategories()?.also { emit(it)}
+    val categories: LiveData<List<String>> = liveData {
+        commsRepository.getCategories()?.also {
+            emit(getCategoryNames(it))}
+    }
+
+    private fun getCategoryNames(categories: List<Category>) : List<String>{
+        categoryList = categories.map {
+            it.name?:"N/A"
+        } as MutableList<String>
+
+        categoryList.add(0,"All Categories")
+
+        return categoryList
     }
 
     fun postArticle(article: Article): LiveData<Boolean> = liveData {

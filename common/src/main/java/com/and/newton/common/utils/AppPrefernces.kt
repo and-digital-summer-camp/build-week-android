@@ -21,6 +21,7 @@ object AppPreferences {
     private val ACCESS_LEVEL =  Pair("access_level", "")
     private val TOKEN =  Pair("token", "")
     private val TIME_VALID =  Pair("time_valid", "")
+    private val USER_PIC = Pair("user_pic", "")
 
     fun init(context: Context) {
         preferences = context.getSharedPreferences(NAME, MODE)
@@ -81,5 +82,11 @@ object AppPreferences {
         get() = preferences.getString(TIME_VALID.first, TIME_VALID.second) ?: System.currentTimeMillis().toString()
         set(value) = preferences.edit {
             it.putString(TIME_VALID.first, value)
+        }
+
+    var user_pic: String
+        get() = preferences.getString(USER_PIC.first, USER_PIC.second) ?: ""
+        set(value) = preferences.edit {
+            it.putString(USER_PIC.first, value)
         }
 }

@@ -1,9 +1,10 @@
 package com.and.newton.summercamp
 
 
+import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -16,10 +17,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.and.newton.common.utils.AppConstants
 import com.and.newton.common.utils.AppPreferences
 import com.and.newton.common.viewmodel.UserViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: Toolbar
     private lateinit var fab: FloatingActionButton
-    private lateinit var user_email: TextView
     private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,11 +68,13 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                     toolbar?.visibility = View.VISIBLE
                     drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                    fab?.show()
+                    if(AppPreferences.access_level == AppConstants.ROLE_ADMIN.toString())  fab?.show() else fab?.hide()
+                    initSideMenuWithUserData()
                 }
             }
         }
     }
+
 
     private fun initCreateArticleButton() {
         val floatingActionButton: FloatingActionButton = findViewById(R.id.fab)
@@ -104,13 +108,22 @@ class MainActivity : AppCompatActivity() {
         userViewModel.authenticatedState.observe(this, Observer { authenticatedState ->
             when (authenticatedState) {
                 UserViewModel.AuthenticationState.AUTHENTICATED -> {
-                    user_email = findViewById(R.id.user_email)
-                    user_email.text = AppPreferences.email
+                    initSideMenuWithUserData()
                 }
             }
         })
     }
 
+    private fun initSideMenuWithUserData() {
+        val navView: NavigationView = findViewById(R.id.nav_view)
+        val navHeader: View = navView.getHeaderView(0)
+        (navHeader.findViewById(R.id.user_email) as TextView)?.text = AppPreferences.email
+        if(AppPreferences.user_pic.isNotEmpty()){
+            Picasso.get()
+                .load(AppPreferences.user_pic)
+                .resize(72, 72).centerCrop().into((navHeader.findViewById(R.id.user_profile_pic) as ImageView))
+        }
+    }
 
 
     override fun onSupportNavigateUp(): Boolean {

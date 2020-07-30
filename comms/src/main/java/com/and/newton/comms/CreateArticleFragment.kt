@@ -64,10 +64,8 @@ class CreateArticleFragment : Fragment() {
             sendArticleRequest()
         }
 
-        viewModel.categories.observe(viewLifecycleOwner, Observer { t ->
-            Timber.d("Mock API Get Categories Response::${t}")
-
-            val categoryNames: List<String?> = t.map { it.name }
+        viewModel.categories.observe(viewLifecycleOwner, Observer { categoryNames ->
+            Timber.d("Mock API Get Categories Response::${categoryNames}")
             initAUtoCompleteCategoryView(categoryNames as List<String>, view)
         })
 
