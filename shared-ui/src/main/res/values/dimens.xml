@@ -6,6 +6,7 @@
     <dimen name="global_500">144dp</dimen>
     <dimen name="global_600">176dp</dimen>
     <dimen name="global_625">184dp</dimen>
+    <dimen name="global_675">200dp</dimen>
 
     <dimen name="small_25">2dp</dimen>
     <dimen name="small_50">4dp</dimen>

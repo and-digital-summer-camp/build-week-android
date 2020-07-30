@@ -28,7 +28,7 @@ object NetworkModule {
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(requestHeaderInterceptor)
             .addInterceptor(httpLogInterceptor)
-            .addInterceptor(mockInterceptor)
+//            .addInterceptor(mockInterceptor)
             .build()
 
         val gsonBuilder = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
