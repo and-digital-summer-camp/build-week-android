@@ -1,14 +1,13 @@
 package com.and.newton.comms
 
+import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -26,7 +25,7 @@ import timber.log.Timber
 class CreateArticleFragment : Fragment() {
 
     private val viewModel: CommsSharedViewModel by viewModels()
-
+    private val UPLOAD_IMAGE: Int = 100
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,6 +49,10 @@ class CreateArticleFragment : Fragment() {
             postNewArticle()
         }
 
+        val uploadImage: Button = view.findViewById<Button>(R.id.uploadImage)
+        uploadImage.setOnClickListener() {
+            uploadImage()
+        }
         viewModel.categories.observe(viewLifecycleOwner, Observer { t ->
             Timber.d("Mock API Get Categories Response::${t}")
 
@@ -139,6 +142,18 @@ class CreateArticleFragment : Fragment() {
     private fun navigateToCommsHome() {
         val uri = Uri.parse("App://nav_comms")
         findNavController().navigate(uri)
+    }
+
+    private fun uploadImage() {
+        var intent: Intent = Intent(Intent.ACTION_GET_CONTENT, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, this.UPLOAD_IMAGE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == this.UPLOAD_IMAGE) {
+            this.requireActivity().findViewById<Button>(R.id.uploadImage).text =  data?.data.toString()
+        }
     }
 
 

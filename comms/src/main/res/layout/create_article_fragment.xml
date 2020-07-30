@@ -27,8 +27,8 @@
             android:id="@+id/textview_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/header_font_size"
             android:text="@string/title_text"
+            android:textSize="@dimen/header_font_size"
             app:layout_constraintBottom_toTopOf="@+id/edittext_title"
             app:layout_constraintStart_toStartOf="@+id/edittext_title" />
 
@@ -85,10 +85,11 @@
             android:id="@+id/highlighted_checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/normal_175"
+            android:layout_marginTop="52dp"
             android:text="@string/highlighted_text"
             android:textSize="@dimen/hint_font_size"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/category_edit" />
 
@@ -118,6 +119,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
+
+        <Button
+            android:id="@+id/uploadImage"
+            android:layout_width="377dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="379dp"
+            android:text="uploadImage"
+            app:layout_constraintBottom_toTopOf="@+id/highlighted_checkBox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
