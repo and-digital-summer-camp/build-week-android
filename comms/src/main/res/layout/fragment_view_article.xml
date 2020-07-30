@@ -24,28 +24,16 @@
 
         <TextView
             android:id="@+id/viewArticleFragment_ArticleTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_100"
             android:textSize="@dimen/normal_125"
             android:textStyle="bold"
             android:textColor="@color/color_title"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/viewArticleFragment_ArticleCategory"
             app:layout_constraintTop_toBottomOf="@id/viewArticleFragment_ArticleImage"/>
 
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/editArticleBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/small_100"
-            android:visibility="gone"
-            android:textColor="@color/color_brown_900"
-            android:backgroundTint="@color/color_primary_shrine_pink"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/edit_article_txt"/>
 
         <TextView
             android:id="@+id/viewArticleFragment_ArticleCategory"
@@ -56,7 +44,10 @@
             android:layout_marginTop="@dimen/small_100"
             android:textColor="@color/color_white"
             app:layout_constraintEnd_toEndOf="parent"
-            android:padding="@dimen/small_100"
+            android:paddingRight="@dimen/normal_100"
+            android:paddingLeft="@dimen/normal_100"
+            android:paddingTop="@dimen/small_25"
+            android:paddingBottom="@dimen/small_25"
             app:layout_constraintTop_toBottomOf="@id/viewArticleFragment_ArticleTitle"
             android:background="@drawable/article_label_border"/>
         <View
