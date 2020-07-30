@@ -100,10 +100,10 @@ class ArticlesAdapter @Inject constructor():
             binding.article = article
             if(article.highlighted == true) {
                 binding.articleConstraintLayout.setBackgroundResource(R.drawable.article_highlight_border)
-                binding.highlightedFire.visibility = View.VISIBLE
+                binding.ivHighlight.visibility = View.VISIBLE
             } else {
                 binding.articleConstraintLayout.background = null
-                binding.highlightedFire.visibility = View.GONE
+                binding.ivHighlight.visibility = View.GONE
             }
 
             binding.executePendingBindings()
