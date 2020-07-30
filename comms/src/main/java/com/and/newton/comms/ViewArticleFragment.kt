@@ -21,12 +21,7 @@ import com.and.newton.common.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.fragment_view_article.view.*
 
 class ViewArticleFragment : Fragment() {
-
     val args: ViewArticleFragmentArgs by navArgs()
-
-    private lateinit var adapter: ArrayAdapter<String>
-    private lateinit var adminMenu: Spinner
-    private var adminOptions: MutableList<String> = mutableListOf("Edit" , "Delete")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
