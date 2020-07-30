@@ -39,13 +39,9 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 
     @Inject
     lateinit var articlesAdapter: ArticlesAdapter
-
     private lateinit var adapter: ArrayAdapter<String>
-
     private val viewModel: CommsSharedViewModel by viewModels()
-
     private lateinit var categoryFilter:Spinner
-    private lateinit var ctx: Context
     private var categoryList: MutableList<String> = mutableListOf("All Categories")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,12 +66,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     }
 
     private fun updateCategoriesFilter(categories : List<String>){
-        Log.d("viewLifeCycle", categories.toString())
         requireActivity().invalidateOptionsMenu()
-    }
-    private fun setDropDownAdapter(){
-        adapter = ArrayAdapter(ctx, R.layout.dropdown_spinner, categoryList)
-        adapter.setDropDownViewResource(R.layout.dropdown_spinner_selected)
     }
 
 
@@ -122,10 +113,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     }
 
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        ctx = context
-}
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initSwipeToRefresh()
@@ -136,7 +124,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         val item = menu.findItem(R.id.action_filter)
         categoryFilter = item.actionView as Spinner
 
-        adapter = ArrayAdapter(ctx, R.layout.dropdown_spinner, categoryList.sorted())
+        adapter = ArrayAdapter(requireContext() , R.layout.dropdown_spinner, categoryList.sorted())
         adapter.setDropDownViewResource(R.layout.dropdown_spinner_selected)
 
         categoryFilter.adapter = adapter
