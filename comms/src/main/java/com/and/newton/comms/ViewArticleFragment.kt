@@ -1,5 +1,6 @@
 package com.and.newton.comms
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -36,7 +37,17 @@ class ViewArticleFragment : Fragment() {
             layout.viewArticleFragment_ArticleTitle.text = article.title
             (activity as AppCompatActivity?)?.supportActionBar?.title = article.title
             layout.viewArticleFragment_ArticleBody.text = article.content
-//            layout.viewArticleFragment_ArticleCategory.text = article.categories
+
+            //TODO needs to change when we get actual picture
+            if(article.imagePath != null){
+                val imagePath: Uri = Uri.parse(article.imagePath)
+                layout.viewArticleFragment_ArticleImage.setImageURI(imagePath)
+            } else {
+                //just an empty border image
+                layout.viewArticleFragment_ArticleImage.setBackgroundResource(R.drawable.article_highlight_border)
+            }
+            layout.viewArticleFragment_ArticleCategory.text = article.categories?.get(0)?.category?.name
+
 
 
         }
