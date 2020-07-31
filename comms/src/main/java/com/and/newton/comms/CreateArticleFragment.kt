@@ -1,13 +1,15 @@
 package com.and.newton.comms
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,10 +18,12 @@ import androidx.navigation.fragment.findNavController
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.Category
 import com.and.newton.shared_ui.CustomAutoCompleteTextView
+import com.cloudinary.android.MediaManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.create_article_fragment.*
 import kotlinx.android.synthetic.main.create_article_fragment.view.*
 import timber.log.Timber
+
 
 @AndroidEntryPoint
 class CreateArticleFragment : Fragment() {
@@ -153,7 +157,19 @@ class CreateArticleFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == this.UPLOAD_IMAGE) {
             this.requireActivity().findViewById<Button>(R.id.uploadImage).text =  data?.data.toString()
+            cloudinary(data?.data.toString())
         }
+    }
+
+    private fun cloudinary(filePath: String) {
+        val requestId = MediaManager.get().upload("filePath")
+            .unsigned("preset1")
+            .option("resource_type", "video")
+            .option("folder", "my_folder/my_sub_folder/")
+            .option("public_id", "my_dog")
+            .option("overwrite", true)
+           // .option("notification_url", "https://mysite.example.com/notify_endpoint")
+            .dispatch()
     }
 
 

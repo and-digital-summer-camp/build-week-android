@@ -50,6 +50,13 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01'
     kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha01'
+    // All:
+ //   implementation "com.cloudinary:cloudinary-android':1.28.2"
+    compile group: 'com.cloudinary', name: 'cloudinary-android', version: '1.28.2'
+
+// Download + Preprocess:
+//    compile group: 'com.cloudinary', name: 'cloudinary-android-preprocess', version: 'release'
+//    compile group: 'com.cloudinary', name: 'cloudinary-android-download', version: 'release'
 
 //    implementation 'com.google.code.gson:gson:2.8.6'
 

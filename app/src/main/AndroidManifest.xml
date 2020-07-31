@@ -3,7 +3,9 @@
     package="com.and.newton.summercamp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <meta-data
+        android:name="cloudinary://942154141375788"
+        android:value="QKzIFmRiO3qkf1UsKuz2P6RTyok@newton-summer-camp"/>
     <application
         android:name=".SummerCampApplication"
         android:allowBackup="true"
