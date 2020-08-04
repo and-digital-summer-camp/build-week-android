@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface SlackAPI {
 
-    @POST("/api/chat.postMessage?token=xoxb-991306771874-1280186174754-ZLsCegbIRUT5IOzvgwkZtC7F&channel=C0103JS0DQC&text=hello")
-    suspend fun postToSlackChannel(token: String, channel: String,  text: String)
+    @POST("/api/chat.postMessage")
+    suspend fun postToSlackChannel(@Query("token") token: String, @Query("channel") channel: String, @Query("text") text: String)
 
 }

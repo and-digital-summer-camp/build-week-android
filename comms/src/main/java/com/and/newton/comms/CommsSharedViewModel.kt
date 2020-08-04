@@ -66,7 +66,7 @@ class CommsSharedViewModel @ViewModelInject constructor(private val commsReposit
         commsRepository.createCategory(category)?.also { emit(true)}
     }
 
-    fun postToSlackChannel(token: String, channel: String, text: String): LiveData<String> = liveData {
-        slackRepo.postToSlackChannel(token, channel, text)?.also { emit(it.toString())}
+    fun postToSlackChannel(token: String, channel: String, text: String): LiveData<Boolean> = liveData {
+        slackRepo.postToSlackChannel(token, channel, text)?.also { emit(true)}
     }
 }

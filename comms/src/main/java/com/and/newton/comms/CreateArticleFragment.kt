@@ -59,8 +59,10 @@ class CreateArticleFragment : Fragment() {
 
         val cancelButton = view.findViewById<Button>(R.id.button_cancel)
         cancelButton.setOnClickListener {
-            val flag = viewModel.postToSlackChannel("xoxb-991306771874-1280186174754-ZLsCegbIRUT5IOzvgwkZtC7F", "C0103JS0DQC", "testt" )
-            Log.d("slackpost", flag.toString())
+            viewModel.postToSlackChannel("xoxb-991306771874-1280186174754-ZLsCegbIRUT5IOzvgwkZtC7F", "C0103JS0DQC", "testt" ).observe(viewLifecycleOwner, Observer { slackMessage ->
+                Timber.d("Slack API ::${slackMessage}")
+            })
+
 //            navigateToCommsHome()
         }
 
