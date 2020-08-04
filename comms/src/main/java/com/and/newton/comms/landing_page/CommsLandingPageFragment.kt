@@ -95,10 +95,6 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
             layout.articles.adapter?.notifyDataSetChanged()
         })
 
-        viewModel.article.observe(viewLifecycleOwner, Observer { anArticle ->
-            Timber.d("Mock API Article id:1 Response::${anArticle}")
-        })
-
         viewModel.categories.observe(viewLifecycleOwner, Observer { categories ->
             Timber.d("Mock API all categories List Response::${categories}")
             updateCategoriesFilter(categories)

@@ -2,6 +2,7 @@ package com.and.newton.comms
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.and.newton.comms.domain.CommsRepository
@@ -14,25 +15,27 @@ class CommsSharedViewModel @ViewModelInject constructor(private val commsReposit
 
     var categoryList: MutableList<String> = mutableListOf("All Categories")
 
-    val articles: LiveData<List<Article>> = liveData {
-        commsRepository.getArticles()?.also { articleList : List<Article> ->
-            val sortedArticleList = articleList.sortedWith(compareByDescending <Article> { it.highlighted }.thenByDescending { it.date }
-            )
-          emit(sortedArticleList)
-        }
-    }
 
-    fun fetchArticles(): LiveData<List<Article>> = liveData {
+    var articles: MutableLiveData<List<Article>> = liveData {
         commsRepository.getArticles()?.also { articleList : List<Article> ->
             val sortedArticleList = articleList.sortedWith(compareByDescending <Article> { it.highlighted }.thenByDescending { it.date }
             )
             emit(sortedArticleList)
         }
-    }
+    } as MutableLiveData<List<Article>>
 
-    val article: LiveData<Article> = liveData {
+
+    fun fetchArticles(): MutableLiveData<List<Article>> = liveData {
+        commsRepository.getArticles()?.also { articleList : List<Article> ->
+            val sortedArticleList = articleList.sortedWith(compareByDescending <Article> { it.highlighted }.thenByDescending { it.date }
+            )
+            emit(sortedArticleList)
+        }
+    } as MutableLiveData<List<Article>>
+
+    var article: MutableLiveData<Article> = liveData {
         commsRepository.getArticle(6)?.also { emit(it)}
-    }
+    } as MutableLiveData<Article>
 
     fun fetchCategories(): LiveData<List<String>> = liveData {
         commsRepository.getCategories()?.also { emit(getCategoryNames(it))}

@@ -1,32 +1,31 @@
 package com.and.newton.comms
 
+import android.app.Activity
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.and.newton.comms.domain.CommsRepository
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.Category
 import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertNotNull
-import junit.framework.TestCase
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
-import org.mockito.Matchers.anyList
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.mock
+import org.mockito.Mockito.spy
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
-import java.util.*
 
-@RunWith(JUnit4::class)
+
 class CommsSharedViewModelTest {
     @Mock
      var commsRepository: CommsRepository = Mockito.mock(CommsRepository::class.java)
 
     lateinit var commsViewModel: CommsSharedViewModel
+
+
+    @get:Rule
+    val rule = InstantTaskExecutorRule()
 
     @Before
     fun setUp() {
@@ -34,14 +33,35 @@ class CommsSharedViewModelTest {
         this.commsViewModel = CommsSharedViewModel(this.commsRepository)
     }
 
+
+
     @Test
-    fun testGetArticles() = runBlocking {
+    fun testGetArticlesFromRepo() = runBlocking {
         val article:Article = Article(0,"title1","content1",null,null,null, true,null)
         Mockito.`when`(commsRepository.getArticles()).thenReturn(listOf(article))
 
         assertEquals(commsRepository.getArticles(),listOf(article));
 
- }
+        commsViewModel.articles.value = commsRepository.getArticles()
+
+
+        assertEquals(article, commsViewModel.articles.getOrAwaitValue()[0])
+
+        assertEquals(1, commsViewModel.articles.getOrAwaitValue().size)
+    }
+
+
+    @Test
+    fun testGetArticle()  {
+        val article:Article = Article(0,"title1","content1",null,null,null, true,null)
+
+        commsViewModel.article.value =  article
+
+        assertEquals(commsViewModel.article.getOrAwaitValue(), article)
+
+
+    }
+
 
 
     @Test
@@ -52,3 +72,4 @@ class CommsSharedViewModelTest {
         assertEquals(commsRepository.getCategories(),listOf(category));
     }
 }
+
