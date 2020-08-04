@@ -5,10 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.and.newton.comms.domain.CommsRepository
+import com.and.newton.comms.domain.SlackRepo
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.Category
 
-class CommsSharedViewModel @ViewModelInject constructor(private val commsRepository: CommsRepository) :
+class CommsSharedViewModel @ViewModelInject constructor(private val commsRepository: CommsRepository, private val slackRepo: SlackRepo) :
     ViewModel() {
 
 
@@ -65,4 +66,7 @@ class CommsSharedViewModel @ViewModelInject constructor(private val commsReposit
         commsRepository.createCategory(category)?.also { emit(true)}
     }
 
+    fun postToSlackChannel(token: String, channel: String, text: String): LiveData<String> = liveData {
+        slackRepo.postToSlackChannel(token, channel, text)?.also { emit(it.toString())}
+    }
 }

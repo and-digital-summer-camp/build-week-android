@@ -22,4 +22,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="edit_article">Edit Article</string>
     <string name="delete_article">Delete Article</string>
+    <string name="slack_text">Slack</string>
 </resources>

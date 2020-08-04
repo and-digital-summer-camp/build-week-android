@@ -31,14 +31,14 @@
 
         <EditText
             android:id="@+id/edittext_content"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/global_825"
+            android:layout_width="372dp"
+            android:layout_height="175dp"
             android:layout_marginTop="@dimen/normal_200"
             android:background="@drawable/edittext_frame"
-            android:padding="@dimen/small_50"
-            android:textColorHint="@color/color_black"
             android:gravity="top|left"
             android:hint="@string/content_text"
+            android:padding="@dimen/small_50"
+            android:textColorHint="@color/color_black"
             android:textSize="@dimen/hint_font_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,14 +47,14 @@
 
         <EditText
             android:id="@+id/edittext_image"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/global_275"
+            android:layout_width="381dp"
+            android:layout_height="52dp"
             android:layout_marginTop="@dimen/normal_200"
             android:background="@drawable/edittext_frame"
-            android:padding="@dimen/small_50"
-            android:textColorHint="@color/color_black"
             android:gravity="top|left"
             android:hint="@string/article_image"
+            android:padding="@dimen/small_50"
+            android:textColorHint="@color/color_black"
             android:textSize="@dimen/hint_font_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,6 +113,41 @@
                 android:track="@drawable/switch_track_selector" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/global_200"
+            android:id="@+id/slack_row"
+            android:padding="@dimen/small_50"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/normal_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/edittext_frame"
+            app:layout_constraintTop_toBottomOf="@+id/highlight_row"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/hint_font_size"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/color_black"
+                android:text="@string/slack_text"/>
+
+            <Switch
+                android:id="@+id/slack_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:checked="true"
+                android:switchMinWidth="@dimen/global_225"
+                android:textOff="OFF"
+                android:textOn="ON"
+                android:theme="@style/SwitchTheme"
+                android:thumb="@drawable/switch_thumb_selector"
+                android:track="@drawable/switch_track_selector" />
+        </RelativeLayout>
+
 
         <Button
             android:id="@+id/button_post"
@@ -122,7 +157,7 @@
             android:layout_marginTop="@dimen/normal_150"
             android:text="@string/post_text"
             android:background="@drawable/button_bg"
-            app:layout_constraintTop_toBottomOf="@+id/highlight_row"
+            app:layout_constraintTop_toBottomOf="@+id/slack_row"
             app:layout_constraintStart_toEndOf="@+id/button_cancel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"  />
@@ -136,7 +171,7 @@
             android:layout_marginTop="@dimen/normal_150"
             android:text="@string/cancel_text"
             app:layout_constraintEnd_toStartOf="@+id/button_post"
-            app:layout_constraintTop_toBottomOf="@+id/highlight_row"
+            app:layout_constraintTop_toBottomOf="@+id/slack_row"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 

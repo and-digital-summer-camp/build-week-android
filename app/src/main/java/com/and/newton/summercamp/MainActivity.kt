@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                     toolbar?.visibility = View.VISIBLE
                     drawerLayout?.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                    if(AppPreferences.access_level == AppConstants.ROLE_ADMIN.toString())  fab?.show() else fab?.hide()
+                    if(AppPreferences.access_level == AppConstants.ROLE_USER.toString())  fab?.show() else fab?.hide()
                     initSideMenuWithUserData()
                 }
             }

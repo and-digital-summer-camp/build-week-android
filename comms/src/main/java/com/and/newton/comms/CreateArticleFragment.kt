@@ -1,6 +1,7 @@
 package com.and.newton.comms
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.Button
@@ -58,11 +59,14 @@ class CreateArticleFragment : Fragment() {
 
         val cancelButton = view.findViewById<Button>(R.id.button_cancel)
         cancelButton.setOnClickListener {
-            navigateToCommsHome()
+            val flag = viewModel.postToSlackChannel("xoxb-991306771874-1280186174754-ZLsCegbIRUT5IOzvgwkZtC7F", "C0103JS0DQC", "testt" )
+            Log.d("slackpost", flag.toString())
+//            navigateToCommsHome()
         }
 
         val postButton = view.findViewById<Button>(R.id.button_post)
         postButton.setOnClickListener {
+
             sendArticleRequest()
         }
 
