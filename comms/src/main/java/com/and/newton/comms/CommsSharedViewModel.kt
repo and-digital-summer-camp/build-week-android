@@ -1,7 +1,6 @@
 package com.and.newton.comms
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -13,11 +12,6 @@ import com.and.newton.comms.network.DataStatus
 
 class CommsSharedViewModel @ViewModelInject constructor(private val commsRepository: CommsRepository) :
     ViewModel() {
-
-    private var _createArticle = MutableLiveData<ApiData<Article>>()
-
-    val createArticle: LiveData<ApiData<Article>>
-        get() = _createArticle
 
     var categoryList: MutableList<String> = mutableListOf("All Categories")
 
