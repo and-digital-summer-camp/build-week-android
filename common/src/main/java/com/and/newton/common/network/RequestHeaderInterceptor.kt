@@ -15,6 +15,7 @@ class RequestHeaderInterceptor @Inject constructor() :
 
         val requestBuilder: Request.Builder = if(authToken!=null && authToken.isNotEmpty()) chain.request().newBuilder().addHeader("Authorization", "Bearer $authToken") else chain.request().newBuilder()
 
+//        val requestBuilder: Request.Builder = chain.request().newBuilder()
 
         return chain.proceed(requestBuilder.build())
 
