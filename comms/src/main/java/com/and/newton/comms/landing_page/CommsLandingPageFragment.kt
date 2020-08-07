@@ -1,27 +1,20 @@
 package com.and.newton.comms.landing_page
 
 
-import android.content.Context
-
-import android.graphics.Color
-
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-
 import androidx.core.content.ContextCompat
-
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.and.newton.comms.CommsSharedViewModel
 import com.and.newton.comms.R
-import com.and.newton.comms.domain.data.Category
+import com.and.newton.comms.network.DataStatus
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.*
 import kotlinx.android.synthetic.main.comms_landing_page_fragment.view.*
@@ -39,7 +32,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
     lateinit var articlesAdapter: ArticlesAdapter
     private lateinit var adapter: ArrayAdapter<String>
     private val viewModel: CommsSharedViewModel by viewModels()
-    private lateinit var categoryFilter:Spinner
+    private lateinit var categoryFilter: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,29 +44,44 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun initSwipeToRefresh(){
-        itemsswipetorefresh.setProgressBackgroundColorSchemeColor(ContextCompat.getColor(requireContext(), R.color.color_secondary_pink))
-        itemsswipetorefresh.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.color_primary_shrine_pink))
+    private fun initSwipeToRefresh() {
+        itemsswipetorefresh.setProgressBackgroundColorSchemeColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.color_secondary_pink
+            )
+        )
+        itemsswipetorefresh.setColorSchemeColors(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.color_primary_shrine_pink
+            )
+        )
 
         itemsswipetorefresh.setOnRefreshListener {
-            viewModel.fetchArticles().observe(viewLifecycleOwner, Observer { articlesData ->
-                Timber.d("Mock API called again all Articles List Response::${articlesData}")
-                articlesAdapter.bindData(articlesData)
-                articles.adapter = articlesAdapter
-                articlesAdapter.filter.filter(viewModel.categoryList[0])
-                articles.adapter?.notifyDataSetChanged()
+            viewModel.articles.observe(viewLifecycleOwner, Observer { articlesData ->
+                if (articlesData.status == DataStatus.SUCCESS) {
+                    articlesAdapter.bindData(articlesData.data!!)
+                    articles.adapter = articlesAdapter
+
+                    articlesAdapter.filter.filter(viewModel.categoryList[0])
+                    articles.adapter?.notifyDataSetChanged()
+                    itemsswipetorefresh.isRefreshing = false
+                } else {
+                    // TODO: Handle erroneous response if the below approach isn't good enough
+                    createErrorDialog(articlesData.responseCode!!, articlesData.message!!)
+                }
+            })
+
+            viewModel.categories.observe(viewLifecycleOwner, Observer {
+                updateCategoriesFilter()
                 itemsswipetorefresh.isRefreshing = false
             })
 
-            viewModel.fetchCategories().observe(viewLifecycleOwner, Observer { categories ->
-                Timber.d("Mock API all categories List Response::${categories}")
-                updateCategoriesFilter(categories)
-                itemsswipetorefresh.isRefreshing = false
-            })
         }
     }
 
-    private fun updateCategoriesFilter(categories : List<String>){
+    private fun updateCategoriesFilter() {
         requireActivity().invalidateOptionsMenu()
     }
 
@@ -87,29 +95,25 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
 
         (activity as AppCompatActivity?)?.supportActionBar?.setTitle(R.string.comms_landing_fragment_title)
 
-        viewModel.articles.observe(viewLifecycleOwner, Observer { articles ->
-            Timber.d("Mock API all Articles List Response::${articles}")
-            articlesAdapter.bindData(articles)
-            layout.articles.adapter = articlesAdapter
-            articlesAdapter.filter.filter(viewModel.categoryList[0])
-            layout.articles.adapter?.notifyDataSetChanged()
+        viewModel.articles.observe(viewLifecycleOwner, Observer { apiData ->
+            if (apiData.status == DataStatus.SUCCESS) {
+                val articles = apiData.data!!
+                articlesAdapter.bindData(articles)
+                layout.articles.adapter = articlesAdapter
+                articlesAdapter.filter.filter(viewModel.categoryList[0])
+                layout.articles.adapter?.notifyDataSetChanged()
+            } else {
+                createErrorDialog(apiData.responseCode!!, apiData.message!!)
+            }
+
         })
 
-        viewModel.article.observe(viewLifecycleOwner, Observer { anArticle ->
-            Timber.d("Mock API Article id:1 Response::${anArticle}")
-        })
-
-        viewModel.categories.observe(viewLifecycleOwner, Observer { categories ->
-            Timber.d("Mock API all categories List Response::${categories}")
-            updateCategoriesFilter(categories)
+        viewModel.categories.observe(viewLifecycleOwner, Observer {
+            updateCategoriesFilter()
         })
 
         return layout
     }
-
-
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -121,7 +125,7 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         val item = menu.findItem(R.id.action_filter)
         categoryFilter = item.actionView as Spinner
 
-        adapter = ArrayAdapter(requireContext() , R.layout.dropdown_spinner, viewModel.categoryList)
+        adapter = ArrayAdapter(requireContext(), R.layout.dropdown_spinner, viewModel.categoryList)
         adapter.setDropDownViewResource(R.layout.dropdown_spinner_selected)
 
         categoryFilter.adapter = adapter
@@ -132,7 +136,12 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         Timber.d("No option selected")
     }
 
-    override fun onItemSelected(spinnerAdapter: AdapterView<*>?, itemView: View?, option: Int, p3: Long) {
+    override fun onItemSelected(
+        spinnerAdapter: AdapterView<*>?,
+        itemView: View?,
+        option: Int,
+        p3: Long
+    ) {
         articlesAdapter.filter.filter(viewModel.categoryList[option])
         articlesAdapter.notifyDataSetChanged()
 
@@ -143,14 +152,25 @@ class CommsLandingPageFragment : Fragment(), AdapterView.OnItemSelectedListener 
         }
     }
 
-    private fun updateArticleListView (isEmpty:Boolean) {
-        if(isEmpty) {
+    private fun updateArticleListView(isEmpty: Boolean) {
+        if (isEmpty) {
             noArticleItemCardView.visibility = View.VISIBLE
             articles.visibility = View.GONE
-        }
-        else {
+        } else {
             noArticleItemCardView.visibility = View.GONE
             articles.visibility = View.VISIBLE
+        }
+    }
+
+    private fun createErrorDialog(code: Int, message: String) {
+        val builder = activity?.let { AlertDialog.Builder(it) }
+
+        builder?.setTitle("Error")
+        builder?.setMessage("A Network Error has occurred: $code - $message")
+
+        val alertDialog = builder?.show()
+        builder?.setPositiveButton(android.R.string.yes) { _, _ ->
+            alertDialog?.dismiss()
         }
     }
 

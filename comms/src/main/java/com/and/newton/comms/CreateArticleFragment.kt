@@ -16,18 +16,20 @@ import androidx.navigation.fragment.navArgs
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.Category
 import com.and.newton.comms.domain.data.CategoryHolder
+import com.and.newton.comms.network.ApiData
+import com.and.newton.comms.network.DataStatus
 import com.and.newton.shared_ui.CustomAutoCompleteTextView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.create_article_fragment.*
 import kotlinx.android.synthetic.main.create_article_fragment.view.*
-import timber.log.Timber
+import retrofit2.Response
 
 @AndroidEntryPoint
 class CreateArticleFragment : Fragment() {
 
     private val args: CreateArticleFragmentArgs by navArgs()
 
-    private var editArticle: Article? = null
+    private var updateArticle: Article? = null
 
     private var isNewCategory: Boolean = true
 
@@ -51,10 +53,11 @@ class CreateArticleFragment : Fragment() {
         val view = inflater.inflate(R.layout.create_article_fragment, container, false)
         (activity as AppCompatActivity?)?.supportActionBar?.setTitle(R.string.create_article_fragment_title)
         // This deals with populating the Fragment with Article data so it is an Edit page
-        editArticle = args.article
-        editArticle?.let {
+        updateArticle = args.article
+        updateArticle?.let {
             (activity as AppCompatActivity?)?.supportActionBar?.title = "Edit Article"
-            populateEditArticle(view, it) }
+            populateEditArticle(view, it)
+        }
 
         val cancelButton = view.findViewById<Button>(R.id.button_cancel)
         cancelButton.setOnClickListener {
@@ -63,11 +66,10 @@ class CreateArticleFragment : Fragment() {
 
         val postButton = view.findViewById<Button>(R.id.button_post)
         postButton.setOnClickListener {
-            sendArticleRequest()
+            postArticleRequest()
         }
 
         viewModel.categories.observe(viewLifecycleOwner, Observer { categoryNames ->
-            Timber.d("Mock API Get Categories Response::${categoryNames}")
             initAUtoCompleteCategoryView(categoryNames as List<String>, view)
         })
 
@@ -84,21 +86,19 @@ class CreateArticleFragment : Fragment() {
             }
     }
 
-    private fun sendArticleRequest() {
+    private fun postArticleRequest() {
         if (!edittext_title.text.isNullOrEmpty() && !edittext_content.text.isNullOrEmpty() && !category_edit.text.isNullOrEmpty()) {
 
-            var categories = ArrayList<CategoryHolder>()
+            val categories = ArrayList<CategoryHolder>()
             val categoryName: String = category_edit.text.toString()
             val category = Category(null, categoryName)
             categories.add(CategoryHolder(category))
 
-            if (isNewCategory)  {
+            if (isNewCategory) {
                 createCategory(categoryName, categories)
-            }
-            else{
+            } else {
                 updateOrCreateArticle(categories)
             }
-
 
         } else {
             if (edittext_title.text.isNullOrEmpty()) {
@@ -113,24 +113,20 @@ class CreateArticleFragment : Fragment() {
         }
     }
 
-
-    private fun createCategory(categoryName:String, categories:List<CategoryHolder>){
+    private fun createCategory(categoryName: String, categories: List<CategoryHolder>) {
         viewModel.createCategory(Category(null, categoryName))
-            .observe(viewLifecycleOwner, Observer { categoryPosted ->
-
-                Timber.d("isNewCategory API success::${categoryPosted}")
-
-                if (categoryPosted) {
+            .observe(viewLifecycleOwner, Observer {
+                if (it.status == DataStatus.SUCCESS) {
                     updateOrCreateArticle(categories)
-                }
-                else {
+                } else {
                     category_edit.error = "Error creating new category"
                 }
             })
+
     }
 
-    private fun updateOrCreateArticle (categories:List<CategoryHolder>){
-        if (editArticle != null) {
+    private fun updateOrCreateArticle(categories: List<CategoryHolder>) {
+        if (updateArticle != null) {
             updateArticle(categories)
         } else {
             createNewArticle(categories)
@@ -144,40 +140,46 @@ class CreateArticleFragment : Fragment() {
             highlighted_switch.isChecked, categories
         )
 
-        viewModel.postArticle(newArticle).observe(viewLifecycleOwner, Observer { success ->
-            Timber.d("Mock API Create New Article Response::${success}")
-
-            handleCallResponse()
+        viewModel.postArticle(newArticle).observe(viewLifecycleOwner, Observer {
+            handleApiResponse(it, false)
         })
+
     }
 
     private fun updateArticle(categories: List<CategoryHolder>) {
-        editArticle?.title = edittext_title.text.toString()
-        editArticle?.content = edittext_content.text.toString()
-        editArticle?.highlighted = highlighted_switch.isChecked
-        editArticle?.categories = categories
-        editArticle?.imagePath = edittext_image.text?.toString()
+        updateArticle?.title = edittext_title.text.toString()
+        updateArticle?.content = edittext_content.text.toString()
+        updateArticle?.highlighted = highlighted_switch.isChecked
+        updateArticle?.categories = categories
+        updateArticle?.imagePath = edittext_image.text?.toString()
 
-        val articleId = editArticle?.id!!
-        editArticle?.let {
-            viewModel.updateArticle(articleId, it).observe(viewLifecycleOwner, Observer { success ->
-                Timber.d("Mock API Update Article Response::${success}")
-
-                handleCallResponse()
-            })
+        val articleId = updateArticle?.id!!
+        updateArticle?.let { updateArticle ->
+            viewModel.updateArticle(articleId, updateArticle)
+                .observe(viewLifecycleOwner, Observer {
+                    handleApiResponse(it, true)
+                })
         }
     }
 
-    private fun handleCallResponse() {
-        // TODO: Handle different responses
-        createSuccessDialog()
+    private fun handleApiResponse(response: ApiData<Article>, isUpdateRequest: Boolean) {
+        if (response.status == DataStatus.SUCCESS) {
+            createSuccessDialog(isUpdateRequest)
+        } else {
+            createErrorDialog(response.responseCode!!, response.message!!)
+        }
     }
 
-    private fun createSuccessDialog() {
+    private fun createSuccessDialog(isUpdateRequest: Boolean) {
         val builder = activity?.let { AlertDialog.Builder(it) }
 
-        builder?.setTitle("Article Created")
-        builder?.setMessage("A new Article has been successfully created")
+        if (isUpdateRequest) {
+            builder?.setTitle("Article Update")
+            builder?.setMessage("The Article has been successfully updated.")
+        } else {
+            builder?.setTitle("Article Created")
+            builder?.setMessage("A new Article has been successfully created.")
+        }
 
         builder?.setPositiveButton(android.R.string.yes) { _, _ ->
             navigateToCommsHome()
@@ -185,11 +187,11 @@ class CreateArticleFragment : Fragment() {
         builder?.show()
     }
 
-    private fun createErrorDialog() {
+    private fun createErrorDialog(code: Int, message: String) {
         val builder = activity?.let { AlertDialog.Builder(it) }
 
         builder?.setTitle("Error")
-        builder?.setMessage("A Network Error has occurred in creating the Article. Please try again")
+        builder?.setMessage("A Network Error has occurred: $code - $message")
 
         val alertDialog = builder?.show()
         builder?.setPositiveButton(android.R.string.yes) { _, _ ->

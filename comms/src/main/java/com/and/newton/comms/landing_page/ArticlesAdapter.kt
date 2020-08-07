@@ -1,7 +1,6 @@
 package com.and.newton.comms.landing_page
 
-import android.graphics.drawable.Drawable
-import android.net.Uri
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,16 +15,12 @@ import com.and.newton.comms.databinding.ArticleListItemBinding
 import com.and.newton.comms.domain.data.Article
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import timber.log.Timber
-//import com.squareup.picasso.Picasso
 import java.util.*
 import javax.inject.Inject
 
 
 class ArticlesAdapter @Inject constructor():
     RecyclerView.Adapter<ArticlesAdapter.ThumbnailViewHolder>(), Filterable {
-
-
 
 
     private var articleDataSet:List<Article> = listOf()
