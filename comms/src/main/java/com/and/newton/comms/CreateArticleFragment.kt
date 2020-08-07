@@ -1,28 +1,34 @@
 package com.and.newton.comms
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.loader.content.AsyncTaskLoader
 import androidx.navigation.fragment.findNavController
 import com.and.newton.comms.domain.data.Article
 import com.and.newton.comms.domain.data.Category
 import com.and.newton.shared_ui.CustomAutoCompleteTextView
 import com.cloudinary.android.MediaManager
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.create_article_fragment.*
 import kotlinx.android.synthetic.main.create_article_fragment.view.*
 import timber.log.Timber
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import java.lang.StringBuilder
 
 
 @AndroidEntryPoint
@@ -30,6 +36,7 @@ class CreateArticleFragment : Fragment() {
 
     private val viewModel: CommsSharedViewModel by viewModels()
     private val UPLOAD_IMAGE: Int = 100
+    private lateinit var uploadedImageUrl: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,6 +59,9 @@ class CreateArticleFragment : Fragment() {
         postButton.setOnClickListener {
             postNewArticle()
         }
+
+        var imageView: ImageView  = this.requireActivity().findViewById<ImageView>(R.id.articleImage)
+        imageView.isVisible = false
 
         val uploadImage: Button = view.findViewById<Button>(R.id.uploadImage)
         uploadImage.setOnClickListener() {
@@ -156,21 +166,79 @@ class CreateArticleFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == this.UPLOAD_IMAGE) {
-            this.requireActivity().findViewById<Button>(R.id.uploadImage).text =  data?.data.toString()
-            cloudinary(data?.data.toString())
+            uploadPhoto(this.requireActivity(), Uri.parse(data?.data.toString()))
         }
     }
 
-    private fun cloudinary(filePath: String) {
-        val requestId = MediaManager.get().upload("filePath")
-            .unsigned("preset1")
-            .option("resource_type", "video")
-            .option("folder", "my_folder/my_sub_folder/")
-            .option("public_id", "my_dog")
-            .option("overwrite", true)
-           // .option("notification_url", "https://mysite.example.com/notify_endpoint")
-            .dispatch()
+    fun uploadPhoto(context: Context, uri: Uri) {
+        var thread: Thread =  Thread {
+            var uplloadPhotoTask: UploadPhotoTask =  UploadPhotoTask(context, uri)
+            uplloadPhotoTask.startLoading()
+            this.uploadedImageUrl = uplloadPhotoTask.getUploadedImageUrl().toString()
+        }
+        thread.start()
+        thread.join()
+        var imageView: ImageView  = this.requireActivity().findViewById<ImageView>(R.id.articleImage)
+        imageView.isVisible = true
+        Picasso.get().load(this.uploadedImageUrl).into(imageView)
     }
+
+
+    private class UploadPhotoTask(context: Context, private var uri: Uri): AsyncTaskLoader<String>(context) {
+        private var uploadedImageUrl: String? = null
+        override fun loadInBackground(): String? {
+             var config: Map<String, String> = mapOf("CLOUDINARY_URL" to "cloudinary://942154141375788:QKzIFmRiO3qkf1UsKuz2P6RTyok@newton-summer-camp",
+            "api_key" to "942154141375788",
+            "api_secret" to "QKzIFmRiO3qkf1UsKuz2P6RTyok",
+            "cloud_name" to "newton-summer-camp"
+            )
+            var mimeType: String? = context.contentResolver.getType(uri)?.toLowerCase()?.replace("/",".")
+            var filePath = StringBuilder().append(context.cacheDir).append(File.separator).append(mimeType)
+            var file: File = File (filePath.toString())
+            if (!file.exists()) {
+                file.createNewFile()
+            }
+            var inputStream: InputStream? = context.contentResolver.openInputStream(uri)
+            if (inputStream != null) {
+                copyStreamToFile(inputStream, file)
+            }
+            MediaManager.init(context, config);
+            var map: Map<String, String> = HashMap()
+            map = mapOf("resource_type" to "image", "folder" to "android")
+            var updatedMap = MediaManager.get().cloudinary.uploader()
+                .upload(file, map)
+            file.delete()
+            this.uploadedImageUrl = updatedMap.get("secure_url").toString()
+            Log.d("map", updatedMap.toString())
+            return null;
+        }
+
+        override fun onStartLoading() {
+            loadInBackground();
+        }
+
+        fun getUploadedImageUrl(): String? {
+            return this.uploadedImageUrl
+        }
+
+        fun copyStreamToFile(inputStream: InputStream, outputFile: File) {
+            inputStream.use { input ->
+                val outputStream = FileOutputStream(outputFile)
+                outputStream.use { output ->
+                    val buffer = ByteArray(4 * 1024) // buffer size
+                    while (true) {
+                        val byteCount = input.read(buffer)
+                        if (byteCount < 0) break
+                        output.write(buffer, 0, byteCount)
+                    }
+                    output.flush()
+                }
+            }
+        }
+
+    }
+
+
 
 
 }
